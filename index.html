@@ -2,8 +2,33 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Clash Royale</title>    
   </head>
   <body>
+    <h1>Clash Royale</h1>    
+    <canvas>
+    </canvas>
+    <script>
+    var antes = new Date();
+    var agora = new Date();
+    var dt = 0;
+    var fps = 0;
+    var eCanvas = document.getElementsByTagName("canvas")[0];
+    eCanvas.width = 600;
+    eCanvas.height = 480;
+    var ctx  = eCanvas.getContext("2d");
+    
+    requestAnimationFrame(passo);
+
+    function passo(){
+      requestAnimationFrame(passo);
+      agora = new Date();
+      dt = (agora - antes)/1000;
+      ctx.clearRect(0, 0, eCanvas.width, eCanvas.height);    
+      
+      antes = agora;
+    }
+
+    </script>
   </body>
 </html>
