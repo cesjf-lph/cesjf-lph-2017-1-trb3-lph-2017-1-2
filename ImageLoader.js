@@ -1,0 +1,3 @@
+function ImageLoader(){
+  this.images = {};
+}
