@@ -9,6 +9,10 @@ var mapa;
 var pc;
 var imglib;
 var soundlib;
+var linhas = 18; //Fixa a quantidade de linhas
+var colunas = 32; //Fixa a quantidade de colunas
+var largura = 32; //Fixa a largura de cada quadro
+var altura = 32; //Fixa a altura de cada quadro
 if (auxiliar == 0){
   var casasMapa = ([
     [5,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  6,  9,  9,  5,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 6],
@@ -309,14 +313,16 @@ if (auxiliar == 0){
 
 function init(){
     eCanvas = document.getElementsByTagName("canvas")[0];
-    eCanvas.width = 1024;
-    eCanvas.height = 576;
+    eCanvas.width = largura * colunas;
+    eCanvas.height = altura * linhas;
     ctx  = eCanvas.getContext("2d");
     soundLib = new SoundLoader();
     imglib = new ImageLoader();
-    mapa = new Map(18, 32);
+    mapa = new Map(linhas, colunas);
     mapa.imageLib = imglib;
     mapa.loadMap(casasMapa);
+    mapa.width = eCanvas.width / colunas;
+    mapa.height = eCanvas.height / linhas;
     configuraControles();
     var id = requestAnimationFrame(passo);
 }

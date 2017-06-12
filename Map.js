@@ -31,37 +31,37 @@ Map.prototype.desenharLimites = function(ctx) {
         case 8:
           ctx.fillStyle = 'red';
           ctx.strokeStyle = 'red';
-          ctx.fillRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
+          ctx.fillRect(j * this.width, i * this.height, this.width, this.height);
           ctx.lineWidth = 3;
-          ctx.strokeRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
+          ctx.strokeRect(j * this.width, i * this.height, this.width, this.height);
           break;
         case 0:
           ctx.fillStyle = 'green';
           ctx.strokeStyle = 'green';
-          ctx.fillRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
+          ctx.fillRect(j * this.width, i * this.height, this.width, this.height);
           ctx.lineWidth = 3;
-          ctx.strokeRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
+          ctx.strokeRect(j * this.width, i * this.height, this.width, this.height);
           break;
         case 9:
           ctx.fillStyle = 'blue';
           ctx.strokeStyle = 'blue';
-          ctx.fillRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
+          ctx.fillRect(j * this.width, i * this.height, this.width, this.height);
           ctx.lineWidth = 3;
-          ctx.strokeRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
+          ctx.strokeRect(j * this.width, i * this.height, this.width, this.height);
           break;
         case 64:
-        case 64:
+        case 69:
         case 94:
         case 99:
           ctx.fillStyle = 'grey';
           ctx.strokeStyle = 'grey';
-          ctx.fillRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
+          ctx.fillRect(j * this.width, i * this.height, this.width, this.height);
           ctx.lineWidth = 3;
-          ctx.strokeRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
+          ctx.strokeRect(j * this.width, i * this.height, this.width, this.height);
           break;
         default:
           ctx.fillStyle = 'yellow';
-          ctx.fillRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
+          ctx.fillRect(j * this.width, i * this.height, this.width, this.height);
       }
     }
   }
