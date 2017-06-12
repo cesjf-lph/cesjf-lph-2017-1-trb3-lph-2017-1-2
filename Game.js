@@ -313,6 +313,10 @@ function init(){
     eCanvas.height = 576;
     ctx  = eCanvas.getContext("2d");
     soundLib = new SoundLoader();
+    imglib = new ImageLoader();
+    mapa = new Map(18, 32);
+    mapa.imageLib = imglib;
+    configuraControles();
     var id = requestAnimationFrame(passo);
 }
 
@@ -322,4 +326,23 @@ function passo(){
   	dt = (agora - antes) / 1000;
   	ctx.clearRect(0, 0, eCanvas.width, eCanvas.height);
   	antes = agora;
+}
+
+function configuraControles() {
+  addEventListener("keydown", function(e) {
+    switch (e.keyCode) {
+      case 0:
+        e.preventDefault();
+        break;
+      default:
+    }
+  });
+  addEventListener("keyup", function(e) {
+    switch (e.keyCode) {
+      case 0:
+        e.preventDefault();
+        break;
+      default:
+    }
+  });
 }
