@@ -3,8 +3,7 @@ var ctx;
 var antes = new Date();
 var agora = new Date();
 var dt = 0;
-var fps = 0;
-var auxiliar = 0;
+var auxiliar = 0; //Variável qua auxilia no status do jogo
 var mapa;
 var pc;
 var imglib;
@@ -353,4 +352,24 @@ function configuraControles() {
       default:
     }
   });
+}
+
+function textoFormatado(texto1, texto2, texto3, texto4, texto5, texto6, texto7, texto8, texto9, texto10){
+  ctx.textAlign="center";
+  ctx.fillStyle = "red";
+  ctx.font = "3em Arial Black";
+  ctx.fillText(texto1, eCanvas.width / 2, eCanvas.height / 2-20);
+  ctx.fillStyle = "white";
+  ctx.font = "1em Arial Black";
+  ctx.fillText(texto2, eCanvas.width / 2, eCanvas.height / 2);
+  ctx.fillText(texto3, eCanvas.width / 2, eCanvas.height / 2 + 20);
+  ctx.fillText(texto4, eCanvas.width / 2, eCanvas.height / 2 + 40);
+  ctx.fillStyle = "white";
+  ctx.font = "0.75em Arial Black";
+  ctx.fillText(texto5, eCanvas.width / 2, eCanvas.height / 2 + 55);
+  ctx.fillText(texto6, eCanvas.width / 2, eCanvas.height / 2 + 70);
+  ctx.fillText(texto7, eCanvas.width / 2, eCanvas.height / 2 + 85);
+  ctx.fillText(texto8, eCanvas.width / 2, eCanvas.height / 2 + 100);
+  ctx.fillText(texto9, eCanvas.width / 2, eCanvas.height / 2 + 115);
+  ctx.fillText(texto10, eCanvas.width / 2, eCanvas.height / 2 + 130);
 }

@@ -77,7 +77,7 @@ Map.prototype.loadMap = function(map) {
 
 Map.prototype.getIndices = function (sprite) {
    var pos = {};
-   pos.c = Math.floor(sprite.x/this.SIZE);
-   pos.l = Math.floor(sprite.y/this.SIZE);
+   pos.c = Math.floor(sprite.x/this.width);
+   pos.l = Math.floor(sprite.y/this.height);
    return pos;
 };
