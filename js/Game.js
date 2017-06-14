@@ -5,7 +5,6 @@ var agora = new Date();
 var dt = 0;
 var auxiliar = 0; //Variável qua auxilia no status do jogo
 var mapa;
-var pc;
 var imglib;
 var soundlib;
 var linhas = 17; //Fixa a quantidade de linhas
@@ -48,8 +47,8 @@ function init(){
     mapa = new Map(linhas, colunas);
     mapa.imageLib = imglib;
     mapa.loadMap(casasMapa);
-    mapa.width = eCanvas.width / colunas;
-    mapa.height = eCanvas.height / linhas;
+    mapa.width = largura;
+    mapa.height = altura;
     a = new Sprite();
     a.imageLib = imglib;
     a.energia = eCanvas.height;//Fixa a energia com o mesmo valor da altura para simplificar no desenho
@@ -66,7 +65,7 @@ function passo(){
   	dt = (agora - antes) / 1000;
   	ctx.clearRect(0, 0, eCanvas.width, eCanvas.height);
     mapa.desenhar(ctx);
-    informacoes();
+    informacoes();//Desenha informações complementares na tela (Barra de energia e cards)
   	antes = agora;
 }
 
@@ -110,12 +109,15 @@ function textoFormatado(texto1, texto2, texto3, texto4, texto5, texto6, texto7, 
 }
 
 function informacoes(){
-  ctx.fillStyle = "grey";
+  ctx.fillStyle = "grey";//Desenha um fundo cinza por traz da barra de energia do "a"
   ctx.fillRect (0 * largura, eCanvas.height, largura, - eCanvas.height);
-  ctx.fillStyle = "hsl("+a.energia/eCanvas.height*120+",100%,50%)";
+
+  ctx.fillStyle = "hsl("+a.energia/eCanvas.height*120+",100%,50%)";//Desenha a barra de energia do "a"
   ctx.fillRect (0 * largura, eCanvas.height, largura, - a.energia);
-  ctx.fillStyle = "grey";
+
+  ctx.fillStyle = "grey";//Desenha um fundo cinza por traz da barra de energia do "b"
   ctx.fillRect (33 * largura, eCanvas.height, largura, - eCanvas.height);
-  ctx.fillStyle = "hsl("+b.energia/eCanvas.height*120+",100%,50%)";
+
+  ctx.fillStyle = "hsl("+b.energia/eCanvas.height*120+",100%,50%)";//Desenha a barra de energia do "a"
   ctx.fillRect (33 * largura, eCanvas.height, largura, - b.energia);
 }

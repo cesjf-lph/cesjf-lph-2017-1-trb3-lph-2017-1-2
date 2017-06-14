@@ -15,13 +15,13 @@ function Map(l, c) {
 Map.prototype.desenhar = function(ctx){
   this.desenharLimites(ctx);
   this.desenharTiles(ctx);
-  for (var i = 0; i < this.a.length; i++) {
+  for (var i = 0; i < this.a.length; i++) {//Chama o desenho do "a"
   }
-  for (var i = 0; i < this.b.length; i++) {
+  for (var i = 0; i < this.b.length; i++) {//Chama o desenho do "b"
   }
 }
 
-Map.prototype.desenharLimites = function(ctx) {
+Map.prototype.desenharLimites = function(ctx) {//Desnhanha estrutura do mapa
   for (var i = 0; i < this.cells.length; i++) {
     var linha = this.cells[i];
     for (var j = 0; j < linha.length; j++) {
@@ -88,12 +88,12 @@ Map.prototype.desenharTiles = function(ctx){
   }
 }
 
-Map.prototype.loadMap = function(map) {
+Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz casasMapa
   for (var i = 0; i < this.cells.length; i++) {
     for (var j = 0; j < this.cells[i].length; j++) {
       this.cells[i][j] = map[i][j];
-      switch (map[i][j]) {
-        case 94:
+      switch (map[i][j]) {//Faz a verificação de conteúdo das casas para incluir as torres
+        case 94://Inclui as 2 torres pequenas de "a"
           var a = new Sprite()
           a.width = largura * 2;
           a.height = altura * 2;
@@ -104,7 +104,7 @@ Map.prototype.loadMap = function(map) {
           a.life = 100;
           this.a.push(a);
         break;
-        case 67:
+        case 67://Inclui as 2 torres pequenas de "b"
           var b = new Sprite()
           b.width = largura * 2;
           b.height = altura * 2;
@@ -115,7 +115,7 @@ Map.prototype.loadMap = function(map) {
           b.life = 100;
           this.b.push(b);
         break;
-        case 99:
+        case 99://Inclui a torre principal de "a"
           var a = new Sprite()
           a.width = largura * 3;
           a.height = altura * 3;
@@ -126,7 +126,7 @@ Map.prototype.loadMap = function(map) {
           a.life = 100;
           this.a.push(a);
         break;
-        case 62:
+        case 62://Inclui a torre principal de "b"
           var b = new Sprite()
           b.width = largura * 3;
           b.height = altura * 3;
