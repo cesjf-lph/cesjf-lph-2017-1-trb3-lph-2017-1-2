@@ -17,12 +17,14 @@ Map.prototype.desenhar = function(ctx){
   this.desenharLimites(ctx);
   this.desenharTiles(ctx);
   for (var i = 0; i < this.a.length; i++) {//Chama o desenho do "a"
+    this.a[i].desenharLimites(ctx);
   }
   for (var i = 0; i < this.b.length; i++) {//Chama o desenho do "b"
+    this.b[i].desenharLimites(ctx);
   }
 }
 
-Map.prototype.desenharLimites = function(ctx) {//Desnhanha estrutura do mapa
+Map.prototype.desenharLimites = function(ctx) {//Desenha estrutura do mapa
   for (var i = 0; i < this.cells.length; i++) {
     var linha = this.cells[i];
     for (var j = 0; j < linha.length; j++) {
@@ -164,8 +166,8 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
         case 94://Inclui as 2 torres pequenas de "a"
           var a = new Sprite()
           a.SIZE = SIZE * 2;
-          a.x = i * SIZE - a.SIZE/2;
-          a.y = j * SIZE - a.SIZE/2;
+          a.x = j * SIZE + a.SIZE/4;
+          a.y = i * SIZE + a.SIZE/4;
           a.vx = 0;
           a.vy = 0;
           a.life = 100;
@@ -174,8 +176,8 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
         case 67://Inclui as 2 torres pequenas de "b"
           var b = new Sprite()
           b.SIZE = SIZE * 2;
-          b.x = i * SIZE - b.SIZE/2;
-          b.y = j * SIZE - b.SIZE/2;
+          b.x = j * SIZE + b.SIZE/4;
+          b.y = i * SIZE + b.SIZE/4;
           b.vx = 0;
           b.vy = 0;
           b.life = 100;
@@ -184,8 +186,8 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
         case 99://Inclui a torre principal de "a"
           var a = new Sprite()
           a.SIZE = SIZE * 3;
-          a.x = i * SIZE - a.SIZE/2;
-          a.y = j * SIZE - a.SIZE/2;
+          a.x = j * SIZE + a.SIZE/6;
+          a.y = i * SIZE + a.SIZE/6;
           a.vx = 0;
           a.vy = 0;
           a.life = 100;
@@ -194,8 +196,8 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
         case 62://Inclui a torre principal de "b"
           var b = new Sprite()
           b.SIZE = SIZE * 3;
-          b.x = i * SIZE - b.SIZE/2;
-          b.y = j * SIZE - b.SIZE/2;
+          b.x = j * SIZE + b.SIZE/6;
+          b.y = i * SIZE + b.SIZE/6;
           b.vx = 0;
           b.vy = 0;
           b.life = 100;
