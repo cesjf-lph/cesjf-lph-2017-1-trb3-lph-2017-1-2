@@ -3,5 +3,5 @@ function Sprite(){
 	this.y = 0;
 	this.vx = 0;
 	this.vy = 0;
-	this.SIZE = 0;
+	this.energia = 0;
 }

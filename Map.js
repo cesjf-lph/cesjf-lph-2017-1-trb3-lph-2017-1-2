@@ -1,7 +1,5 @@
 function Map(l, c) {
-  this.SIZE = 32;
   this.cells = [];
-  this.enemies = [];
   this.imageLib = null;
 
   for (var i = 0; i < l; i++) {
@@ -49,9 +47,19 @@ Map.prototype.desenharLimites = function(ctx) {
           ctx.lineWidth = 3;
           ctx.strokeRect(j * this.width, i * this.height, this.width, this.height);
           break;
+        case 100:
+          ctx.fillStyle = 'white';
+          ctx.strokeStyle = 'white';
+          ctx.fillRect(j * this.width, i * this.height, this.width, this.height);
+          ctx.lineWidth = 3;
+          ctx.strokeRect(j * this.width, i * this.height, this.width, this.height);
+          break;
         default:
           ctx.fillStyle = 'yellow';
+          ctx.strokeStyle = 'yellow';
           ctx.fillRect(j * this.width, i * this.height, this.width, this.height);
+          ctx.lineWidth = 3;
+          ctx.strokeRect(j * this.width, i * this.height, this.width, this.height);
       }
     }
   }
