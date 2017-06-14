@@ -65,7 +65,7 @@ function passo(){
   	agora = new Date();
   	dt = (agora - antes) / 1000;
   	ctx.clearRect(0, 0, eCanvas.width, eCanvas.height);
-    mapa.desenhar(ctx);    
+    mapa.desenhar(ctx);
     informacoes();
   	antes = agora;
 }

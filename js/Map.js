@@ -1,7 +1,8 @@
 function Map(l, c) {
-  this.SIZE = 32;
   this.cells = [];
   this.imageLib = null;
+  this.a = [];
+  this.b = [];
 
   for (var i = 0; i < l; i++) {
     this.cells[i] = [];
@@ -14,6 +15,10 @@ function Map(l, c) {
 Map.prototype.desenhar = function(ctx){
   this.desenharLimites(ctx);
   this.desenharTiles(ctx);
+  for (var i = 0; i < this.a.length; i++) {
+  }
+  for (var i = 0; i < this.b.length; i++) {
+  }
 }
 
 Map.prototype.desenharLimites = function(ctx) {
@@ -72,12 +77,12 @@ Map.prototype.desenharTiles = function(ctx){
     var linha = this.cells[i];
     for (var j = 0; j < linha.length; j++) {
       switch (this.cells[i][j]) {
-        case 0:        
+        case 0:
           this.imageLib.drawImageTile(ctx, "chao", 0, 0, 32, j*this.SIZE, i*this.SIZE); //desenha chao
           break;
-        case 9: 
+        case 9:
           this.imageLib.drawImageTile(ctx, "intervalo", 0, 0, 32, j*this.SIZE, i*this.SIZE); //intervalo entre os players
-        default:         
+        default:
       }
     }
   }
@@ -87,6 +92,53 @@ Map.prototype.loadMap = function(map) {
   for (var i = 0; i < this.cells.length; i++) {
     for (var j = 0; j < this.cells[i].length; j++) {
       this.cells[i][j] = map[i][j];
+      switch (map[i][j]) {
+        case 94:
+          var a = new Sprite()
+          a.width = largura * 2;
+          a.height = altura * 2;
+          a.x = i * largura - a.width/2;
+          a.y = j * altura - a.height/2;
+          a.vx = 0;
+          a.vy = 0;
+          a.life = 100;
+          this.a.push(a);
+        break;
+        case 67:
+          var b = new Sprite()
+          b.width = largura * 2;
+          b.height = altura * 2;
+          b.x = i * largura - b.width/2;
+          b.y = j * altura - b.height/2;
+          b.vx = 0;
+          b.vy = 0;
+          b.life = 100;
+          this.b.push(b);
+        break;
+        case 99:
+          var a = new Sprite()
+          a.width = largura * 3;
+          a.height = altura * 3;
+          a.x = i * largura - a.width/2;
+          a.y = j * altura - a.height/2;
+          a.vx = 0;
+          a.vy = 0;
+          a.life = 100;
+          this.a.push(a);
+        break;
+        case 62:
+          var b = new Sprite()
+          b.width = largura * 3;
+          b.height = altura * 3;
+          b.x = i * largura - b.width/2;
+          b.y = j * altura - b.height/2;
+          b.vx = 0;
+          b.vy = 0;
+          b.life = 100;
+          this.b.push(b);
+        break;
+        default:
+      }
     }
   }
 };
