@@ -1,4 +1,5 @@
 function Map(l, c) {
+  this.SIZE = 32;
   this.cells = [];
   this.imageLib = null;
   this.a = [];
@@ -79,6 +80,30 @@ Map.prototype.desenharTiles = function(ctx){
       switch (this.cells[i][j]) {
         case 0:
           this.imageLib.drawImageTile(ctx, "chao", 0, 0, 32, j*this.SIZE, i*this.SIZE); //desenha chao
+          break;
+        case 1:
+          this.imageLib.drawImageTile(ctx, "laterais", 0, 0, 32, j*this.SIZE, i*this.SIZE);
+          break;
+        case 2:
+          this.imageLib.drawImageTile(ctx, "laterais", 0, 1, 32, j*this.SIZE, i*this.SIZE);
+          break;
+        case 3:
+          this.imageLib.drawImageTile(ctx, "laterais", 0, 2, 32, j*this.SIZE, i*this.SIZE);
+          break;
+        case 4:
+          this.imageLib.drawImageTile(ctx, "laterais", 0, 3, 32, j*this.SIZE, i*this.SIZE);
+          break;
+        case 5:
+          this.imageLib.drawImageTile(ctx, "laterais", 0, 4, 32, j*this.SIZE, i*this.SIZE);
+          break;
+        case 6:
+          this.imageLib.drawImageTile(ctx, "laterais", 0, 5, 32, j*this.SIZE, i*this.SIZE);
+          break;
+        case 7:
+          this.imageLib.drawImageTile(ctx, "laterais", 0, 6, 32, j*this.SIZE, i*this.SIZE);
+          break;
+        case 8:
+          this.imageLib.drawImageTile(ctx, "laterais", 0, 7, 32, j*this.SIZE, i*this.SIZE);
           break;
         case 9:
           this.imageLib.drawImageTile(ctx, "intervalo", 0, 0, 32, j*this.SIZE, i*this.SIZE); //intervalo entre os players
