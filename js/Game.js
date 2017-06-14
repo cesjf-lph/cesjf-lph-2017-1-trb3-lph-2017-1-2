@@ -9,8 +9,7 @@ var imglib;
 var soundlib;
 var linhas = 17; //Fixa a quantidade de linhas
 var colunas = 38; //Fixa a quantidade de colunas
-var largura = 32; //Fixa a largura de cada quadro
-var altura = 32; //Fixa a altura de cada quadro
+var SIZE = 32; //Fixa a altura e largura de cada quadro
 var casasMapa = ([
   [100, 100, 100, 5,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  6,  9,  9,  5,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 6, 100, 100, 100],
   [100, 100, 100, 1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  3,  9,  9,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 3, 100, 100, 100],
@@ -34,8 +33,8 @@ var casasMapa = ([
 
 function init(){
     eCanvas = document.getElementsByTagName("canvas")[0];
-    eCanvas.width = largura * colunas;//Largura de cada quadro vezes o número de colunas
-    eCanvas.height = altura * linhas;//Altura de cada quadro vezes o número de linhas
+    eCanvas.width = SIZE * colunas;//Largura de cada quadro vezes o número de colunas
+    eCanvas.height = SIZE * linhas;//Altura de cada quadro vezes o número de linhas
     ctx  = eCanvas.getContext("2d");
 
     soundLib = new SoundLoader();
@@ -43,7 +42,6 @@ function init(){
     imglib = new ImageLoader();
     imglib.load("chao", "img/chao.png");
     imglib.load("intervalo", "img/intervalo.png");
-    imglib.load("caminho", "img/caminho.png");
     imglib.load("0", "img/0.png");
     imglib.load("1", "img/1.png");
     imglib.load("2", "img/2.png");
@@ -59,8 +57,8 @@ function init(){
     mapa = new Map(linhas, colunas);
     mapa.imageLib = imglib;
     mapa.loadMap(casasMapa);
-    mapa.width = largura;
-    mapa.height = altura;
+    mapa.width = SIZE;
+    mapa.height = SIZE;
     a = new Sprite();
     a.imageLib = imglib;
     a.energia = eCanvas.height;//Fixa a energia com o mesmo valor da altura para simplificar no desenho
@@ -122,20 +120,20 @@ function textoFormatado(texto1, texto2, texto3, texto4, texto5, texto6, texto7, 
 
 function informacoes(){
   ctx.fillStyle = "grey";//Desenha um fundo cinza por traz da barra de energia do "a"
-  ctx.fillRect (2 * largura, eCanvas.height, largura, - eCanvas.height);
+  ctx.fillRect (2 * SIZE, eCanvas.height, SIZE, - eCanvas.height);
 
   ctx.fillStyle = "hsl("+a.energia/eCanvas.height*120+",100%,50%)";//Desenha a barra de energia do "a"
-  ctx.fillRect (2 * largura, eCanvas.height, largura, - a.energia);
+  ctx.fillRect (2 * SIZE, eCanvas.height, SIZE, - a.energia);
 
   ctx.fillStyle = "grey";//Desenha um fundo cinza por traz da barra de energia do "b"
-  ctx.fillRect (35 * largura, eCanvas.height, largura, - eCanvas.height);
+  ctx.fillRect (35 * SIZE, eCanvas.height, SIZE, - eCanvas.height);
 
   ctx.fillStyle = "hsl("+b.energia/eCanvas.height*120+",100%,50%)";//Desenha a barra de energia do "a"
-  ctx.fillRect (35 * largura, eCanvas.height, largura, - b.energia);
+  ctx.fillRect (35 * SIZE, eCanvas.height, SIZE, - b.energia);
 
   ctx.fillStyle = "grey";//Desenha um fundo cinza por traz da barra de cards de "a"
-  ctx.fillRect (0 * largura, eCanvas.height, largura * 2, - eCanvas.height);
+  ctx.fillRect (0 * SIZE, eCanvas.height, SIZE * 2, - eCanvas.height);
 
   ctx.fillStyle = "grey";//Desenha um fundo cinza por traz da barra de cards de "b"
-  ctx.fillRect (36 * largura, eCanvas.height, largura * 2, - eCanvas.height);
+  ctx.fillRect (36 * SIZE, eCanvas.height, SIZE * 2, - eCanvas.height);
 }

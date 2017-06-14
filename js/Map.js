@@ -37,37 +37,37 @@ Map.prototype.desenharLimites = function(ctx) {//Desnhanha estrutura do mapa
         case 8:
           ctx.fillStyle = 'brown';
           ctx.strokeStyle = 'brown';
-          ctx.fillRect(j * this.width, i * this.height, this.width, this.height);
+          ctx.fillRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
           ctx.lineWidth = 3;
-          ctx.strokeRect(j * this.width, i * this.height, this.width, this.height);
+          ctx.strokeRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
           break;
         case 0:
           ctx.fillStyle = 'green';
           ctx.strokeStyle = 'green';
-          ctx.fillRect(j * this.width, i * this.height, this.width, this.height);
+          ctx.fillRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
           ctx.lineWidth = 3;
-          ctx.strokeRect(j * this.width, i * this.height, this.width, this.height);
+          ctx.strokeRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
           break;
         case 9:
           ctx.fillStyle = 'blue';
           ctx.strokeStyle = 'blue';
-          ctx.fillRect(j * this.width, i * this.height, this.width, this.height);
+          ctx.fillRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
           ctx.lineWidth = 3;
-          ctx.strokeRect(j * this.width, i * this.height, this.width, this.height);
+          ctx.strokeRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
           break;
         case 100:
           ctx.fillStyle = 'white';
           ctx.strokeStyle = 'white';
-          ctx.fillRect(j * this.width, i * this.height, this.width, this.height);
+          ctx.fillRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
           ctx.lineWidth = 3;
-          ctx.strokeRect(j * this.width, i * this.height, this.width, this.height);
+          ctx.strokeRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
           break;
         default:
           ctx.fillStyle = 'yellow';
           ctx.strokeStyle = 'yellow';
-          ctx.fillRect(j * this.width, i * this.height, this.width, this.height);
+          ctx.fillRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
           ctx.lineWidth = 3;
-          ctx.strokeRect(j * this.width, i * this.height, this.width, this.height);
+          ctx.strokeRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
       }
     }
   }
@@ -79,34 +79,34 @@ Map.prototype.desenharTiles = function(ctx){
     for (var j = 0; j < linha.length; j++) {
       switch (this.cells[i][j]) {
         case 0:
-          this.imageLib.drawImageTile(ctx, "0", 0, 0, 32, j*this.width, i*this.height); //desenha chao
+          this.imageLib.drawImageTile(ctx, "0", 0, 0, 32, j*this.SIZE, i*this.SIZE); //desenha chao
           break;
         case 1:
-          this.imageLib.drawImageTile(ctx, "1", 0, 0, 32, j*this.width, i*this.height); //desenha chao
+          this.imageLib.drawImageTile(ctx, "1", 0, 0, 32, j*this.SIZE, i*this.SIZE); //desenha chao
           break;
         case 2:
-          this.imageLib.drawImageTile(ctx, "2", 0, 0, 32, j*this.width, i*this.height); //desenha chao
+          this.imageLib.drawImageTile(ctx, "2", 0, 0, 32, j*this.SIZE, i*this.SIZE); //desenha chao
           break;
         case 3:
-          this.imageLib.drawImageTile(ctx, "3", 0, 0, 32, j*this.width, i*this.height); //desenha chao
+          this.imageLib.drawImageTile(ctx, "3", 0, 0, 32, j*this.SIZE, i*this.SIZE); //desenha chao
           break;
         case 4:
-          this.imageLib.drawImageTile(ctx, "4", 0, 0, 32, j*this.width, i*this.height); //desenha chao
+          this.imageLib.drawImageTile(ctx, "4", 0, 0, 32, j*this.SIZE, i*this.SIZE); //desenha chao
           break;
         case 5:
-          this.imageLib.drawImageTile(ctx, "5", 0, 0, 32, j*this.width, i*this.height); //desenha chao
+          this.imageLib.drawImageTile(ctx, "5", 0, 0, 32, j*this.SIZE, i*this.SIZE); //desenha chao
           break;
         case 6:
-          this.imageLib.drawImageTile(ctx, "6", 0, 0, 32, j*this.width, i*this.height); //desenha chao
+          this.imageLib.drawImageTile(ctx, "6", 0, 0, 32, j*this.SIZE, i*this.SIZE); //desenha chao
           break;
         case 7:
-          this.imageLib.drawImageTile(ctx, "7", 0, 0, 32, j*this.width, i*this.height); //desenha chao
+          this.imageLib.drawImageTile(ctx, "7", 0, 0, 32, j*this.SIZE, i*this.SIZE); //desenha chao
           break;
         case 8:
-          this.imageLib.drawImageTile(ctx, "8", 0, 0, 32, j*this.width, i*this.height); //desenha chao
+          this.imageLib.drawImageTile(ctx, "8", 0, 0, 32, j*this.SIZE, i*this.SIZE); //desenha chao
           break;
         case 9:
-          this.imageLib.drawImageTile(ctx, "intervalo", 0, 0, 32, j*this.width, i*this.height); //intervalo entre os players
+          this.imageLib.drawImageTile(ctx, "intervalo", 0, 0, 32, j*this.SIZE, i*this.SIZE); //intervalo entre os players
           break
         case 62:
         case 63:
@@ -142,13 +142,13 @@ Map.prototype.desenharTiles = function(ctx){
         case 97:
         case 98:
         case 99:
-          this.imageLib.drawImageTile(ctx, "chao", 0, 0, 32, j*this.width, i*this.height); //intervalo entre os players
+          this.imageLib.drawImageTile(ctx, "chao", 0, 0, 32, j*this.SIZE, i*this.SIZE); //intervalo entre os players
           break
         case 79:
         case 80:
         case 81:
         case 82:
-          this.imageLib.drawImageTile(ctx, "ponte", 0, 0, 32, j*this.width, i*this.height); //intervalo entre os players
+          this.imageLib.drawImageTile(ctx, "ponte", 0, 0, 32, j*this.SIZE, i*this.SIZE); //intervalo entre os players
           break
         default:
       }
@@ -163,10 +163,9 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
       switch (map[i][j]) {//Faz a verificação de conteúdo das casas para incluir as torres
         case 94://Inclui as 2 torres pequenas de "a"
           var a = new Sprite()
-          a.width = largura * 2;
-          a.height = altura * 2;
-          a.x = i * largura - a.width/2;
-          a.y = j * altura - a.height/2;
+          a.SIZE = SIZE * 2;
+          a.x = i * SIZE - a.SIZE/2;
+          a.y = j * SIZE - a.SIZE/2;
           a.vx = 0;
           a.vy = 0;
           a.life = 100;
@@ -174,10 +173,9 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
         break;
         case 67://Inclui as 2 torres pequenas de "b"
           var b = new Sprite()
-          b.width = largura * 2;
-          b.height = altura * 2;
-          b.x = i * largura - b.width/2;
-          b.y = j * altura - b.height/2;
+          b.SIZE = SIZE * 2;
+          b.x = i * SIZE - b.SIZE/2;
+          b.y = j * SIZE - b.SIZE/2;
           b.vx = 0;
           b.vy = 0;
           b.life = 100;
@@ -185,10 +183,9 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
         break;
         case 99://Inclui a torre principal de "a"
           var a = new Sprite()
-          a.width = largura * 3;
-          a.height = altura * 3;
-          a.x = i * largura - a.width/2;
-          a.y = j * altura - a.height/2;
+          a.SIZE = SIZE * 3;
+          a.x = i * SIZE - a.SIZE/2;
+          a.y = j * SIZE - a.SIZE/2;
           a.vx = 0;
           a.vy = 0;
           a.life = 100;
@@ -196,10 +193,9 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
         break;
         case 62://Inclui a torre principal de "b"
           var b = new Sprite()
-          b.width = largura * 3;
-          b.height = altura * 3;
-          b.x = i * largura - b.width/2;
-          b.y = j * altura - b.height/2;
+          b.SIZE = SIZE * 3;
+          b.x = i * SIZE - b.SIZE/2;
+          b.y = j * SIZE - b.SIZE/2;
           b.vx = 0;
           b.vy = 0;
           b.life = 100;
@@ -213,7 +209,7 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
 
 Map.prototype.getIndices = function (sprite) {
    var pos = {};
-   pos.c = Math.floor(sprite.x/this.width);
-   pos.l = Math.floor(sprite.y/this.height);
+   pos.c = Math.floor(sprite.x/this.SIZE);
+   pos.l = Math.floor(sprite.y/this.SIZE);
    return pos;
 };
