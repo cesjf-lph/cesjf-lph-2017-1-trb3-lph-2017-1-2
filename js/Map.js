@@ -1,4 +1,5 @@
 function Map(l, c) {
+  this.SIZE = 32;
   this.cells = [];
   this.imageLib = null;
 
@@ -12,6 +13,7 @@ function Map(l, c) {
 
 Map.prototype.desenhar = function(ctx){
   this.desenharLimites(ctx);
+  this.desenharTiles(ctx);
 }
 
 Map.prototype.desenharLimites = function(ctx) {
@@ -64,6 +66,20 @@ Map.prototype.desenharLimites = function(ctx) {
     }
   }
 };
+
+Map.prototype.desenharTiles = function(ctx){
+  for (var i = 0; i < this.cells.length; i++) {
+    var linha = this.cells[i];
+    for (var j = 0; j < linha.length; j++) {
+      switch (this.cells[i][j]) {
+        case 0:        
+          this.imageLib.drawImageTile(ctx, "chao", 0, 0, 32, j*this.SIZE, i*this.SIZE); //desenha chao
+          break;
+        default:         
+      }
+    }
+  }
+}
 
 Map.prototype.loadMap = function(map) {
   for (var i = 0; i < this.cells.length; i++) {

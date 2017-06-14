@@ -33,14 +33,17 @@ var casasMapa = ([
 ]);
 
 
-
 function init(){
     eCanvas = document.getElementsByTagName("canvas")[0];
     eCanvas.width = largura * colunas;//Largura de cada quadro vezes o número de colunas
     eCanvas.height = altura * linhas;//Altura de cada quadro vezes o número de linhas
     ctx  = eCanvas.getContext("2d");
+
     soundLib = new SoundLoader();
+
     imglib = new ImageLoader();
+    imglib.load("chao", "img/chao.png");
+
     mapa = new Map(linhas, colunas);
     mapa.imageLib = imglib;
     mapa.loadMap(casasMapa);
@@ -61,7 +64,7 @@ function passo(){
   	agora = new Date();
   	dt = (agora - antes) / 1000;
   	ctx.clearRect(0, 0, eCanvas.width, eCanvas.height);
-    mapa.desenhar(ctx);
+    mapa.desenhar(ctx);    
     informacoes();
   	antes = agora;
 }
