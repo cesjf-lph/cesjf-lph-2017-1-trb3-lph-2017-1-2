@@ -75,6 +75,8 @@ Map.prototype.desenharTiles = function(ctx){
         case 0:        
           this.imageLib.drawImageTile(ctx, "chao", 0, 0, 32, j*this.SIZE, i*this.SIZE); //desenha chao
           break;
+        case 9: 
+          this.imageLib.drawImageTile(ctx, "intervalo", 0, 0, 32, j*this.SIZE, i*this.SIZE); //intervalo entre os players
         default:         
       }
     }

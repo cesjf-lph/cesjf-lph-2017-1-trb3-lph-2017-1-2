@@ -43,6 +43,7 @@ function init(){
 
     imglib = new ImageLoader();
     imglib.load("chao", "img/chao.png");
+    imglib.load("intervalo", "img/intervalo.png");
 
     mapa = new Map(linhas, colunas);
     mapa.imageLib = imglib;
