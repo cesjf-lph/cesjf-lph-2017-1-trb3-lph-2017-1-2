@@ -43,7 +43,18 @@ function init(){
     imglib = new ImageLoader();
     imglib.load("chao", "img/chao.png");
     imglib.load("intervalo", "img/intervalo.png");
-    imglib.load("laterais", "img/laterais.png");
+    imglib.load("caminho", "img/caminho.png");
+    imglib.load("0", "img/0.png");
+    imglib.load("1", "img/1.png");
+    imglib.load("2", "img/2.png");
+    imglib.load("3", "img/3.png");
+    imglib.load("3", "img/3.png");
+    imglib.load("4", "img/4.png");
+    imglib.load("5", "img/5.png");
+    imglib.load("6", "img/6.png");
+    imglib.load("7", "img/7.png");
+    imglib.load("8", "img/8.png");
+    imglib.load("ponte", "img/ponte.png");
 
     mapa = new Map(linhas, colunas);
     mapa.imageLib = imglib;
