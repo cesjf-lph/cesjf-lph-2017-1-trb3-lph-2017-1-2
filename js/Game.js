@@ -123,17 +123,47 @@ function informacoes(){
   ctx.fillRect (2 * SIZE, eCanvas.height, SIZE, - eCanvas.height);
 
   ctx.fillStyle = "hsl("+a.energia/eCanvas.height*120+",100%,50%)";//Desenha a barra de energia do "a"
-  ctx.fillRect (2 * SIZE, eCanvas.height, SIZE, - a.energia);
+  ctx.fillRect (2 * SIZE + 3, eCanvas.height, SIZE - 6, - a.energia);
 
   ctx.fillStyle = "grey";//Desenha um fundo cinza por traz da barra de energia do "b"
   ctx.fillRect (35 * SIZE, eCanvas.height, SIZE, - eCanvas.height);
 
   ctx.fillStyle = "hsl("+b.energia/eCanvas.height*120+",100%,50%)";//Desenha a barra de energia do "a"
-  ctx.fillRect (35 * SIZE, eCanvas.height, SIZE, - b.energia);
+  ctx.fillRect (35 * SIZE + 3, eCanvas.height, SIZE - 6, - b.energia);
 
   ctx.fillStyle = "grey";//Desenha um fundo cinza por traz da barra de cards de "a"
   ctx.fillRect (0 * SIZE, eCanvas.height, SIZE * 2, - eCanvas.height);
 
   ctx.fillStyle = "grey";//Desenha um fundo cinza por traz da barra de cards de "b"
   ctx.fillRect (36 * SIZE, eCanvas.height, SIZE * 2, - eCanvas.height);
+
+  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "a"
+  ctx.fillRect (0 * SIZE, 2 * SIZE, SIZE * 2, SIZE * 2.9);
+
+  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "a"
+  ctx.fillRect (0 * SIZE, 5 * SIZE, SIZE * 2, SIZE * 2.9);
+
+  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "a"
+  ctx.fillRect (0 * SIZE, 8 * SIZE, SIZE * 2, SIZE * 2.9);
+
+  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "a"
+  ctx.fillRect (0 * SIZE, 11 * SIZE, SIZE * 2, SIZE * 2.9);
+
+  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "a"
+  ctx.fillRect (0 * SIZE, 14 * SIZE, SIZE * 2, SIZE * 2.9);
+
+  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
+  ctx.fillRect (36 * SIZE, 2 * SIZE, SIZE * 2, SIZE * 2.9);
+
+  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
+  ctx.fillRect (36 * SIZE, 5 * SIZE, SIZE * 2, SIZE * 2.9);
+
+  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
+  ctx.fillRect (36 * SIZE, 8 * SIZE, SIZE * 2, SIZE * 2.9);
+
+  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
+  ctx.fillRect (36 * SIZE, 11 * SIZE, SIZE * 2, SIZE * 2.9);
+
+  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
+  ctx.fillRect (36 * SIZE, 14 * SIZE, SIZE * 2, SIZE * 2.9);
 }
