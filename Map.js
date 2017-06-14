@@ -29,8 +29,8 @@ Map.prototype.desenharLimites = function(ctx) {
         case 6:
         case 7:
         case 8:
-          ctx.fillStyle = 'red';
-          ctx.strokeStyle = 'red';
+          ctx.fillStyle = 'brown';
+          ctx.strokeStyle = 'brown';
           ctx.fillRect(j * this.width, i * this.height, this.width, this.height);
           ctx.lineWidth = 3;
           ctx.strokeRect(j * this.width, i * this.height, this.width, this.height);
@@ -45,16 +45,6 @@ Map.prototype.desenharLimites = function(ctx) {
         case 9:
           ctx.fillStyle = 'blue';
           ctx.strokeStyle = 'blue';
-          ctx.fillRect(j * this.width, i * this.height, this.width, this.height);
-          ctx.lineWidth = 3;
-          ctx.strokeRect(j * this.width, i * this.height, this.width, this.height);
-          break;
-        case 64:
-        case 69:
-        case 94:
-        case 99:
-          ctx.fillStyle = 'grey';
-          ctx.strokeStyle = 'grey';
           ctx.fillRect(j * this.width, i * this.height, this.width, this.height);
           ctx.lineWidth = 3;
           ctx.strokeRect(j * this.width, i * this.height, this.width, this.height);
