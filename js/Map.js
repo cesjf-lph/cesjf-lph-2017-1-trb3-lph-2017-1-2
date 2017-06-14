@@ -14,7 +14,7 @@ function Map(l, c) {
 }
 
 Map.prototype.desenhar = function(ctx){
-  this.desenharLimites(ctx);
+  //this.desenharLimites(ctx);
   this.desenharTiles(ctx);
   for (var i = 0; i < this.a.length; i++) {//Chama o desenho do "a"
     this.a[i].desenharLimites(ctx);

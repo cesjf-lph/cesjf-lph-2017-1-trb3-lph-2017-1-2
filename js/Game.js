@@ -66,6 +66,7 @@ function init(){
     b.imageLib = imglib;
     b.energia = eCanvas.height;//Fixa a energia com o mesmo valor da altura para simplificar no desenho
     configuraControles();
+    window.onmousedown = configuraMouse;
     var id = requestAnimationFrame(passo);
 }
 
@@ -97,6 +98,18 @@ function configuraControles() {
     }
   });
 }
+
+function configuraMouse(e) {
+  e = e || window.event;
+  var button = e.which || e.button;
+  if(button == 1) {
+    console.log("Botão esquerdo");
+  } else if(button == 2) {
+    console.log("Botão de rolagem");
+  } else if(button == 3) {
+    console.log("Botão direito");
+  }
+};
 
 function textoFormatado(texto1, texto2, texto3, texto4, texto5, texto6, texto7, texto8, texto9, texto10){
   ctx.textAlign="center";
