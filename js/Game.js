@@ -119,51 +119,77 @@ function textoFormatado(texto1, texto2, texto3, texto4, texto5, texto6, texto7, 
 }
 
 function informacoes(){
-  ctx.fillStyle = "grey";//Desenha um fundo cinza por traz da barra de energia do "a"
-  ctx.fillRect (2 * SIZE, eCanvas.height, SIZE, - eCanvas.height);
+  ctx.fillStyle = "grey";//Desenha um fundo cinza por traz da barra de informações do "a"
+  ctx.fillRect (0 * SIZE, eCanvas.height, SIZE * 3, - eCanvas.height);
 
   ctx.fillStyle = "hsl("+a.energia/eCanvas.height*120+",100%,50%)";//Desenha a barra de energia do "a"
   ctx.fillRect (2 * SIZE + 3, eCanvas.height, SIZE - 6, - a.energia);
 
+  ctx.textAlign="left";//Adiciona texto "A" a barra do "a"
+  ctx.fillStyle = "white";
+  ctx.font = "4em Arial Black";
+  ctx.fillText("A", 0 * SIZE + 8, 55);
+
+  ctx.textAlign="center";//Adiciona texto "ENERGIA" a barra do "a"
+  ctx.font = "2em Arial Black";
+  ctx.fillText("E", 2 * SIZE + SIZE / 2, eCanvas.height / 2 - 90);
+  ctx.fillText("N", 2 * SIZE + SIZE / 2, eCanvas.height / 2 - 60);
+  ctx.fillText("E", 2 * SIZE + SIZE / 2, eCanvas.height / 2 - 30);
+  ctx.fillText("R", 2 * SIZE + SIZE / 2, eCanvas.height / 2);
+  ctx.fillText("G", 2 * SIZE + SIZE / 2, eCanvas.height / 2 + 30);
+  ctx.fillText("I", 2 * SIZE + SIZE / 2, eCanvas.height / 2 + 60);
+  ctx.fillText("A", 2 * SIZE + SIZE / 2, eCanvas.height / 2 + 90);
+
   ctx.fillStyle = "grey";//Desenha um fundo cinza por traz da barra de energia do "b"
-  ctx.fillRect (35 * SIZE, eCanvas.height, SIZE, - eCanvas.height);
+  ctx.fillRect (35 * SIZE, eCanvas.height, SIZE * 3, - eCanvas.height);
 
   ctx.fillStyle = "hsl("+b.energia/eCanvas.height*120+",100%,50%)";//Desenha a barra de energia do "a"
   ctx.fillRect (35 * SIZE + 3, eCanvas.height, SIZE - 6, - b.energia);
 
-  ctx.fillStyle = "grey";//Desenha um fundo cinza por traz da barra de cards de "a"
-  ctx.fillRect (0 * SIZE, eCanvas.height, SIZE * 2, - eCanvas.height);
+  ctx.textAlign="left";//Adiciona texto "A" a barra do "b"
+  ctx.fillStyle = "black";
+  ctx.font = "4em Arial Black";
+  ctx.fillText("B", 36 * SIZE + 6, 55);
 
-  ctx.fillStyle = "grey";//Desenha um fundo cinza por traz da barra de cards de "b"
-  ctx.fillRect (36 * SIZE, eCanvas.height, SIZE * 2, - eCanvas.height);
+  ctx.textAlign="center";//Adiciona texto "ENERGIA" a barra do "b"
+  ctx.font = "2em Arial Black";
+  ctx.fillText("E", 35 * SIZE + SIZE / 2, eCanvas.height / 2 - 90);
+  ctx.fillText("N", 35 * SIZE + SIZE / 2, eCanvas.height / 2 - 60);
+  ctx.fillText("E", 35 * SIZE + SIZE / 2, eCanvas.height / 2 - 30);
+  ctx.fillText("R", 35 * SIZE + SIZE / 2, eCanvas.height / 2);
+  ctx.fillText("G", 35 * SIZE + SIZE / 2, eCanvas.height / 2 + 30);
+  ctx.fillText("I", 35 * SIZE + SIZE / 2, eCanvas.height / 2 + 60);
+  ctx.fillText("A", 35 * SIZE + SIZE / 2, eCanvas.height / 2 + 90);
 
-  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "a"
-  ctx.fillRect (0 * SIZE, 2 * SIZE, SIZE * 2, SIZE * 2.9);
 
-  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "a"
-  ctx.fillRect (0 * SIZE, 5 * SIZE, SIZE * 2, SIZE * 2.9);
 
-  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "a"
-  ctx.fillRect (0 * SIZE, 8 * SIZE, SIZE * 2, SIZE * 2.9);
+  ctx.fillStyle = "white";//Desenha um fundo branco por traz do card 1 de "a"
+  ctx.fillRect (0 * SIZE + 2, 2 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
 
-  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "a"
-  ctx.fillRect (0 * SIZE, 11 * SIZE, SIZE * 2, SIZE * 2.9);
+  ctx.fillStyle = "white";//Desenha um fundo branco por traz do card 1 de "a"
+  ctx.fillRect (0 * SIZE + 2, 5 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
 
-  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "a"
-  ctx.fillRect (0 * SIZE, 14 * SIZE, SIZE * 2, SIZE * 2.9);
+  ctx.fillStyle = "white";//Desenha um fundo branco por traz do card 1 de "a"
+  ctx.fillRect (0 * SIZE + 2, 8 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
+
+  ctx.fillStyle = "white";//Desenha um fundo branco por traz do card 1 de "a"
+  ctx.fillRect (0 * SIZE + 2, 11 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
+
+  ctx.fillStyle = "white";//Desenha um fundo preto por traz do card 1 de "a"
+  ctx.fillRect (0 * SIZE + 2, 14 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
 
   ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
-  ctx.fillRect (36 * SIZE, 2 * SIZE, SIZE * 2, SIZE * 2.9);
+  ctx.fillRect (36 * SIZE - 1, 2 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
 
   ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
-  ctx.fillRect (36 * SIZE, 5 * SIZE, SIZE * 2, SIZE * 2.9);
+  ctx.fillRect (36 * SIZE - 1, 5 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
 
   ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
-  ctx.fillRect (36 * SIZE, 8 * SIZE, SIZE * 2, SIZE * 2.9);
+  ctx.fillRect (36 * SIZE - 1, 8 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
 
   ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
-  ctx.fillRect (36 * SIZE, 11 * SIZE, SIZE * 2, SIZE * 2.9);
+  ctx.fillRect (36 * SIZE - 1, 11 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
 
   ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
-  ctx.fillRect (36 * SIZE, 14 * SIZE, SIZE * 2, SIZE * 2.9);
+  ctx.fillRect (36 * SIZE - 1, 14 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
 }
