@@ -119,7 +119,7 @@ function textoFormatado(texto1, texto2, texto3, texto4, texto5, texto6, texto7, 
 }
 
 function informacoes(){
-  ctx.fillStyle = "grey";//Desenha um fundo cinza por traz da barra de informações do "a"
+  ctx.fillStyle = "#156c99";//Desenha um fundo azul por traz da barra de informações do "a"
   ctx.fillRect (0 * SIZE, eCanvas.height, SIZE * 3, - eCanvas.height);
 
   ctx.fillStyle = "hsl("+a.energia/eCanvas.height*120+",100%,50%)";//Desenha a barra de energia do "a"
@@ -140,7 +140,7 @@ function informacoes(){
   ctx.fillText("I", 2 * SIZE + SIZE / 2, eCanvas.height / 2 + 60);
   ctx.fillText("A", 2 * SIZE + SIZE / 2, eCanvas.height / 2 + 90);
 
-  ctx.fillStyle = "grey";//Desenha um fundo cinza por traz da barra de energia do "b"
+  ctx.fillStyle = "#156c99";//Desenha um fundo azul por traz da barra de energia do "b"
   ctx.fillRect (35 * SIZE, eCanvas.height, SIZE * 3, - eCanvas.height);
 
   ctx.fillStyle = "hsl("+b.energia/eCanvas.height*120+",100%,50%)";//Desenha a barra de energia do "a"
