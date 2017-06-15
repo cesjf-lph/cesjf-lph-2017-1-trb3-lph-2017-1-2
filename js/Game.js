@@ -76,8 +76,14 @@ function passo(){
   	dt = (agora - antes) / 1000;
   	ctx.clearRect(0, 0, eCanvas.width, eCanvas.height);
     mapa.desenhar(ctx);
+    if (a.energia < eCanvas.height){
+      a.energia = a.energia + dt * 10;
+    }
+    if (b.energia < eCanvas.height){
+      b.energia = b.energia + dt * 10;
+    }
     informacoes();//Desenha informações complementares na tela (Barra de energia e cards)
-    mapa.carregaBarra();
+    mapa.carregaBarra();//Adiciona cores na barra de acordo com a energia
   	antes = agora;
 }
 
