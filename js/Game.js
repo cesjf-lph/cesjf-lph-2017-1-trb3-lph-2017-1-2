@@ -77,6 +77,7 @@ function passo(){
   	ctx.clearRect(0, 0, eCanvas.width, eCanvas.height);
     mapa.desenhar(ctx);
     informacoes();//Desenha informações complementares na tela (Barra de energia e cards)
+    mapa.carregaBarra();
   	antes = agora;
 }
 

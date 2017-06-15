@@ -215,3 +215,13 @@ Map.prototype.getIndices = function (sprite) {
    pos.l = Math.floor(sprite.y/this.SIZE);
    return pos;
 };
+
+Map.prototype.carregaBarra = function(){
+	if(a.energia < eCanvas.height){
+      a.energia = a.energia + dt * 10;
+    }
+    if(b.energia < eCanvas.height){
+      b.energia = b.energia + dt * 10;
+    }
+  	antes = agora;
+  };
