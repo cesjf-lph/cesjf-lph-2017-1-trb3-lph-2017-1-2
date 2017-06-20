@@ -110,6 +110,33 @@ Map.prototype.desenharTiles = function(ctx){
         case 9:
           this.imageLib.drawImageTile(ctx, "intervalo", 0, 0, 32, j*this.SIZE, i*this.SIZE); //intervalo entre os players
           break
+        case 10:
+          var X = 10;
+          if(this.cells[i][j+1] == X && this.cells[i+1][j] == X && this.cells[i-1][j] != X) this.imageLib.drawImageTile(ctx, "pc", 0, 0, 32, j*this.SIZE, i*this.SIZE);
+          if(this.cells[i][j-1] == X && this.cells[i+1][j] == X && this.cells[i-1][j] != X) this.imageLib.drawImageTile(ctx, "pc", 0, 1, 32, j*this.SIZE, i*this.SIZE);
+          if(this.cells[i-1][j] == X && this.cells[i][j+1] == X && this.cells[i+1][j] == X) this.imageLib.drawImageTile(ctx, "pc", 1, 0, 32, j*this.SIZE, i*this.SIZE);
+          if(this.cells[i-1][j] == X && this.cells[i][j-1] == X && this.cells[i+1][j] == X) this.imageLib.drawImageTile(ctx, "pc", 1, 1, 32, j*this.SIZE, i*this.SIZE);
+          if(this.cells[i-1][j] == X && this.cells[i][j+1] == X && this.cells[i+1][j] != X) this.imageLib.drawImageTile(ctx, "pc", 2, 0, 32, j*this.SIZE, i*this.SIZE);
+          if(this.cells[i][j-1] == X && this.cells[i-1][j] == X && this.cells[i+1][j] != X) this.imageLib.drawImageTile(ctx, "pc", 2, 1, 32, j*this.SIZE, i*this.SIZE);          
+          break;
+        case 11:
+          var X = 11;
+          if(this.cells[i][j+1] == X && this.cells[i+1][j] == X && this.cells[i-1][j] != X) this.imageLib.drawImageTile(ctx, "pc2", 0, 0, 32, j*this.SIZE, i*this.SIZE);
+          if(this.cells[i][j-1] == X && this.cells[i+1][j] == X && this.cells[i-1][j] != X) this.imageLib.drawImageTile(ctx, "pc2", 0, 1, 32, j*this.SIZE, i*this.SIZE);
+          if(this.cells[i-1][j] == X && this.cells[i][j+1] == X && this.cells[i+1][j] == X) this.imageLib.drawImageTile(ctx, "pc2", 1, 0, 32, j*this.SIZE, i*this.SIZE);
+          if(this.cells[i-1][j] == X && this.cells[i][j-1] == X && this.cells[i+1][j] == X) this.imageLib.drawImageTile(ctx, "pc2", 1, 1, 32, j*this.SIZE, i*this.SIZE);
+          if(this.cells[i-1][j] == X && this.cells[i][j+1] == X && this.cells[i+1][j] != X) this.imageLib.drawImageTile(ctx, "pc2", 2, 0, 32, j*this.SIZE, i*this.SIZE);
+          if(this.cells[i][j-1] == X && this.cells[i-1][j] == X && this.cells[i+1][j] != X) this.imageLib.drawImageTile(ctx, "pc2", 2, 1, 32, j*this.SIZE, i*this.SIZE);
+          break;
+        case 12:
+          var X = 12;
+          if(this.cells[i][j+1] == X && this.cells[i+1][j] == X && this.cells[i-1][j] != X) this.imageLib.drawImageTile(ctx, "pc3", 0, 0, 32, j*this.SIZE, i*this.SIZE);
+          if(this.cells[i][j-1] == X && this.cells[i+1][j] == X && this.cells[i-1][j] != X) this.imageLib.drawImageTile(ctx, "pc3", 0, 1, 32, j*this.SIZE, i*this.SIZE);
+          if(this.cells[i-1][j] == X && this.cells[i][j+1] == X && this.cells[i+1][j] == X) this.imageLib.drawImageTile(ctx, "pc3", 1, 0, 32, j*this.SIZE, i*this.SIZE);
+          if(this.cells[i-1][j] == X && this.cells[i][j-1] == X && this.cells[i+1][j] == X) this.imageLib.drawImageTile(ctx, "pc3", 1, 1, 32, j*this.SIZE, i*this.SIZE);
+          if(this.cells[i-1][j] == X && this.cells[i][j+1] == X && this.cells[i+1][j] != X) this.imageLib.drawImageTile(ctx, "pc3", 2, 0, 32, j*this.SIZE, i*this.SIZE);
+          if(this.cells[i][j-1] == X && this.cells[i-1][j] == X && this.cells[i+1][j] != X) this.imageLib.drawImageTile(ctx, "pc3", 2, 1, 32, j*this.SIZE, i*this.SIZE);
+          break;
         case 62:
         case 63:
         case 64:
