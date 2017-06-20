@@ -290,7 +290,7 @@ Map.prototype.delete = function(){
 Map.prototype.criaPersonagem = function(linha, coluna){
   if (coluna == 7){
     var a = new Sprite()
-    a.x = coluna * SIZE;
+    a.x = coluna * SIZE+SIZE/2;
     a.y = linha * SIZE+SIZE/2;
     a.SIZE = 32;
     a.vx = 0;
@@ -300,9 +300,9 @@ Map.prototype.criaPersonagem = function(linha, coluna){
     a.mover = true;
     this.a.push(a);
   }
-  if (coluna == 31){
+  if (coluna == 30){
     var b = new Sprite()
-    b.x = coluna * SIZE;
+    b.x = coluna * SIZE+SIZE/2;
     b.y = linha * SIZE+SIZE/2;
     b.SIZE = 32;
     b.vx = 0;
