@@ -166,8 +166,8 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
         case 94://Inclui as 2 torres pequenas de "a"
           var a = new Sprite()
           a.SIZE = SIZE * 2;
-          a.x = j * SIZE + a.SIZE/4;
-          a.y = i * SIZE + a.SIZE/4;
+          a.x = j * SIZE - SIZE / 2;
+          a.y = i * SIZE - SIZE / 2;
           a.vx = 0;
           a.vy = 0;
           a.life = 100;
@@ -178,8 +178,8 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
         case 67://Inclui as 2 torres pequenas de "b"
           var b = new Sprite()
           b.SIZE = SIZE * 2;
-          b.x = j * SIZE + b.SIZE/4;
-          b.y = i * SIZE + b.SIZE/4;
+          b.x = j * SIZE - SIZE / 2;
+          b.y = i * SIZE - SIZE / 2;
           b.vx = 0;
           b.vy = 0;
           b.life = 100;
@@ -190,8 +190,8 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
         case 99://Inclui a torre principal de "a"
           var a = new Sprite()
           a.SIZE = SIZE * 3;
-          a.x = j * SIZE + a.SIZE/6;
-          a.y = i * SIZE + a.SIZE/6;
+          a.x = j * SIZE - a.SIZE / 3;
+          a.y = i * SIZE - a.SIZE / 3;
           a.vx = 0;
           a.vy = 0;
           a.life = 100;
@@ -202,8 +202,8 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
         case 62://Inclui a torre principal de "b"
           var b = new Sprite()
           b.SIZE = SIZE * 3;
-          b.x = j * SIZE + b.SIZE/6;
-          b.y = i * SIZE + b.SIZE/6;
+          b.x = j * SIZE - b.SIZE / 3;
+          b.y = i * SIZE - b.SIZE / 3;
           b.vx = 0;
           b.vy = 0;
           b.life = 100;
@@ -225,14 +225,14 @@ Map.prototype.getIndices = function (sprite) {
 };
 
 Map.prototype.carregaBarra = function(){
-	if(a.energia < eCanvas.height){
-      a.energia = a.energia + dt * 10;
-    }
-    if(b.energia < eCanvas.height){
-      b.energia = b.energia + dt * 10;
-    }
-  	antes = agora;
-  };
+  if(a.energia < eCanvas.height){
+    a.energia = a.energia + dt * 10;
+  }
+  if(b.energia < eCanvas.height){
+    b.energia = b.energia + dt * 10;
+  }
+	antes = agora;
+};
 
 Map.prototype.delete = function(){
   for (var i = 0; i < this.a.length; i++) {
@@ -250,8 +250,8 @@ Map.prototype.delete = function(){
 Map.prototype.criaPersonagem = function(linha, coluna){
   if (coluna == 7){
     var a = new Sprite()
-    a.x = coluna * SIZE;
-    a.y = linha * SIZE + SIZE / 2;
+    a.x = coluna * SIZE-SIZE/2;
+    a.y = linha * SIZE;
     a.SIZE = 32;
     a.vx = 0;
     a.vy = 0;
@@ -262,8 +262,8 @@ Map.prototype.criaPersonagem = function(linha, coluna){
   }
   if (coluna == 31){
     var b = new Sprite()
-    b.x = coluna * SIZE;
-    b.y = linha * SIZE + SIZE / 2;
+    b.x = coluna * SIZE-SIZE/2;
+    b.y = linha * SIZE;
     b.SIZE = 32;
     b.vx = 0;
     b.vy = 0;
@@ -271,5 +271,75 @@ Map.prototype.criaPersonagem = function(linha, coluna){
     b.destroyed = false;
     b.mover = true;
     this.b.push(b);
+  }
+}
+
+Map.prototype.moverPersonagens = function(dt) {
+  for (var i = 0; i < this.a.length; i++){
+    this.a[i].movimenta(dt);
+  }
+  for (var i = 0; i < this.b.length; i++){
+    this.b[i].movimenta(dt);
+  }
+}
+
+Map.prototype.move = function(map){
+  for (var i = 0; i < this.a.length; i++) {
+    for (var j = 0; j < this.b.length; j++) {
+      if (this.a[i].mover == true){
+        var dx = this.a[i].x - this.b[j].x;
+        var dy = this.a[i].y - this.b[j].y;
+        var raio = Math.sqrt(
+          Math.pow(dx,2)+
+          Math.pow(dy,2)
+        );
+        if(raio<0){//Incluir o perseguir
+
+        } else{
+          if (this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE) + 1] == this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE)] - 1){
+            this.a[i].vx = 100;
+            this.a[i].vy = 0;
+          } else if (this.cells[Math.floor(this.a[i].y/SIZE) + 1][Math.floor(this.a[i].x/SIZE)] == this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE)] - 1){
+            this.a[i].vy = 100;
+            this.a[i].vx = 0;
+          }else if (this.cells[Math.floor(this.a[i].y/SIZE) - 1][Math.floor(this.a[i].x/SIZE)] == this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE)] - 1){
+            this.a[i].vy = -100;
+            this.a[i].vx = 0;
+          }else{
+            this.a[i].vx = 0;
+            this.a[i].vy = 0;
+          }
+        }
+      }
+    }this.a[i].movimenta(dt);
+  }
+  for (var i = 0; i < this.b.length; i++) {
+    for (var j = 0; j < this.a.length; j++) {
+      if (this.b[i].mover == true){
+        var dx = this.b[i].x - this.a[j].x;
+        var dy = this.b[i].y - this.a[j].y;
+        var raio = Math.sqrt(
+          Math.pow(dx,2)+
+          Math.pow(dy,2)
+        );
+        if(raio<0){//Incluir o perseguir
+
+        } else{
+          if (this.cells[Math.ceil(this.b[i].y/SIZE)][Math.ceil(this.b[i].x/SIZE) - 1] == this.cells[Math.ceil(this.b[i].y/SIZE)][Math.ceil(this.b[i].x/SIZE)] + 1){
+            this.b[i].vx = -100;
+            this.b[i].vy = 0;
+          } else if (this.cells[Math.ceil(this.b[i].y/SIZE) - 1][Math.ceil(this.b[i].x/SIZE)] == this.cells[Math.ceil(this.b[i].y/SIZE)][Math.ceil(this.b[i].x/SIZE)] + 1){
+            this.b[i].vy = -100;
+            this.b[i].vx = 0;
+          }else if (this.cells[Math.ceil(this.b[i].y/SIZE) + 1][Math.ceil(this.b[i].x/SIZE)] == this.cells[Math.ceil(this.b[i].y/SIZE)][Math.ceil(this.b[i].x/SIZE)] + 1){
+            this.b[i].vy = 100;
+            this.b[i].vx = 0;
+          }else{
+            this.b[i].vy = 0;
+            this.b[i].vx = 0;
+          }
+        }
+      }
+    }
   }
 }
