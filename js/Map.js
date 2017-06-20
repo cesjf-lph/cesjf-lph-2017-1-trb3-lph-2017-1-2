@@ -311,7 +311,7 @@ Map.prototype.move = function(map){
           }
         }
       }
-    }this.a[i].movimenta(dt);
+    }
   }
   for (var i = 0; i < this.b.length; i++) {
     for (var j = 0; j < this.a.length; j++) {

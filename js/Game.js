@@ -90,7 +90,11 @@ function configuraControles() {
         mapa.criaPersonagem(13, 7);//(Linha, coluna) Se linha = 3 cria personagem na parte superior, se linha = 13 cria personagem na parte inferior, se coluna = 7 cria personagem de "a", se coluna = 31 cria personagem de "b"
         e.preventDefault();
         break;
-      default31
+      case 39:
+        mapa.criaPersonagem(13, 31);//(Linha, coluna) Se linha = 3 cria personagem na parte superior, se linha = 13 cria personagem na parte inferior, se coluna = 7 cria personagem de "a", se coluna = 31 cria personagem de "b"
+        e.preventDefault();
+        break;
+      default:
     }
   });
   addEventListener("keyup", function(e) {
