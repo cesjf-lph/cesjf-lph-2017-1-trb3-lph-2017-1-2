@@ -206,8 +206,8 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
         case 94://Inclui as 2 torres pequenas de "a"
           var a = new Sprite()
           a.SIZE = SIZE * 2;
-          a.x = j * SIZE - SIZE / 2;
-          a.y = i * SIZE - SIZE / 2;
+          a.x = j * SIZE+SIZE/2;
+          a.y = i * SIZE+SIZE/2;
           a.vx = 0;
           a.vy = 0;
           a.life = 100;
@@ -218,8 +218,8 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
         case 67://Inclui as 2 torres pequenas de "b"
           var b = new Sprite()
           b.SIZE = SIZE * 2;
-          b.x = j * SIZE - SIZE / 2;
-          b.y = i * SIZE - SIZE / 2;
+          b.x = j * SIZE+SIZE/2;
+          b.y = i * SIZE+SIZE/2;
           b.vx = 0;
           b.vy = 0;
           b.life = 100;
@@ -230,8 +230,8 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
         case 99://Inclui a torre principal de "a"
           var a = new Sprite()
           a.SIZE = SIZE * 3;
-          a.x = j * SIZE - a.SIZE / 3;
-          a.y = i * SIZE - a.SIZE / 3;
+          a.x = j * SIZE+SIZE/2;
+          a.y = i * SIZE+SIZE/2;
           a.vx = 0;
           a.vy = 0;
           a.life = 100;
@@ -242,8 +242,8 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
         case 62://Inclui a torre principal de "b"
           var b = new Sprite()
           b.SIZE = SIZE * 3;
-          b.x = j * SIZE - b.SIZE / 3;
-          b.y = i * SIZE - b.SIZE / 3;
+          b.x = j * SIZE+SIZE/2;
+          b.y = i * SIZE+SIZE/2;
           b.vx = 0;
           b.vy = 0;
           b.life = 100;
@@ -290,8 +290,8 @@ Map.prototype.delete = function(){
 Map.prototype.criaPersonagem = function(linha, coluna){
   if (coluna == 7){
     var a = new Sprite()
-    a.x = coluna * SIZE-SIZE/2;
-    a.y = linha * SIZE;
+    a.x = coluna * SIZE;
+    a.y = linha * SIZE+SIZE/2;
     a.SIZE = 32;
     a.vx = 0;
     a.vy = 0;
@@ -302,8 +302,8 @@ Map.prototype.criaPersonagem = function(linha, coluna){
   }
   if (coluna == 31){
     var b = new Sprite()
-    b.x = coluna * SIZE-SIZE/2;
-    b.y = linha * SIZE;
+    b.x = coluna * SIZE;
+    b.y = linha * SIZE+SIZE/2;
     b.SIZE = 32;
     b.vx = 0;
     b.vy = 0;
@@ -365,13 +365,13 @@ Map.prototype.move = function(map){
         if(raio<0){//Incluir o perseguir
 
         } else{
-          if (this.cells[Math.ceil(this.b[i].y/SIZE)][Math.ceil(this.b[i].x/SIZE) - 1] == this.cells[Math.ceil(this.b[i].y/SIZE)][Math.ceil(this.b[i].x/SIZE)] + 1){
+          if (this.cells[Math.floor(this.b[i].y/SIZE)][Math.floor(this.b[i].x/SIZE) - 1] == this.cells[Math.floor(this.b[i].y/SIZE)][Math.floor(this.b[i].x/SIZE)] + 1){
             this.b[i].vx = -100;
             this.b[i].vy = 0;
-          } else if (this.cells[Math.ceil(this.b[i].y/SIZE) - 1][Math.ceil(this.b[i].x/SIZE)] == this.cells[Math.ceil(this.b[i].y/SIZE)][Math.ceil(this.b[i].x/SIZE)] + 1){
+          } else if (this.cells[Math.floor(this.b[i].y/SIZE) - 1][Math.floor(this.b[i].x/SIZE)] == this.cells[Math.floor(this.b[i].y/SIZE)][Math.floor(this.b[i].x/SIZE)] + 1){
             this.b[i].vy = -100;
             this.b[i].vx = 0;
-          }else if (this.cells[Math.ceil(this.b[i].y/SIZE) + 1][Math.ceil(this.b[i].x/SIZE)] == this.cells[Math.ceil(this.b[i].y/SIZE)][Math.ceil(this.b[i].x/SIZE)] + 1){
+          }else if (this.cells[Math.floor(this.b[i].y/SIZE) + 1][Math.floor(this.b[i].x/SIZE)] == this.cells[Math.floor(this.b[i].y/SIZE)][Math.floor(this.b[i].x/SIZE)] + 1){
             this.b[i].vy = 100;
             this.b[i].vx = 0;
           }else{
@@ -387,10 +387,30 @@ Map.prototype.move = function(map){
 Map.prototype.vidaPersonagens = function() {
   for (var i = 0; i < this.a.length; i++) {
     ctx.fillStyle = "hsl("+this.a[i].life/100*120+",100%,50%)";
-    ctx.fillRect (this.a[i].x, this.a[i].y+this.a[i].SIZE, this.a[i].life/100*this.a[i].SIZE, 2);
+    ctx.fillRect (this.a[i].x-this.a[i].SIZE/2, this.a[i].y+this.a[i].SIZE/2, this.a[i].life/100*this.a[i].SIZE, 2);
   }
   for (var i = 0; i < this.b.length; i++) {
     ctx.fillStyle = "hsl("+this.b[i].life/100*120+",100%,50%)";
-    ctx.fillRect (this.b[i].x, this.b[i].y+this.b[i].SIZE, this.b[i].life/100*this.b[i].SIZE, 2);
+    ctx.fillRect (this.b[i].x-this.b[i].SIZE/2, this.b[i].y+this.b[i].SIZE/2, this.b[i].life/100*this.b[i].SIZE, 2);
   }
+}
+
+Map.prototype.testarColisao = function(){
+  for (var i = 0; i < this.a.length; i++) {
+    for (var j = 0; j < this.b.length; j++) {
+      if(this.a[i].colidiuCom(this.b[j])){
+        this.a[i].vx = 0;
+        this.a[i].vy = 0;
+      }
+    }
+  }
+  for (var i = 0; i < this.b.length; i++) {
+    for (var j = 0; j < this.a.length; j++) {
+      if(this.b[i].colidiuCom(this.a[j])){
+        this.b[i].vx = 0;
+        this.b[i].vy = 0;
+      }
+    }
+  }
+
 }

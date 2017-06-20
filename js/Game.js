@@ -87,6 +87,7 @@ function passo(){
     mapa.move(mapa);
     mapa.carregaBarra();
     mapa.vidaPersonagens();
+    mapa.testarColisao();
   	antes = agora;
 }
 

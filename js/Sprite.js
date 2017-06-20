@@ -9,14 +9,14 @@ function Sprite(){
 Sprite.prototype.desenharLimites = function(ctx) {
   ctx.fillStyle = "blue";
   ctx.fillRect(
-    this.x,
-    this.y,
+    this.x-this.SIZE/2,
+    this.y-this.SIZE/2,
     this.SIZE, this.SIZE
   );
   ctx.strokeStyle = "darkgrey";
   ctx.strokeRect(
-    this.x,
-    this.y,
+    this.x-this.SIZE/2,
+    this.y-this.SIZE/2,
     this.SIZE, this.SIZE
   );
 };
