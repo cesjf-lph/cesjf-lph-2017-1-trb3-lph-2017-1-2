@@ -77,23 +77,24 @@ function passo(){
   	ctx.clearRect(0, 0, eCanvas.width, eCanvas.height);
     mapa.desenhar(ctx);
     if (a.energia < eCanvas.height){
-      a.energia = a.energia + dt * 10;
+      a.energia = a.energia + dt*10;
     }
     if (b.energia < eCanvas.height){
-      b.energia = b.energia + dt * 10;
+      b.energia = b.energia + dt*10;
     }
     informacoes();//Desenha informações complementares na tela (Barra de energia e cards)
-    mapa.carregaBarra();//Adiciona cores na barra de acordo com a energia
+    mapa.carregaBarra();
   	antes = agora;
 }
 
 function configuraControles() {
   addEventListener("keydown", function(e) {
     switch (e.keyCode) {
-      case 0:
+      case 37:
+        mapa.criaPersonagem(13, 31);//(Linha, coluna) Se linha = 3 cria personagem na parte superior, se linha = 13 cria personagem na parte inferior, se coluna = 7 cria personagem de "a", se coluna = 31 cria personagem de "b"
         e.preventDefault();
         break;
-      default:
+      default31
     }
   });
   addEventListener("keyup", function(e) {
