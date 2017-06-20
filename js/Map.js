@@ -401,6 +401,10 @@ Map.prototype.testarColisao = function(){
       if(this.a[i].colidiuCom(this.b[j])){
         this.a[i].vx = 0;
         this.a[i].vy = 0;
+        this.a[i].life = this.a[i].life - dt*100;//Consome a Life
+        if (this.a[i].life <= 0){
+          this.a[i].destroyed = true;//Ativa a destruição
+        }
       }
     }
   }
@@ -409,8 +413,12 @@ Map.prototype.testarColisao = function(){
       if(this.b[i].colidiuCom(this.a[j])){
         this.b[i].vx = 0;
         this.b[i].vy = 0;
+        this.b[i].life = this.b[i].life - dt*100;//Consome a Life
+        if (this.b[i].life <= 0){
+          this.b[i].destroyed = true;//Ativa a destruição
+        }
       }
     }
   }
-
+  this.delete();//Chama a função de deleter
 }
