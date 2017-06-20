@@ -25,3 +25,11 @@ Sprite.prototype.movimenta = function(dt) {
   this.x = this.x + this.vx * dt;
   this.y = this.y + this.vy * dt;
 };
+
+Sprite.prototype.colidiuCom = function(alvo){
+  if(this.y+(this.SIZE/2) < alvo.y-(alvo.SIZE/2)) return false;
+  if(this.y-(this.SIZE/2) > alvo.y+(alvo.SIZE/2)) return false;
+  if(this.x+(this.SIZE/2) < alvo.x-(alvo.SIZE/2)) return false;
+  if(this.x-(this.SIZE/2) > alvo.x+(alvo.SIZE/2)) return false;
+  return true;
+}

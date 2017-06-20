@@ -387,10 +387,10 @@ Map.prototype.move = function(map){
 Map.prototype.vidaPersonagens = function() {
   for (var i = 0; i < this.a.length; i++) {
     ctx.fillStyle = "hsl("+this.a[i].life/100*120+",100%,50%)";
-    ctx.fillRect (this.a[i].x, this.a[i].y+this.a[i].SIZE, this.a[i].life/100*this.a[i].SIZE, 3);
+    ctx.fillRect (this.a[i].x, this.a[i].y+this.a[i].SIZE, this.a[i].life/100*this.a[i].SIZE, 2);
   }
   for (var i = 0; i < this.b.length; i++) {
     ctx.fillStyle = "hsl("+this.b[i].life/100*120+",100%,50%)";
-    ctx.fillRect (this.b[i].x, this.b[i].y+this.b[i].SIZE, this.b[i].life/100*this.b[i].SIZE, 3);
+    ctx.fillRect (this.b[i].x, this.b[i].y+this.b[i].SIZE, this.b[i].life/100*this.b[i].SIZE, 2);
   }
 }
