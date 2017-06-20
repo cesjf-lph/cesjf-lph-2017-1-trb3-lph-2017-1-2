@@ -130,6 +130,26 @@ Map.prototype.desenharTiles = function(ctx){
           var X = 14;
           if(this.cells[i][j] == X) this.imageLib.drawImageTile(ctx, "pc5", 0, 0, 96, j*this.SIZE, i*this.SIZE);
           break;
+        case 15:
+          var X = 15;
+          if(this.cells[i][j] == X) this.imageLib.drawImageTile(ctx, "pc", 0, 0, 96, j*this.SIZE, i*this.SIZE);
+          break;
+        case 16:
+          var X = 16;
+          if(this.cells[i][j] == X) this.imageLib.drawImageTile(ctx, "pc2", 0, 0, 96, j*this.SIZE, i*this.SIZE);
+          break;
+        case 17:
+          var X = 17;
+          if(this.cells[i][j] == X) this.imageLib.drawImageTile(ctx, "pc3", 0, 0, 96, j*this.SIZE, i*this.SIZE);
+          break;
+        case 18:
+          var X = 18;
+          if(this.cells[i][j] == X) this.imageLib.drawImageTile(ctx, "pc4", 0, 0, 96, j*this.SIZE, i*this.SIZE);
+          break;
+        case 19:
+          var X = 19;
+          if(this.cells[i][j] == X) this.imageLib.drawImageTile(ctx, "pc5", 0, 0, 96, j*this.SIZE, i*this.SIZE);
+          break;
         case 62:
         case 63:
         case 64:
