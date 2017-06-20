@@ -13,20 +13,20 @@ function Map(l, c) {
   }
 }
 
-Map.prototype.desenhar = function(ctx){
+Map.prototype.desenhar = function(ctx){//Função que desenha elementos na tela
   //this.desenharLimites(ctx);
   this.informacoes();//Desenha informações complementares na tela (Barra de energia e cards)
   this.desenharTiles(ctx);
+  this.vidaPersonagens();
   for (var i = 0; i < this.a.length; i++) {//Chama o desenho do "a"
     this.a[i].desenharLimites(ctx);
   }
   for (var i = 0; i < this.b.length; i++) {//Chama o desenho do "b"
     this.b[i].desenharLimites(ctx);
   }
-  this.vidaPersonagens();
 }
 
-Map.prototype.desenharLimites = function(ctx) {//Desenha estrutura do mapa
+/*Map.prototype.desenharLimites = function(ctx) {//Desenha estrutura do mapa
   for (var i = 0; i < this.cells.length; i++) {
     var linha = this.cells[i];
     for (var j = 0; j < linha.length; j++) {
@@ -75,9 +75,9 @@ Map.prototype.desenharLimites = function(ctx) {//Desenha estrutura do mapa
       }
     }
   }
-};
+};*/
 
-Map.prototype.desenharTiles = function(ctx){
+Map.prototype.desenharTiles = function(ctx){//Função que coloca as imagens paradas na tela
   for (var i = 0; i < this.cells.length; i++) {
     var linha = this.cells[i];
     for (var j = 0; j < linha.length; j++) {
@@ -118,7 +118,7 @@ Map.prototype.desenharTiles = function(ctx){
   }
 }
 
-Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz casasMapa
+Map.prototype.loadMap = function(map) {//Funão que carrega o mapa de acordo com a matriz casasMapa
   for (var i = 0; i < this.cells.length; i++) {
     for (var j = 0; j < this.cells[i].length; j++) {
       this.cells[i][j] = map[i][j];
@@ -128,8 +128,6 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
           a.SIZE = SIZE * 2;
           a.x = j * SIZE+SIZE/2;
           a.y = i * SIZE+SIZE/2;
-          a.vx = 0;
-          a.vy = 0;
           a.life = 100;
           a.destroyed = false;
           a.mover = false;
@@ -140,8 +138,6 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
           b.SIZE = SIZE * 2;
           b.x = j * SIZE+SIZE/2;
           b.y = i * SIZE+SIZE/2;
-          b.vx = 0;
-          b.vy = 0;
           b.life = 100;
           b.destroyed = false;
           b.mover = false;
@@ -152,8 +148,6 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
           a.SIZE = SIZE * 3;
           a.x = j * SIZE+SIZE/2;
           a.y = i * SIZE+SIZE/2;
-          a.vx = 0;
-          a.vy = 0;
           a.life = 100;
           a.destroyed = false;
           a.mover = false;
@@ -164,8 +158,6 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
           b.SIZE = SIZE * 3;
           b.x = j * SIZE+SIZE/2;
           b.y = i * SIZE+SIZE/2;
-          b.vx = 0;
-          b.vy = 0;
           b.life = 100;
           b.destroyed = false;
           b.mover = false;
@@ -177,14 +169,14 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
   }
 };
 
-Map.prototype.getIndices = function (sprite) {
+/*Map.prototype.getIndices = function (sprite) {//Função que cria indices
    var pos = {};
    pos.c = Math.floor(sprite.x/this.SIZE);
    pos.l = Math.floor(sprite.y/this.SIZE);
    return pos;
-};
+};*/
 
-Map.prototype.carregaBarra = function(){
+Map.prototype.carregaBarra = function(){//Função que recarrega a barra de energia de "a" e de "b"
   if(a.energia < eCanvas.height){
     a.energia = a.energia + dt * 10;
   }
@@ -193,7 +185,7 @@ Map.prototype.carregaBarra = function(){
   }
 };
 
-Map.prototype.delete = function(){
+Map.prototype.delete = function(){//Função que deleta os personagens da tela
   for (var i = 0; i < this.a.length; i++) {
     if (this.a[i].destroyed == true){
       this.a.splice(i,1);
@@ -206,8 +198,8 @@ Map.prototype.delete = function(){
   }
 }
 
-Map.prototype.criaPersonagem = function(linha, coluna){
-  if (coluna == 7){
+Map.prototype.criaPersonagem = function(linha, coluna){//Função que gera os personagens selecionados na tela
+  if (coluna == 7){//Se a coluna for igual a 7 cria personagem de "a"
     var a = new Sprite()
     a.x = coluna * SIZE+SIZE/2;
     a.y = linha * SIZE+SIZE/2;
@@ -219,7 +211,7 @@ Map.prototype.criaPersonagem = function(linha, coluna){
     a.mover = true;
     this.a.push(a);
   }
-  if (coluna == 30){
+  if (coluna == 30){//Se a coluna for igual a 30 cria personagem de "b"
     var b = new Sprite()
     b.x = coluna * SIZE+SIZE/2;
     b.y = linha * SIZE+SIZE/2;
@@ -233,7 +225,7 @@ Map.prototype.criaPersonagem = function(linha, coluna){
   }
 }
 
-Map.prototype.moverPersonagens = function(dt) {
+Map.prototype.moverPersonagens = function(dt) {//Função chama o mover do Sprite para cada um dos personagens
   for (var i = 0; i < this.a.length; i++){
     this.a[i].movimenta(dt);
   }
@@ -242,7 +234,7 @@ Map.prototype.moverPersonagens = function(dt) {
   }
 }
 
-Map.prototype.move = function(map){
+Map.prototype.move = function(map){//Função que acrescenta valor a vy e vx para o personagem se mover
   for (var i = 0; i < this.a.length; i++) {
     for (var j = 0; j < this.b.length; j++) {
       if (this.a[i].mover == true){
@@ -252,9 +244,9 @@ Map.prototype.move = function(map){
           Math.pow(dx,2)+
           Math.pow(dy,2)
         );
-        if(raio<0){//Incluir o perseguir (Útil com o arqueiro)
+        if(raio<0){//Incluir posteriormente o perseguir (Útil com o arqueiro) // Para isso tem que alterar o valor do raio
 
-        } else{
+        } else{//Faz o personagem seguir o caminho até a torre inimiga
           if (this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE) + 1] == this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE)] - 1){
             this.a[i].vx = 100;
             this.a[i].vy = 0;
@@ -281,9 +273,9 @@ Map.prototype.move = function(map){
           Math.pow(dx,2)+
           Math.pow(dy,2)
         );
-        if(raio<0){//Incluir o perseguir (Útil com o arqueiro)
+        if(raio<0){//Incluir posteriormente o perseguir (Útil com o arqueiro) // Para isso tem que alterar o valor do raio
 
-        } else{
+        } else{//Faz o personagem seguir o caminho até a torre inimiga
           if (this.cells[Math.floor(this.b[i].y/SIZE)][Math.floor(this.b[i].x/SIZE) - 1] == this.cells[Math.floor(this.b[i].y/SIZE)][Math.floor(this.b[i].x/SIZE)] + 1){
             this.b[i].vx = -100;
             this.b[i].vy = 0;
@@ -303,7 +295,7 @@ Map.prototype.move = function(map){
   }
 }
 
-Map.prototype.vidaPersonagens = function() {
+Map.prototype.vidaPersonagens = function() {//Função que desenha a barra de life de cada um dos personagens
   for (var i = 0; i < this.a.length; i++) {
     ctx.fillStyle = "hsl("+this.a[i].life/100*120+",100%,50%)";
     ctx.fillRect (this.a[i].x-this.a[i].SIZE/2, this.a[i].y+this.a[i].SIZE/2, this.a[i].life/100*this.a[i].SIZE, 2);
@@ -314,7 +306,7 @@ Map.prototype.vidaPersonagens = function() {
   }
 }
 
-Map.prototype.testarColisao = function(){
+Map.prototype.testarColisao = function(){//Função que chama o teste de colisão do Sprite e se tiver colidido impede o mover para ocorrer a batalha
   for (var i = 0; i < this.a.length; i++) {
     for (var j = 0; j < this.b.length; j++) {
       if(this.a[i].colidiuCom(this.b[j])){
@@ -339,21 +331,28 @@ Map.prototype.testarColisao = function(){
       }
     }
   }
-  this.delete();//Chama a função de deleter
+  this.delete();//Chama a função de deletar
 }
-Map.prototype.informacoes = function(){
-  ctx.fillStyle = "#156c99";//Desenha um fundo azul por traz da barra de informações do "a"
-  ctx.fillRect (0 * SIZE, eCanvas.height, SIZE * 3, - eCanvas.height);
+
+Map.prototype.informacoes = function(){//Função que desenha outros elementos auxiliares na tela como por exemplo a barra de energia
+  ctx.fillStyle = "#156c99";//Desenha um fundo azul por traz do eCanvas
+  ctx.fillRect (0, 0, eCanvas.width, eCanvas.height);
 
   ctx.fillStyle = "hsl("+a.energia/eCanvas.height*120+",100%,50%)";//Desenha a barra de energia do "a"
   ctx.fillRect (2 * SIZE + 3, eCanvas.height, SIZE - 6, - a.energia);
 
-  ctx.textAlign="left";//Adiciona texto "A" a barra do "a"
-  ctx.fillStyle = "white";
+  ctx.fillStyle = "hsl("+b.energia/eCanvas.height*120+",100%,50%)";//Desenha a barra de energia do "a"
+  ctx.fillRect (35 * SIZE + 3, eCanvas.height, SIZE - 6, - b.energia);
+
+  ctx.textAlign="left";//Adiciona texto "A" e "B"
   ctx.font = "4em Arial Black";
+  ctx.fillStyle = "black";
+  ctx.fillText("B", 36 * SIZE + 6, 55);
+  ctx.fillStyle = "white";
   ctx.fillText("A", 0 * SIZE + 8, 55);
 
   ctx.textAlign="center";//Adiciona texto "ENERGIA" a barra do "a"
+  ctx.fillStyle = "white";
   ctx.font = "2em Arial Black";
   ctx.fillText("E", 2 * SIZE + SIZE / 2, eCanvas.height / 2 - 90);
   ctx.fillText("N", 2 * SIZE + SIZE / 2, eCanvas.height / 2 - 60);
@@ -363,18 +362,8 @@ Map.prototype.informacoes = function(){
   ctx.fillText("I", 2 * SIZE + SIZE / 2, eCanvas.height / 2 + 60);
   ctx.fillText("A", 2 * SIZE + SIZE / 2, eCanvas.height / 2 + 90);
 
-  ctx.fillStyle = "#156c99";//Desenha um fundo azul por traz da barra de energia do "b"
-  ctx.fillRect (35 * SIZE, eCanvas.height, SIZE * 3, - eCanvas.height);
-
-  ctx.fillStyle = "hsl("+b.energia/eCanvas.height*120+",100%,50%)";//Desenha a barra de energia do "a"
-  ctx.fillRect (35 * SIZE + 3, eCanvas.height, SIZE - 6, - b.energia);
-
-  ctx.textAlign="left";//Adiciona texto "A" a barra do "b"
-  ctx.fillStyle = "black";
-  ctx.font = "4em Arial Black";
-  ctx.fillText("B", 36 * SIZE + 6, 55);
-
   ctx.textAlign="center";//Adiciona texto "ENERGIA" a barra do "b"
+  ctx.fillStyle = "black";
   ctx.font = "2em Arial Black";
   ctx.fillText("E", 35 * SIZE + SIZE / 2, eCanvas.height / 2 - 90);
   ctx.fillText("N", 35 * SIZE + SIZE / 2, eCanvas.height / 2 - 60);

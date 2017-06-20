@@ -28,7 +28,7 @@ var casasMapa = ([
   [ 14, 100, 100, 1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  3,  9,  9,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 3, 100,  19, 100],
   [100, 100, 100, 1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  3,  9,  9,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 3, 100, 100, 100],
   [100, 100, 100, 8,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  7,  9,  9,  8,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4, 7, 100, 100, 100],
-]);//Casas 100: Espaços em branco para inclusão de informações (Barra de energia e cards)./ Campos 1, 2, 3, 4, 5, 6, 7 e 8: campos com imagens de bordas / Campos 9: Campos com o riacho / Campos 79, 80, 81 e 82: compõe a ponte / Campos 0: Campos com o gramado // Campos de 62 a 99: Campos onde o personagem pode percorrer // Campos 94: Campos onde serão posicionada as torres pequenas de "a" / Campo 99: Campo onde será posicionada a torre principal de "a" / Campos 67: Campos onde serão posicionadas as pequenas torres de "b" / Campo 62: Campo onde será posicionada a torre principal de "b"
+]);//Casas 100: Espaços em branco para inclusão de informações (Barra de energia e cards)./ Campos 1, 2, 3, 4, 5, 6, 7 e 8: campos com imagens de bordas / Campos 9: Campos com o riacho / Campos 79, 80, 81 e 82: compõe a ponte / Campos 0: Campos com o gramado // Campos de 62 a 99: Campos onde o personagem pode percorrer // Campos 94: Campos onde serão posicionada as torres pequenas de "a" / Campo 99: Campo onde será posicionada a torre principal de "a" / Campos 67: Campos onde serão posicionadas as pequenas torres de "b" / Campo 62: Campo onde será posicionada a torre principal de "b", Casas 10, 11, 12, 13, 14, 15, 16, 17, 18 e 19: campos com os cards de personagens
 
 
 function init(){
@@ -37,9 +37,9 @@ function init(){
     eCanvas.height = SIZE * linhas;//Altura de cada quadro vezes o número de linhas
     ctx  = eCanvas.getContext("2d");
 
-    soundLib = new SoundLoader();
+    soundLib = new SoundLoader();//Vincula os sons
 
-    imglib = new ImageLoader();
+    imglib = new ImageLoader();//Vincula as imagens
     imglib.load("chao", "img/chao.png");
     imglib.load("0", "img/0.png");
     imglib.load("1", "img/1.png");
@@ -72,8 +72,6 @@ function init(){
     mapa = new Map(linhas, colunas);
     mapa.imageLib = imglib;
     mapa.loadMap(casasMapa);
-    mapa.width = SIZE;
-    mapa.height = SIZE;
     a = new Sprite();
     a.imageLib = imglib;
     a.energia = eCanvas.height;//Fixa a energia com o mesmo valor da altura para simplificar no desenho
@@ -134,7 +132,7 @@ function configuraMouse(e) {
   }
 };
 
-function textoFormatado(texto1, texto2, texto3, texto4, texto5, texto6, texto7, texto8, texto9, texto10){//Não está sendo utilizado ainda, vai ser útil nas telas de boas vindas pausa e vitória
+/*function textoFormatado(texto1, texto2, texto3, texto4, texto5, texto6, texto7, texto8, texto9, texto10){//Não está sendo utilizado ainda, vai ser útil nas telas de boas vindas pausa e vitória
   ctx.textAlign="center";
   ctx.fillStyle = "red";
   ctx.font = "3em Arial Black";
@@ -152,4 +150,4 @@ function textoFormatado(texto1, texto2, texto3, texto4, texto5, texto6, texto7, 
   ctx.fillText(texto8, eCanvas.width / 2, eCanvas.height / 2 + 100);
   ctx.fillText(texto9, eCanvas.width / 2, eCanvas.height / 2 + 115);
   ctx.fillText(texto10, eCanvas.width / 2, eCanvas.height / 2 + 130);
-}
+}*/
