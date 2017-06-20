@@ -66,8 +66,8 @@ function init(){
     imglib.load("80", "img/80.png");
     imglib.load("81", "img/81.png");
     imglib.load("82", "img/82.png");
-    imglib.load("100", "img/9.png");
-
+    imglib.load("tower", "img/tower.png");
+    imglib.load("castle", "img/castle.png");
 
     mapa = new Map(linhas, colunas);
     mapa.imageLib = imglib;

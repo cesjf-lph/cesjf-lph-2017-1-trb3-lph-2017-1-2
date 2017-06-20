@@ -17,13 +17,14 @@ Map.prototype.desenhar = function(ctx){//Função que desenha elementos na tela
   //this.desenharLimites(ctx);
   this.informacoes();//Desenha informações complementares na tela (Barra de energia e cards)
   this.desenharTiles(ctx);
-  this.vidaPersonagens();
   for (var i = 0; i < this.a.length; i++) {//Chama o desenho do "a"
     this.a[i].desenharLimites(ctx);
   }
   for (var i = 0; i < this.b.length; i++) {//Chama o desenho do "b"
     this.b[i].desenharLimites(ctx);
   }
+  this.vidaPersonagens();
+  this.desenhaTorres();
 }
 
 /*Map.prototype.desenharLimites = function(ctx) {//Desenha estrutura do mapa
@@ -303,6 +304,25 @@ Map.prototype.vidaPersonagens = function() {//Função que desenha a barra de li
   for (var i = 0; i < this.b.length; i++) {
     ctx.fillStyle = "hsl("+this.b[i].life/100*120+",100%,50%)";
     ctx.fillRect (this.b[i].x-this.b[i].SIZE/2, this.b[i].y+this.b[i].SIZE/2, this.b[i].life/100*this.b[i].SIZE, 2);
+  }
+}
+
+Map.prototype.desenhaTorres = function() {//Função que desenha as torres e o castelo
+  for (var i = 0; i < this.a.length; i++) {
+    if (this.a[i].SIZE == 64){
+      this.imageLib.drawImageTile(ctx, "tower", 0, 0, 64, this.a[i].x-this.a[i].SIZE/2, this.a[i].y-this.a[i].SIZE/2);
+    }
+    if (this.a[i].SIZE == 96){
+      this.imageLib.drawImageTile(ctx, "castle", 0, 0, 96, this.a[i].x-this.a[i].SIZE/2, this.a[i].y-this.a[i].SIZE/2);
+    }
+  }
+  for (var i = 0; i < this.b.length; i++) {
+    if (this.b[i].SIZE == 64){
+      this.imageLib.drawImageTile(ctx, "tower", 0, 0, 64, this.b[i].x-this.b[i].SIZE/2, this.b[i].y-this.b[i].SIZE/2);
+    }
+    if (this.b[i].SIZE == 96){
+      this.imageLib.drawImageTile(ctx, "castle", 0, 0, 96, this.b[i].x-this.b[i].SIZE/2, this.b[i].y-this.b[i].SIZE/2);
+    }
   }
 }
 
