@@ -86,6 +86,7 @@ function passo(){
     mapa.moverPersonagens(dt);
     mapa.move(mapa);
     mapa.carregaBarra();
+    mapa.vidaPersonagens();
   	antes = agora;
 }
 
@@ -187,8 +188,6 @@ function informacoes(){
   ctx.fillText("G", 35 * SIZE + SIZE / 2, eCanvas.height / 2 + 30);
   ctx.fillText("I", 35 * SIZE + SIZE / 2, eCanvas.height / 2 + 60);
   ctx.fillText("A", 35 * SIZE + SIZE / 2, eCanvas.height / 2 + 90);
-
-
 
   /*ctx.fillStyle = "white";//Desenha um fundo branco por traz do card 1 de "a"
   ctx.fillRect (0 * SIZE + 2, 2 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
