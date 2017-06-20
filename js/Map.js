@@ -172,6 +172,7 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
           a.vy = 0;
           a.life = 100;
           a.destroyed = false;
+          a.mover = false;
           this.a.push(a);
         break;
         case 67://Inclui as 2 torres pequenas de "b"
@@ -183,6 +184,7 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
           b.vy = 0;
           b.life = 100;
           b.destroyed = false;
+          b.mover = false;
           this.b.push(b);
         break;
         case 99://Inclui a torre principal de "a"
@@ -194,6 +196,7 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
           a.vy = 0;
           a.life = 100;
           a.destroyed = false;
+          a.mover = false;
           this.a.push(a);
         break;
         case 62://Inclui a torre principal de "b"
@@ -205,6 +208,7 @@ Map.prototype.loadMap = function(map) {//Carrega o mapa de acordo com a matriz c
           b.vy = 0;
           b.life = 100;
           b.destroyed = false;
+          b.mover = false;
           this.b.push(b);
         break;
         default:
@@ -253,6 +257,7 @@ Map.prototype.criaPersonagem = function(linha, coluna){
     a.vy = 0;
     a.life = 100;
     a.destroyed = false;
+    a.mover = true;
     this.a.push(a);
   }
   if (coluna == 31){
@@ -264,6 +269,7 @@ Map.prototype.criaPersonagem = function(linha, coluna){
     b.vy = 0;
     b.life = 100;
     b.destroyed = false;
+    b.mover = true;
     this.b.push(b);
   }
 }
