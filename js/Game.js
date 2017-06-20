@@ -41,7 +41,6 @@ function init(){
 
     imglib = new ImageLoader();
     imglib.load("chao", "img/chao.png");
-    imglib.load("intervalo", "img/intervalo.png");
     imglib.load("0", "img/0.png");
     imglib.load("1", "img/1.png");
     imglib.load("2", "img/2.png");
@@ -52,12 +51,22 @@ function init(){
     imglib.load("6", "img/6.png");
     imglib.load("7", "img/7.png");
     imglib.load("8", "img/8.png");
-    imglib.load("ponte", "img/ponte.png");
-    imglib.load("pc", "img/pc.png");
-    imglib.load("pc2", "img/pc2.png");
-    imglib.load("pc3", "img/pc3.png");
-    imglib.load("pc4", "img/pc4.png");
-    imglib.load("pc5", "img/pc5.png");
+    imglib.load("9", "img/9.png");
+    imglib.load("10", "img/10.png");
+    imglib.load("11", "img/11.png");
+    imglib.load("12", "img/12.png");
+    imglib.load("13", "img/13.png");
+    imglib.load("14", "img/14.png");
+    imglib.load("15", "img/15.png");
+    imglib.load("16", "img/16.png");
+    imglib.load("17", "img/17.png");
+    imglib.load("18", "img/18.png");
+    imglib.load("19", "img/19.png");
+    imglib.load("79", "img/79.png");
+    imglib.load("80", "img/80.png");
+    imglib.load("81", "img/81.png");
+    imglib.load("82", "img/82.png");
+    imglib.load("100", "img/9.png");
 
 
     mapa = new Map(linhas, colunas);
@@ -81,12 +90,10 @@ function passo(){
   	agora = new Date();
   	dt = (agora - antes) / 1000;
   	ctx.clearRect(0, 0, eCanvas.width, eCanvas.height);
-    informacoes();//Desenha informações complementares na tela (Barra de energia e cards)
     mapa.desenhar(ctx);
     mapa.moverPersonagens(dt);
     mapa.move(mapa);
     mapa.carregaBarra();
-    mapa.vidaPersonagens();
     mapa.testarColisao();
   	antes = agora;
 }
@@ -127,7 +134,7 @@ function configuraMouse(e) {
   }
 };
 
-function textoFormatado(texto1, texto2, texto3, texto4, texto5, texto6, texto7, texto8, texto9, texto10){
+function textoFormatado(texto1, texto2, texto3, texto4, texto5, texto6, texto7, texto8, texto9, texto10){//Não está sendo utilizado ainda, vai ser útil nas telas de boas vindas pausa e vitória
   ctx.textAlign="center";
   ctx.fillStyle = "red";
   ctx.font = "3em Arial Black";
@@ -145,78 +152,4 @@ function textoFormatado(texto1, texto2, texto3, texto4, texto5, texto6, texto7, 
   ctx.fillText(texto8, eCanvas.width / 2, eCanvas.height / 2 + 100);
   ctx.fillText(texto9, eCanvas.width / 2, eCanvas.height / 2 + 115);
   ctx.fillText(texto10, eCanvas.width / 2, eCanvas.height / 2 + 130);
-}
-
-function informacoes(){
-  ctx.fillStyle = "#156c99";//Desenha um fundo azul por traz da barra de informações do "a"
-  ctx.fillRect (0 * SIZE, eCanvas.height, SIZE * 3, - eCanvas.height);
-
-  ctx.fillStyle = "hsl("+a.energia/eCanvas.height*120+",100%,50%)";//Desenha a barra de energia do "a"
-  ctx.fillRect (2 * SIZE + 3, eCanvas.height, SIZE - 6, - a.energia);
-
-  ctx.textAlign="left";//Adiciona texto "A" a barra do "a"
-  ctx.fillStyle = "white";
-  ctx.font = "4em Arial Black";
-  ctx.fillText("A", 0 * SIZE + 8, 55);
-
-  ctx.textAlign="center";//Adiciona texto "ENERGIA" a barra do "a"
-  ctx.font = "2em Arial Black";
-  ctx.fillText("E", 2 * SIZE + SIZE / 2, eCanvas.height / 2 - 90);
-  ctx.fillText("N", 2 * SIZE + SIZE / 2, eCanvas.height / 2 - 60);
-  ctx.fillText("E", 2 * SIZE + SIZE / 2, eCanvas.height / 2 - 30);
-  ctx.fillText("R", 2 * SIZE + SIZE / 2, eCanvas.height / 2);
-  ctx.fillText("G", 2 * SIZE + SIZE / 2, eCanvas.height / 2 + 30);
-  ctx.fillText("I", 2 * SIZE + SIZE / 2, eCanvas.height / 2 + 60);
-  ctx.fillText("A", 2 * SIZE + SIZE / 2, eCanvas.height / 2 + 90);
-
-  ctx.fillStyle = "#156c99";//Desenha um fundo azul por traz da barra de energia do "b"
-  ctx.fillRect (35 * SIZE, eCanvas.height, SIZE * 3, - eCanvas.height);
-
-  ctx.fillStyle = "hsl("+b.energia/eCanvas.height*120+",100%,50%)";//Desenha a barra de energia do "a"
-  ctx.fillRect (35 * SIZE + 3, eCanvas.height, SIZE - 6, - b.energia);
-
-  ctx.textAlign="left";//Adiciona texto "A" a barra do "b"
-  ctx.fillStyle = "black";
-  ctx.font = "4em Arial Black";
-  ctx.fillText("B", 36 * SIZE + 6, 55);
-
-  ctx.textAlign="center";//Adiciona texto "ENERGIA" a barra do "b"
-  ctx.font = "2em Arial Black";
-  ctx.fillText("E", 35 * SIZE + SIZE / 2, eCanvas.height / 2 - 90);
-  ctx.fillText("N", 35 * SIZE + SIZE / 2, eCanvas.height / 2 - 60);
-  ctx.fillText("E", 35 * SIZE + SIZE / 2, eCanvas.height / 2 - 30);
-  ctx.fillText("R", 35 * SIZE + SIZE / 2, eCanvas.height / 2);
-  ctx.fillText("G", 35 * SIZE + SIZE / 2, eCanvas.height / 2 + 30);
-  ctx.fillText("I", 35 * SIZE + SIZE / 2, eCanvas.height / 2 + 60);
-  ctx.fillText("A", 35 * SIZE + SIZE / 2, eCanvas.height / 2 + 90);
-
-  /*ctx.fillStyle = "white";//Desenha um fundo branco por traz do card 1 de "a"
-  ctx.fillRect (0 * SIZE + 2, 2 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
-
-  ctx.fillStyle = "white";//Desenha um fundo branco por traz do card 1 de "a"
-  ctx.fillRect (0 * SIZE + 2, 5 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
-
-  ctx.fillStyle = "white";//Desenha um fundo branco por traz do card 1 de "a"
-  ctx.fillRect (0 * SIZE + 2, 8 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
-
-  ctx.fillStyle = "white";//Desenha um fundo branco por traz do card 1 de "a"
-  ctx.fillRect (0 * SIZE + 2, 11 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
-
-  ctx.fillStyle = "white";//Desenha um fundo preto por traz do card 1 de "a"
-  ctx.fillRect (0 * SIZE + 2, 14 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
-
-  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
-  ctx.fillRect (36 * SIZE - 1, 2 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
-
-  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
-  ctx.fillRect (36 * SIZE - 1, 5 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
-
-  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
-  ctx.fillRect (36 * SIZE - 1, 8 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
-
-  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
-  ctx.fillRect (36 * SIZE - 1, 11 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
-
-  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
-  ctx.fillRect (36 * SIZE - 1, 14 * SIZE, SIZE * 2 - 1, SIZE * 2.9);*/
 }

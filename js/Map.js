@@ -15,6 +15,7 @@ function Map(l, c) {
 
 Map.prototype.desenhar = function(ctx){
   //this.desenharLimites(ctx);
+  this.informacoes();//Desenha informações complementares na tela (Barra de energia e cards)
   this.desenharTiles(ctx);
   for (var i = 0; i < this.a.length; i++) {//Chama o desenho do "a"
     this.a[i].desenharLimites(ctx);
@@ -22,6 +23,7 @@ Map.prototype.desenhar = function(ctx){
   for (var i = 0; i < this.b.length; i++) {//Chama o desenho do "b"
     this.b[i].desenharLimites(ctx);
   }
+  this.vidaPersonagens();
 }
 
 Map.prototype.desenharLimites = function(ctx) {//Desenha estrutura do mapa
@@ -81,118 +83,36 @@ Map.prototype.desenharTiles = function(ctx){
     for (var j = 0; j < linha.length; j++) {
       switch (this.cells[i][j]) {
         case 0:
-          this.imageLib.drawImageTile(ctx, "0", 0, 0, 32, j*this.SIZE, i*this.SIZE); //desenha chao
-          break;
         case 1:
-          this.imageLib.drawImageTile(ctx, "1", 0, 0, 32, j*this.SIZE, i*this.SIZE); //desenha chao
-          break;
         case 2:
-          this.imageLib.drawImageTile(ctx, "2", 0, 0, 32, j*this.SIZE, i*this.SIZE); //desenha chao
-          break;
         case 3:
-          this.imageLib.drawImageTile(ctx, "3", 0, 0, 32, j*this.SIZE, i*this.SIZE); //desenha chao
-          break;
         case 4:
-          this.imageLib.drawImageTile(ctx, "4", 0, 0, 32, j*this.SIZE, i*this.SIZE); //desenha chao
-          break;
         case 5:
-          this.imageLib.drawImageTile(ctx, "5", 0, 0, 32, j*this.SIZE, i*this.SIZE); //desenha chao
-          break;
         case 6:
-          this.imageLib.drawImageTile(ctx, "6", 0, 0, 32, j*this.SIZE, i*this.SIZE); //desenha chao
-          break;
         case 7:
-          this.imageLib.drawImageTile(ctx, "7", 0, 0, 32, j*this.SIZE, i*this.SIZE); //desenha chao
-          break;
         case 8:
-          this.imageLib.drawImageTile(ctx, "8", 0, 0, 32, j*this.SIZE, i*this.SIZE); //desenha chao
-          break;
         case 9:
-          this.imageLib.drawImageTile(ctx, "intervalo", 0, 0, 32, j*this.SIZE, i*this.SIZE); //intervalo entre os players
-          break
         case 10:
-          var X = 10;
-          if(this.cells[i][j] == X) this.imageLib.drawImageTile(ctx, "pc", 0, 0, 96, j*this.SIZE, i*this.SIZE);
-          break;
         case 11:
-          var X = 11;
-          if(this.cells[i][j] == X) this.imageLib.drawImageTile(ctx, "pc2", 0, 0, 96, j*this.SIZE, i*this.SIZE);
-          break;
         case 12:
-          var X = 12;
-          if(this.cells[i][j] == X) this.imageLib.drawImageTile(ctx, "pc3", 0, 0, 96, j*this.SIZE, i*this.SIZE);
-          break;
         case 13:
-          var X = 13;
-          if(this.cells[i][j] == X) this.imageLib.drawImageTile(ctx, "pc4", 0, 0, 96, j*this.SIZE, i*this.SIZE);
-          break;
         case 14:
-          var X = 14;
-          if(this.cells[i][j] == X) this.imageLib.drawImageTile(ctx, "pc5", 0, 0, 96, j*this.SIZE, i*this.SIZE);
-          break;
         case 15:
-          var X = 15;
-          if(this.cells[i][j] == X) this.imageLib.drawImageTile(ctx, "pc", 0, 0, 96, j*this.SIZE, i*this.SIZE);
-          break;
         case 16:
-          var X = 16;
-          if(this.cells[i][j] == X) this.imageLib.drawImageTile(ctx, "pc2", 0, 0, 96, j*this.SIZE, i*this.SIZE);
-          break;
         case 17:
-          var X = 17;
-          if(this.cells[i][j] == X) this.imageLib.drawImageTile(ctx, "pc3", 0, 0, 96, j*this.SIZE, i*this.SIZE);
-          break;
         case 18:
-          var X = 18;
-          if(this.cells[i][j] == X) this.imageLib.drawImageTile(ctx, "pc4", 0, 0, 96, j*this.SIZE, i*this.SIZE);
-          break;
         case 19:
-          var X = 19;
-          if(this.cells[i][j] == X) this.imageLib.drawImageTile(ctx, "pc5", 0, 0, 96, j*this.SIZE, i*this.SIZE);
-          break;
-        case 62:
-        case 63:
-        case 64:
-        case 65:
-        case 66:
-        case 67:
-        case 68:
-        case 69:
-        case 70:
-        case 71:
-        case 72:
-        case 73:
-        case 74:
-        case 75:
-        case 76:
-        case 77:
-        case 78:
-        case 83:
-        case 84:
-        case 85:
-        case 86:
-        case 87:
-        case 88:
-        case 89:
-        case 90:
-        case 91:
-        case 92:
-        case 93:
-        case 94:
-        case 95:
-        case 96:
-        case 97:
-        case 98:
-        case 99:
-          this.imageLib.drawImageTile(ctx, "chao", 0, 0, 32, j*this.SIZE, i*this.SIZE); //intervalo entre os players
-          break
         case 79:
         case 80:
         case 81:
         case 82:
-          this.imageLib.drawImageTile(ctx, "ponte", 0, 0, 32, j*this.SIZE, i*this.SIZE); //intervalo entre os players
-          break
+          this.imageLib.drawImageTile(ctx, this.cells[i][j], 0, 0, 96, j*this.SIZE, i*this.SIZE); //desenha o chão
+          break;
+        case 100:
+          break;
         default:
+          this.imageLib.drawImageTile(ctx, "chao", 0, 0, 32, j*this.SIZE, i*this.SIZE); //intervalo entre os players
+          break
       }
     }
   }
@@ -271,7 +191,6 @@ Map.prototype.carregaBarra = function(){
   if(b.energia < eCanvas.height){
     b.energia = b.energia + dt * 10;
   }
-	antes = agora;
 };
 
 Map.prototype.delete = function(){
@@ -333,7 +252,7 @@ Map.prototype.move = function(map){
           Math.pow(dx,2)+
           Math.pow(dy,2)
         );
-        if(raio<0){//Incluir o perseguir
+        if(raio<0){//Incluir o perseguir (Útil com o arqueiro)
 
         } else{
           if (this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE) + 1] == this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE)] - 1){
@@ -362,7 +281,7 @@ Map.prototype.move = function(map){
           Math.pow(dx,2)+
           Math.pow(dy,2)
         );
-        if(raio<0){//Incluir o perseguir
+        if(raio<0){//Incluir o perseguir (Útil com o arqueiro)
 
         } else{
           if (this.cells[Math.floor(this.b[i].y/SIZE)][Math.floor(this.b[i].x/SIZE) - 1] == this.cells[Math.floor(this.b[i].y/SIZE)][Math.floor(this.b[i].x/SIZE)] + 1){
@@ -401,7 +320,7 @@ Map.prototype.testarColisao = function(){
       if(this.a[i].colidiuCom(this.b[j])){
         this.a[i].vx = 0;
         this.a[i].vy = 0;
-        this.a[i].life = this.a[i].life - dt*100;//Consome a Life
+        this.a[i].life = this.a[i].life - dt*100;//Consome a Life este valor 100 pode ser passado no personagem para que tenha consumos em tempos diferentes pro tipo de personagem
         if (this.a[i].life <= 0){
           this.a[i].destroyed = true;//Ativa a destruição
         }
@@ -413,7 +332,7 @@ Map.prototype.testarColisao = function(){
       if(this.b[i].colidiuCom(this.a[j])){
         this.b[i].vx = 0;
         this.b[i].vy = 0;
-        this.b[i].life = this.b[i].life - dt*100;//Consome a Life
+        this.b[i].life = this.b[i].life - dt*100;//Consome a Life este valor 100 pode ser passado no personagem para que tenha consumos em tempos diferentes pro tipo de personagem
         if (this.b[i].life <= 0){
           this.b[i].destroyed = true;//Ativa a destruição
         }
@@ -421,4 +340,78 @@ Map.prototype.testarColisao = function(){
     }
   }
   this.delete();//Chama a função de deleter
+}
+Map.prototype.informacoes = function(){
+  ctx.fillStyle = "#156c99";//Desenha um fundo azul por traz da barra de informações do "a"
+  ctx.fillRect (0 * SIZE, eCanvas.height, SIZE * 3, - eCanvas.height);
+
+  ctx.fillStyle = "hsl("+a.energia/eCanvas.height*120+",100%,50%)";//Desenha a barra de energia do "a"
+  ctx.fillRect (2 * SIZE + 3, eCanvas.height, SIZE - 6, - a.energia);
+
+  ctx.textAlign="left";//Adiciona texto "A" a barra do "a"
+  ctx.fillStyle = "white";
+  ctx.font = "4em Arial Black";
+  ctx.fillText("A", 0 * SIZE + 8, 55);
+
+  ctx.textAlign="center";//Adiciona texto "ENERGIA" a barra do "a"
+  ctx.font = "2em Arial Black";
+  ctx.fillText("E", 2 * SIZE + SIZE / 2, eCanvas.height / 2 - 90);
+  ctx.fillText("N", 2 * SIZE + SIZE / 2, eCanvas.height / 2 - 60);
+  ctx.fillText("E", 2 * SIZE + SIZE / 2, eCanvas.height / 2 - 30);
+  ctx.fillText("R", 2 * SIZE + SIZE / 2, eCanvas.height / 2);
+  ctx.fillText("G", 2 * SIZE + SIZE / 2, eCanvas.height / 2 + 30);
+  ctx.fillText("I", 2 * SIZE + SIZE / 2, eCanvas.height / 2 + 60);
+  ctx.fillText("A", 2 * SIZE + SIZE / 2, eCanvas.height / 2 + 90);
+
+  ctx.fillStyle = "#156c99";//Desenha um fundo azul por traz da barra de energia do "b"
+  ctx.fillRect (35 * SIZE, eCanvas.height, SIZE * 3, - eCanvas.height);
+
+  ctx.fillStyle = "hsl("+b.energia/eCanvas.height*120+",100%,50%)";//Desenha a barra de energia do "a"
+  ctx.fillRect (35 * SIZE + 3, eCanvas.height, SIZE - 6, - b.energia);
+
+  ctx.textAlign="left";//Adiciona texto "A" a barra do "b"
+  ctx.fillStyle = "black";
+  ctx.font = "4em Arial Black";
+  ctx.fillText("B", 36 * SIZE + 6, 55);
+
+  ctx.textAlign="center";//Adiciona texto "ENERGIA" a barra do "b"
+  ctx.font = "2em Arial Black";
+  ctx.fillText("E", 35 * SIZE + SIZE / 2, eCanvas.height / 2 - 90);
+  ctx.fillText("N", 35 * SIZE + SIZE / 2, eCanvas.height / 2 - 60);
+  ctx.fillText("E", 35 * SIZE + SIZE / 2, eCanvas.height / 2 - 30);
+  ctx.fillText("R", 35 * SIZE + SIZE / 2, eCanvas.height / 2);
+  ctx.fillText("G", 35 * SIZE + SIZE / 2, eCanvas.height / 2 + 30);
+  ctx.fillText("I", 35 * SIZE + SIZE / 2, eCanvas.height / 2 + 60);
+  ctx.fillText("A", 35 * SIZE + SIZE / 2, eCanvas.height / 2 + 90);
+
+  //Código abaixo pode ser útil no momento da seleção do personagem
+  /*ctx.fillStyle = "white";//Desenha um fundo branco por traz do card 1 de "a"
+  ctx.fillRect (0 * SIZE + 2, 2 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
+
+  ctx.fillStyle = "white";//Desenha um fundo branco por traz do card 1 de "a"
+  ctx.fillRect (0 * SIZE + 2, 5 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
+
+  ctx.fillStyle = "white";//Desenha um fundo branco por traz do card 1 de "a"
+  ctx.fillRect (0 * SIZE + 2, 8 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
+
+  ctx.fillStyle = "white";//Desenha um fundo branco por traz do card 1 de "a"
+  ctx.fillRect (0 * SIZE + 2, 11 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
+
+  ctx.fillStyle = "white";//Desenha um fundo preto por traz do card 1 de "a"
+  ctx.fillRect (0 * SIZE + 2, 14 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
+
+  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
+  ctx.fillRect (36 * SIZE - 1, 2 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
+
+  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
+  ctx.fillRect (36 * SIZE - 1, 5 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
+
+  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
+  ctx.fillRect (36 * SIZE - 1, 8 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
+
+  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
+  ctx.fillRect (36 * SIZE - 1, 11 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
+
+  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
+  ctx.fillRect (36 * SIZE - 1, 14 * SIZE, SIZE * 2 - 1, SIZE * 2.9);*/
 }
