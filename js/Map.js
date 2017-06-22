@@ -394,33 +394,36 @@ Map.prototype.informacoes = function(){//Função que desenha outros elementos a
   ctx.fillText("A", 35 * SIZE + SIZE / 2, eCanvas.height / 2 + 90);
 
   //Código abaixo pode ser útil no momento da seleção do personagem
-  /*ctx.fillStyle = "white";//Desenha um fundo branco por traz do card 1 de "a"
-  ctx.fillRect (0 * SIZE + 2, 2 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
-
-  ctx.fillStyle = "white";//Desenha um fundo branco por traz do card 1 de "a"
-  ctx.fillRect (0 * SIZE + 2, 5 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
-
-  ctx.fillStyle = "white";//Desenha um fundo branco por traz do card 1 de "a"
-  ctx.fillRect (0 * SIZE + 2, 8 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
-
-  ctx.fillStyle = "white";//Desenha um fundo branco por traz do card 1 de "a"
-  ctx.fillRect (0 * SIZE + 2, 11 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
-
-  ctx.fillStyle = "white";//Desenha um fundo preto por traz do card 1 de "a"
-  ctx.fillRect (0 * SIZE + 2, 14 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
-
-  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
-  ctx.fillRect (36 * SIZE - 1, 2 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
-
-  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
-  ctx.fillRect (36 * SIZE - 1, 5 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
-
-  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
-  ctx.fillRect (36 * SIZE - 1, 8 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
-
-  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
-  ctx.fillRect (36 * SIZE - 1, 11 * SIZE, SIZE * 2 - 1, SIZE * 2.9);
-
-  ctx.fillStyle = "black";//Desenha um fundo preto por traz do card 1 de "b"
-  ctx.fillRect (36 * SIZE - 1, 14 * SIZE, SIZE * 2 - 1, SIZE * 2.9);*/
+  if (a.seletor == 0){
+    ctx.fillStyle = "yellow";//Desenha um fundo branco por traz do card 1 de "a"
+    ctx.fillRect (0 * SIZE, 2 * SIZE, SIZE * 2, SIZE * 2.9);
+  }else if (a.seletor == 1){
+    ctx.fillStyle = "yellow";//Desenha um fundo branco por traz do card 1 de "a"
+    ctx.fillRect (0 * SIZE, 5 * SIZE, SIZE * 2, SIZE * 3);
+  }else if (a.seletor == 2){
+    ctx.fillStyle = "yellow";//Desenha um fundo branco por traz do card 1 de "a"
+    ctx.fillRect (0 * SIZE, 8 * SIZE, SIZE * 2, SIZE * 3);
+  }else if (a.seletor == 3){
+    ctx.fillStyle = "yellow";//Desenha um fundo branco por traz do card 1 de "a"
+    ctx.fillRect (0 * SIZE, 11 * SIZE, SIZE * 2, SIZE * 3);
+  }else if (a.seletor == 4){
+    ctx.fillStyle = "yellow";//Desenha um fundo preto por traz do card 1 de "a"
+    ctx.fillRect (0 * SIZE, 14 * SIZE, SIZE * 2, SIZE * 3);
+  }
+  if (b.seletor == 0){
+    ctx.fillStyle = "yellow";//Desenha um fundo preto por traz do card 1 de "b"
+    ctx.fillRect (36 * SIZE, 2 * SIZE, SIZE * 2, SIZE * 3);
+  }else if (b.seletor == 1){
+    ctx.fillStyle = "yellow";//Desenha um fundo preto por traz do card 1 de "b"
+    ctx.fillRect (36 * SIZE, 5 * SIZE, SIZE * 2, SIZE * 3);
+  }else if (b.seletor == 2){
+    ctx.fillStyle = "yellow";//Desenha um fundo preto por traz do card 1 de "b"
+    ctx.fillRect (36 * SIZE, 8 * SIZE, SIZE * 2, SIZE * 3);
+  }else if (b.seletor == 3){
+    ctx.fillStyle = "yellow";//Desenha um fundo preto por traz do card 1 de "b"
+    ctx.fillRect (36 * SIZE, 11 * SIZE, SIZE * 2, SIZE * 3);
+  }else if (b.seletor == 4){
+    ctx.fillStyle = "yellow";//Desenha um fundo preto por traz do card 1 de "b"
+    ctx.fillRect (36 * SIZE, 14 * SIZE, SIZE * 2, SIZE * 3);
+  }
 }

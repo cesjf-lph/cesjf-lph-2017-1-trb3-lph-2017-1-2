@@ -79,9 +79,11 @@ function init(){
     a = new Sprite();
     a.imageLib = imglib;
     a.energia = eCanvas.height;//Fixa a energia com o mesmo valor da altura para simplificar no desenho
+    a.seletor = 0;
     b = new Sprite();
     b.imageLib = imglib;
     b.energia = eCanvas.height;//Fixa a energia com o mesmo valor da altura para simplificar no desenho
+    b.seletor = 0;
 
     configuraControles();
     window.onmousedown = configuraMouse;
@@ -107,14 +109,38 @@ function passo(){
 function configuraControles() {
   addEventListener("keydown", function(e) {
     switch (e.keyCode) {
-        case 37:
+        case 38:
+          if (b.seletor > 0){
+            b.seletor = b.seletor - 1;
+          }
+          e.preventDefault();
+          break;
+        case 40:
+          if (b.seletor < 4){
+            b.seletor = b.seletor + 1;
+          }
+          e.preventDefault();
+          break;
+        case 87:
+          if (a.seletor > 0){
+            a.seletor = a.seletor - 1;
+          }
+          e.preventDefault();
+          break;
+        case 83:
+          if (a.seletor < 4){
+            a.seletor = a.seletor + 1;
+          }
+          e.preventDefault();
+          break;
+        case 68:
           if (a.energia > 100 && auxiliar == 1){//Condiciona o lançamento a ter energia suficiente e o jogo estar em execução
             mapa.criaPersonagem(13, 7);//(Linha, coluna) Se linha = 3 cria personagem na parte superior, se linha = 13 cria personagem na parte inferior, se coluna = 7 cria personagem de "a", se coluna = 30 cria personagem de "b"
             a.energia = a.energia - 100;
           }
           e.preventDefault();
           break;
-        case 39:
+        case 37:
           if (b.energia > 100 && auxiliar == 1){//Condiciona o lançamento a ter energia suficiente e o jogo estar em
             mapa.criaPersonagem(13, 30);//(Linha, coluna) Se linha = 3 cria personagem na parte superior, se linha = 13 cria personagem na parte inferior, se coluna = 7 cria personagem de "a", se coluna = 30 cria personagem de "b"
             b.energia = b.energia - 100;
