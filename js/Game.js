@@ -28,8 +28,11 @@ var casasMapa = ([
   [ 14, 100, 100, 1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  3,  9,  9,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 3, 100,  19, 100],
   [100, 100, 100, 1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  3,  9,  9,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 3, 100, 100, 100],
   [100, 100, 100, 8,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  7,  9,  9,  8,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4, 7, 100, 100, 100],
-]);//Casas 100: Espaços em branco para inclusão de informações (Barra de energia e cards)./ Campos 1, 2, 3, 4, 5, 6, 7 e 8: campos com imagens de bordas / Campos 9: Campos com o riacho / Campos 79, 80, 81 e 82: compõe a ponte / Campos 0: Campos com o gramado // Campos de 62 a 99: Campos onde o personagem pode percorrer // Campos 94: Campos onde serão posicionada as torres pequenas de "a" / Campo 99: Campo onde será posicionada a torre principal de "a" / Campos 67: Campos onde serão posicionadas as pequenas torres de "b" / Campo 62: Campo onde será posicionada a torre principal de "b", Casas 10, 11, 12, 13, 14, 15, 16, 17, 18 e 19: campos com os cards de personagens
-
+]);/*Casas 100: Espaços em branco para inclusão de informações (Barra de energia e cards)./ Campos 1, 2, 3, 4, 5, 6, 7 e 8: campos com imagens de bordas /
+Campos 9: Campos com o riacho / Campos 79, 80, 81 e 82: compõe a ponte / Campos 0: Campos com o gramado //
+Campos de 62 a 99: Campos onde o personagem pode percorrer // Campos 94: Campos onde serão posicionada as torres pequenas de "a" /
+Campo 99: Campo onde será posicionada a torre principal de "a" / Campos 67: Campos onde serão posicionadas as pequenas torres de "b" /
+Campo 62: Campo onde será posicionada a torre principal de "b", Casas 10, 11, 12, 13, 14, 15, 16, 17, 18 e 19: campos com os cards de personagens*/
 
 function init(){
     eCanvas = document.getElementsByTagName("canvas")[0];
@@ -72,12 +75,14 @@ function init(){
     mapa = new Map(linhas, colunas);
     mapa.imageLib = imglib;
     mapa.loadMap(casasMapa);
+
     a = new Sprite();
     a.imageLib = imglib;
     a.energia = eCanvas.height;//Fixa a energia com o mesmo valor da altura para simplificar no desenho
     b = new Sprite();
     b.imageLib = imglib;
     b.energia = eCanvas.height;//Fixa a energia com o mesmo valor da altura para simplificar no desenho
+
     configuraControles();
     window.onmousedown = configuraMouse;
     var id = requestAnimationFrame(passo);
@@ -88,11 +93,14 @@ function passo(){
   	agora = new Date();
   	dt = (agora - antes) / 1000;
   	ctx.clearRect(0, 0, eCanvas.width, eCanvas.height);
+    tela(ctx);
+    if(auxiliar == 1){
     mapa.desenhar(ctx);
     mapa.moverPersonagens(dt);
     mapa.move(mapa);
     mapa.carregaBarra();
     mapa.testarColisao();
+  }
   	antes = agora;
 }
 
@@ -100,16 +108,16 @@ function configuraControles() {
   addEventListener("keydown", function(e) {
     switch (e.keyCode) {
       case 37:
-        if (a.energia > 200){
+        if (a.energia > 100){
           mapa.criaPersonagem(13, 7);//(Linha, coluna) Se linha = 3 cria personagem na parte superior, se linha = 13 cria personagem na parte inferior, se coluna = 7 cria personagem de "a", se coluna = 30 cria personagem de "b"
-          a.energia = a.energia - 200;
+          a.energia = a.energia - 100;
         }
         e.preventDefault();
         break;
       case 39:
-        if (b.energia > 200){
+        if (b.energia > 100){
           mapa.criaPersonagem(13, 30);//(Linha, coluna) Se linha = 3 cria personagem na parte superior, se linha = 13 cria personagem na parte inferior, se coluna = 7 cria personagem de "a", se coluna = 30 cria personagem de "b"
-          b.energia = b.energia - 200;
+          b.energia = b.energia - 100;
         }
         e.preventDefault();
         break;
@@ -130,6 +138,7 @@ function configuraMouse(e) {
   e = e || window.event;
   var button = e.which || e.button;
   if(button == 1) {
+    auxiliar = 1;
     console.log("Botão esquerdo");
   } else if(button == 2) {
     console.log("Botão de rolagem");
@@ -137,6 +146,14 @@ function configuraMouse(e) {
     console.log("Botão direito");
   }
 };
+
+function tela(ctx){
+  if(auxiliar == 0){
+    var telaInicial = new Image();
+    telaInicial.src = "img/logo.png";
+    ctx.drawImage(telaInicial, 0, 0, 1216, 544);
+  }
+}
 
 /*function textoFormatado(texto1, texto2, texto3, texto4, texto5, texto6, texto7, texto8, texto9, texto10){//Não está sendo utilizado ainda, vai ser útil nas telas de boas vindas pausa e vitória
   ctx.textAlign="center";
