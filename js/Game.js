@@ -3,7 +3,7 @@ var ctx;
 var antes = new Date();
 var agora = new Date();
 var dt = 0;
-var auxiliar = 0; //Variável qua auxilia no status do jogo
+var auxiliar = 0; //Variável qua auxilia no status do jogo, se 0 tela inicial, se 1 está em jogo, se 2
 var mapa;
 var imglib;
 var soundlib;
@@ -95,32 +95,32 @@ function passo(){
   	ctx.clearRect(0, 0, eCanvas.width, eCanvas.height);
     tela(ctx);
     if(auxiliar == 1){
-    mapa.desenhar(ctx);
-    mapa.moverPersonagens(dt);
-    mapa.move(mapa);
-    mapa.carregaBarra();
-    mapa.testarColisao();
-  }
+      mapa.desenhar(ctx);
+      mapa.moverPersonagens(dt);
+      mapa.move(mapa);
+      mapa.carregaBarra();
+      mapa.testarColisao();
+    }
   	antes = agora;
 }
 
 function configuraControles() {
   addEventListener("keydown", function(e) {
     switch (e.keyCode) {
-      case 37:
-        if (a.energia > 100){
-          mapa.criaPersonagem(13, 7);//(Linha, coluna) Se linha = 3 cria personagem na parte superior, se linha = 13 cria personagem na parte inferior, se coluna = 7 cria personagem de "a", se coluna = 30 cria personagem de "b"
-          a.energia = a.energia - 100;
-        }
-        e.preventDefault();
-        break;
-      case 39:
-        if (b.energia > 100){
-          mapa.criaPersonagem(13, 30);//(Linha, coluna) Se linha = 3 cria personagem na parte superior, se linha = 13 cria personagem na parte inferior, se coluna = 7 cria personagem de "a", se coluna = 30 cria personagem de "b"
-          b.energia = b.energia - 100;
-        }
-        e.preventDefault();
-        break;
+        case 37:
+          if (a.energia > 100 && auxiliar == 1){//Condiciona o lançamento a ter energia suficiente e o jogo estar em execução
+            mapa.criaPersonagem(13, 7);//(Linha, coluna) Se linha = 3 cria personagem na parte superior, se linha = 13 cria personagem na parte inferior, se coluna = 7 cria personagem de "a", se coluna = 30 cria personagem de "b"
+            a.energia = a.energia - 100;
+          }
+          e.preventDefault();
+          break;
+        case 39:
+          if (b.energia > 100 && auxiliar == 1){//Condiciona o lançamento a ter energia suficiente e o jogo estar em
+            mapa.criaPersonagem(13, 30);//(Linha, coluna) Se linha = 3 cria personagem na parte superior, se linha = 13 cria personagem na parte inferior, se coluna = 7 cria personagem de "a", se coluna = 30 cria personagem de "b"
+            b.energia = b.energia - 100;
+          }
+          e.preventDefault();
+          break;
       default:
     }
   });
