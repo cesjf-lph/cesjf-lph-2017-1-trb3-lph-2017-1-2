@@ -147,6 +147,14 @@ function configuraControles() {
           }
           e.preventDefault();
           break;
+        case 39:
+          if (b.energia > 100 && auxiliar == 1){//Condiciona o lançamento a ter energia suficiente e o jogo estar em
+            mapa.criaPersonagem(3, 30);//(Linha, coluna) Se linha = 3 cria personagem na parte superior, se linha = 13 cria personagem na parte inferior, se coluna = 7 cria personagem de "a", se coluna = 30 cria personagem de "b"
+            b.energia = b.energia - 100;
+          }
+          e.preventDefault();
+          break;
+
       default:
     }
   });
