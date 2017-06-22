@@ -132,6 +132,7 @@ Map.prototype.loadMap = function(map) {//Funão que carrega o mapa de acordo com
           a.life = 100;
           a.destroyed = false;
           a.mover = false;
+          a.multiplicador = 0;//Força do personagem em no teste de colisão
           this.a.push(a);
         break;
         case 67://Inclui as 2 torres pequenas de "b"
@@ -142,6 +143,7 @@ Map.prototype.loadMap = function(map) {//Funão que carrega o mapa de acordo com
           b.life = 100;
           b.destroyed = false;
           b.mover = false;
+          b.multiplicador = 0;//Força do personagem em no teste de colisão
           this.b.push(b);
         break;
         case 99://Inclui a torre principal de "a"
@@ -152,6 +154,7 @@ Map.prototype.loadMap = function(map) {//Funão que carrega o mapa de acordo com
           a.life = 100;
           a.destroyed = false;
           a.mover = false;
+          a.multiplicador = 0;//Força do personagem em no teste de colisão
           this.a.push(a);
         break;
         case 62://Inclui a torre principal de "b"
@@ -162,6 +165,7 @@ Map.prototype.loadMap = function(map) {//Funão que carrega o mapa de acordo com
           b.life = 100;
           b.destroyed = false;
           b.mover = false;
+          b.multiplicador = 0;//Força do personagem em no teste de colisão
           this.b.push(b);
         break;
         default:
@@ -199,7 +203,7 @@ Map.prototype.delete = function(){//Função que deleta os personagens da tela
   }
 }
 
-Map.prototype.criaPersonagem = function(linha, coluna){//Função que gera os personagens selecionados na tela
+Map.prototype.criaPersonagem = function(linha, coluna, multiplicador){//Função que gera os personagens selecionados na tela
   if (coluna == 7){//Se a coluna for igual a 7 cria personagem de "a"
     var a = new Sprite()
     a.x = coluna * SIZE+SIZE/2;
@@ -210,6 +214,7 @@ Map.prototype.criaPersonagem = function(linha, coluna){//Função que gera os pe
     a.life = 100;
     a.destroyed = false;
     a.mover = true;
+    a.multiplicador = multiplicador;//Força do personagem em no teste de colisão
     this.a.push(a);
   }
   if (coluna == 30){//Se a coluna for igual a 30 cria personagem de "b"
@@ -222,6 +227,7 @@ Map.prototype.criaPersonagem = function(linha, coluna){//Função que gera os pe
     b.life = 100;
     b.destroyed = false;
     b.mover = true;
+    b.multiplicador = multiplicador;//Força do personagem em no teste de colisão
     this.b.push(b);
   }
 }
@@ -332,7 +338,7 @@ Map.prototype.testarColisao = function(){//Função que chama o teste de colisã
       if(this.a[i].colidiuCom(this.b[j])){
         this.a[i].vx = 0;
         this.a[i].vy = 0;
-        this.a[i].life = this.a[i].life - dt*100;//Consome a Life este valor 100 pode ser passado no personagem para que tenha consumos em tempos diferentes pro tipo de personagem
+        this.a[i].life = this.a[i].life - dt*(20+20*this.a[i].multiplicador);//Consome a Life este valor em parenteses é a força do personagem
         if (this.a[i].life <= 0){
           this.a[i].destroyed = true;//Ativa a destruição
         }
@@ -344,7 +350,7 @@ Map.prototype.testarColisao = function(){//Função que chama o teste de colisã
       if(this.b[i].colidiuCom(this.a[j])){
         this.b[i].vx = 0;
         this.b[i].vy = 0;
-        this.b[i].life = this.b[i].life - dt*100;//Consome a Life este valor 100 pode ser passado no personagem para que tenha consumos em tempos diferentes pro tipo de personagem
+        this.b[i].life = this.b[i].life - dt*(20+20*this.b[i].multiplicador);//Consome a Life este valor em parenteses é a força do personagem
         if (this.b[i].life <= 0){
           this.b[i].destroyed = true;//Ativa a destruição
         }
@@ -393,7 +399,6 @@ Map.prototype.informacoes = function(){//Função que desenha outros elementos a
   ctx.fillText("I", 35 * SIZE + SIZE / 2, eCanvas.height / 2 + 60);
   ctx.fillText("A", 35 * SIZE + SIZE / 2, eCanvas.height / 2 + 90);
 
-  //Código abaixo pode ser útil no momento da seleção do personagem
   if (a.seletor == 0){
     ctx.fillStyle = "yellow";//Desenha um fundo branco por traz do card 1 de "a"
     ctx.fillRect (0 * SIZE, 2 * SIZE, SIZE * 2, SIZE * 2.9);
