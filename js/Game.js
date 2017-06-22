@@ -140,6 +140,13 @@ function configuraControles() {
           }
           e.preventDefault();
           break;
+        case 65:
+          if (a.energia >  50+100/(a.seletor+1) && auxiliar == 1){//Condiciona o lançamento a ter energia suficiente e o jogo estar em execução
+            mapa.criaPersonagem(3, 7, a.seletor);//(Linha, coluna) Se linha = 3 cria personagem na parte superior, se linha = 13 cria personagem na parte inferior, se coluna = 7 cria personagem de "a", se coluna = 30 cria personagem de "b"
+            a.energia = a.energia - (50+100/(a.seletor+1));
+          }
+          e.preventDefault();
+          break;
         case 37:
           if (b.energia >  50+100/(b.seletor+1) && auxiliar == 1){//Condiciona o lançamento a ter energia suficiente e o jogo estar em
             mapa.criaPersonagem(13, 30, b.seletor);//(Linha, coluna) Se linha = 3 cria personagem na parte superior, se linha = 13 cria personagem na parte inferior, se coluna = 7 cria personagem de "a", se coluna = 30 cria personagem de "b"
@@ -147,6 +154,14 @@ function configuraControles() {
           }
           e.preventDefault();
           break;
+        case 39:
+          if (b.energia >  50+100/(b.seletor+1) && auxiliar == 1){//Condiciona o lançamento a ter energia suficiente e o jogo estar em
+            mapa.criaPersonagem(3, 30, b.seletor);//(Linha, coluna) Se linha = 3 cria personagem na parte superior, se linha = 13 cria personagem na parte inferior, se coluna = 7 cria personagem de "a", se coluna = 30 cria personagem de "b"
+            b.energia = b.energia - (50+100/(b.seletor+1));
+          }
+          e.preventDefault();
+          break;
+
       default:
     }
   });
