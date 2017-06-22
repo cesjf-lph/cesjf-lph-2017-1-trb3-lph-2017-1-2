@@ -18,10 +18,10 @@ Map.prototype.desenhar = function(ctx){//Função que desenha elementos na tela
   this.informacoes();//Desenha informações complementares na tela (Barra de energia e cards)
   this.desenharTiles(ctx);
   for (var i = 0; i < this.a.length; i++) {//Chama o desenho do "a"
-    this.a[i].desenharLimites(ctx);
+    this.a[i].desenharPose(ctx);
   }
   for (var i = 0; i < this.b.length; i++) {//Chama o desenho do "b"
-    this.b[i].desenharLimites(ctx);
+    this.b[i].desenharPose(ctx);
   }
   this.vidaPersonagens();
   this.desenhaTorres();
