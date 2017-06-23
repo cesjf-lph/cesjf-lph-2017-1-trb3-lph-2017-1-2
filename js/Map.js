@@ -564,14 +564,20 @@ Map.prototype.criaFlecha = function(arqueiro, vx, vy, quemAtira){//Função que 
     }else if(flecha.vx < 0 && flecha.vy == 0){
       arqueiro.dir = 3;
     }
-    arqueiro.tempoFlecha = 2;//Tempo entre uma flecha e outra
+    arqueiro.tempoFlecha = 2.5;//Tempo entre uma flecha e outra
+    flecha.tempoFlecha = 2;//Tempo para movimentar a flecha
     this.flechas.push(flecha);
   }
 }
 
 Map.prototype.moverFlechas = function(dt){//Função que movimenta as flechas
   for (var i = 0; i < this.flechas.length; i++){//Chama o movimenta do Sprite para as flechas
-    this.flechas[i].movimenta(dt);
+    if (this.flechas[i].tempoFlecha < 0){
+      this.flechas[i].movimenta(dt);
+      if (this.flechas[i].tempoFlecha > -0.19){
+        soundLib.play("punch-off");
+      }
+    }
   }
 }
 
@@ -632,6 +638,11 @@ Map.prototype.testarColisaoFlechas = function(){//Função que chama o teste de 
 Map.prototype.testarColisao = function(){//Função que chama o teste de colisão do Sprite e se personagem tiver colidido impede o movimento para ocorrer a batalha
   for (var i = 0; i < this.a.length; i++) {
     for (var j = 0; j < this.b.length; j++) {
+
+      //Subtrai tempo para a flecha sair do arco de acordo com dt
+      for (var k = 0; k < this.flechas.length; k++) {
+        this.flechas[k].tempoFlecha = this.flechas[k].tempoFlecha - dt;
+      }
 
       //Subtrai tempoPunch de acordo com dt
       this.a[i].tempoPunch = this.a[i].tempoPunch - dt;
