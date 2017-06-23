@@ -27,6 +27,7 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
           a.destroyed = false;
           a.mover = false;//Impede que as torres se movam
           a.seletor = 0;//Força do personagem no teste de colisão
+          a.tempoAlert = 0;//Variável que controla o tempo do som de alert
           this.a.push(a);
         break;
         case 67://Gera os dados das 2 torres de "a"
@@ -38,6 +39,7 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
           b.destroyed = false;
           b.mover = false;//Impede que as torres se movam
           b.seletor = 0;//Força do personagem no teste de colisão
+          b.tempoAlert = 0;//Variável que controla o tempo do som de alert
           this.b.push(b);
         break;
         case 99://Gera a torre principal de "a"
@@ -49,6 +51,7 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
           a.destroyed = false;
           a.mover = false;//Impede que a torre se mova
           a.seletor = 0;//Força do personagem no teste de colisão
+          a.tempoAlert = 0;//Variável que controla o tempo do som de alert
           this.a.push(a);
         break;
         case 62://Gera a torre principal de "b"
@@ -60,6 +63,7 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
           b.destroyed = false;
           b.mover = false;//Impede que a torre se mova
           b.seletor = 0;//Força do personagem no teste de colisão
+          b.tempoAlert = 0;//Variável que controla o tempo do som de alert
           this.b.push(b);
         break;
         default:
@@ -322,6 +326,7 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     a.mover = true;//Permite que o personagem se mova
     a.seletor = seletor;//Força do personagem em no teste de colisão
     a.dir = "";//Variável de direção para controlar melhor as poses
+    a.tempoPunch = 0;//Variável que controla o tempo do som de cada som de punch
     this.a.push(a);
   }
   if (coluna == 30){//Se a coluna for igual a 30 cria personagem de "b"
@@ -351,6 +356,7 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     b.mover = true;//Permite que o personagem se mova
     b.seletor = seletor;//Força do personagem em no teste de colisão
     b.dir = "";//Variável de direção para controlar melhor as poses
+    b.tempoPunch = 0;//Variável que controla o tempo do som de cada som de punch
     this.b.push(b);
   }
 }
@@ -428,12 +434,33 @@ Map.prototype.moverPersonagens = function(map, dt){//Função que acrescenta val
 Map.prototype.testarColisao = function(){//Função que chama o teste de colisão do Sprite e se tiver colidido impede o movimento para ocorrer a batalha
   for (var i = 0; i < this.a.length; i++) {
     for (var j = 0; j < this.b.length; j++) {
-      if(this.a[i].colidiuCom(this.b[j])){
+
+      //Subtrai tempoPunch de acordo com dt
+      this.a[i].tempoPunch = this.a[i].tempoPunch - dt;
+      this.b[j].tempoPunch = this.b[j].tempoPunch - dt;
+
+      //Subtrai tempoAlert de acordo com dt
+      this.a[i].tempoAlert = this.a[i].tempoAlert - dt;
+      this.b[j].tempoAlert = this.b[j].tempoAlert - dt;
+
+      if(this.a[i].colidiuCom(this.b[j])){//Caso ocorra a colisão
         //Quando colide zera vx e vy de a e b para a batalha ocorrer
         this.a[i].vx = 0;
         this.a[i].vy = 0;
         this.b[j].vx = 0;
         this.b[j].vy = 0;
+
+        //Adiciona som quando a esta em batalha
+        if (this.a[i].tempoPunch < 0){
+          this.a[i].tempoPunch = 1.3;
+          soundLib.play("punch-on");
+        }
+
+        //Adiciona som quando b esta em batalha
+        if (this.b[j].tempoPunch < 0){
+          this.b[j].tempoPunch = 1.3;
+          soundLib.play("punch-on");
+        }
 
         //Quando colide consome a life de a e b
         this.a[i].life = this.a[i].life - dt*(20+20*this.a[i].seletor);//Consome a life do personagem a
@@ -457,19 +484,45 @@ Map.prototype.testarColisao = function(){//Função que chama o teste de colisã
           this.b[j].pose = 10;
         }
 
+        //Adiciona som de alerta quando energia das torres de a chega a 30%
+        if (this.a[i].SIZE == 96 || this.a[i].SIZE == 64 && this.a[i].life < 30 && this.a[i].tempoAlert < 0){
+          this.a[i].tempoAlert = 2;
+          soundLib.play("alert");
+        }
+
+        //Adiciona som de alerta quando energia das torres de a chega a 30%
+        if (this.b[j].SIZE == 96 || this.b[j].SIZE == 64 && this.b[j].life < 30 && this.b[j].tempoAlert < 0){
+          this.b[j].tempoAlert = 2;
+          soundLib.play("alert");
+        }
+
         //Verifica se a vida da torre principal de a está zerada
         if (this.a[i].life <= 0){
           this.a[i].destroyed = true;
-          if (this.a[i].SIZE == 96){
-            auxiliar = 4;//Se a vida da torre principal de a estiver zerada a auxiliar passa a valer 4 que nas telas é vitoria de b
+          if (this.a[i].SIZE == 96){//Se a vida da torre principal de a estiver zerada a auxiliar passa a valer 4 que nas telas é vitoria de b
+            auxiliar = 4;
+            soundLib.play("aplause");//Adiciona som de palmas pela destruião da torre principal
+          }
+          if (this.a[i].SIZE == 64){//Adiciona som de esplosão quando esplode as pequenas torres de a
+            soundLib.play("explosion");
+          }
+          if (this.a[i].SIZE == 32){//Adiciona som quando personagem morre
+            soundLib.play("dying");
           }
         }
 
         //Verifica se a vida da torre principal de a está zerada
         if (this.b[j].life <= 0){
           this.b[j].destroyed = true;
-          if (this.b[j].SIZE == 96){
-            auxiliar = 3;//Se a vida da torre principal de b estiver zerada a auxiliar passa a valer 3 que nas telas é vitoria de a
+          if (this.b[j].SIZE == 96){//Se a vida da torre principal de b estiver zerada a auxiliar passa a valer 3 que nas telas é vitoria de a
+            auxiliar = 3;
+            soundLib.play("aplause");//Adiciona som de palmas pela destruião da torre principal
+          }
+          if (this.b[j].SIZE == 64){//Adiciona som de esplosão quando esplode as pequenas torres de a
+            soundLib.play("explosion");
+          }
+          if (this.b[j].SIZE == 32){//Adiciona som quando personagem morre
+            soundLib.play("dying");
           }
         }
       }

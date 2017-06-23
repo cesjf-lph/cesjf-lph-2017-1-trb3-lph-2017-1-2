@@ -42,6 +42,12 @@ function init(){
     ctx  = eCanvas.getContext("2d");
 
     soundLib = new SoundLoader();//Vincula os sons
+    soundLib.load("select", "mp3/select.mp3");
+    soundLib.load("explosion", "mp3/explosion.mp3");
+    soundLib.load("aplause", "mp3/aplause.mp3");
+    soundLib.load("dying", "mp3/dying.mp3");
+    soundLib.load("punch-on", "mp3/punch-on.mp3");
+    soundLib.load("alert", "mp3/alert.mp3");
 
     imglib = new ImageLoader();//Vincula as imagens
     imglib.load("chao", "img/chao.png");
@@ -72,7 +78,6 @@ function init(){
     imglib.load("82", "img/82.png");
     imglib.load("tower", "img/tower.png");
     imglib.load("castle", "img/castle.png");
-
     imglib.load("personagem0", "Personagens x cartas/1.png");
     imglib.load("personagem1", "Personagens x cartas/2.png");
     imglib.load("personagem2", "Personagens x cartas/3.png");
@@ -84,7 +89,6 @@ function init(){
     imglib.load("personagem8", "Personagens x cartas/9.png");
     imglib.load("personagem9", "Personagens x cartas/10.png");
 
-    soundLib.load("select", "mp3/select.mp3");
 
     mapa = new Map(linhas, colunas);
     mapa.imageLib = imglib;
