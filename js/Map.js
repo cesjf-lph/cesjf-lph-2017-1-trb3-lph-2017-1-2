@@ -459,7 +459,7 @@ Map.prototype.testaRaio = function(){//
         Math.pow(dx,2)+
         Math.pow(dy,2)
       );
-      if(raio<500 && raio < menorDist){//Teste da distância da menor distancia
+      if(raio<500){//Teste da distância da menor distancia
         menorDist = raio;
       }
     }
