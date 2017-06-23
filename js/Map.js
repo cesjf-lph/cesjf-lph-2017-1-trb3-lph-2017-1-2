@@ -303,18 +303,26 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     var a = new Sprite()
     a.imageLib = this.imageLib;
     a.poses = [//adiciona poses de a
-      {key: "personagem" + seletor, row: 11, col: 0, colMax: 7, time: 8 },//0 - Caminhada para a direita com espada na mão
-      {key: "personagem" + seletor, row: 10, col: 0, colMax: 7, time: 8},//1 - Caminhada para baixo com espada na mão
-      {key: "personagem" + seletor, row: 9, col: 0, colMax: 7, time: 8},//2 - Caminhada para a esquerda com espada na mão
-      {key: "personagem" + seletor, row: 8, col: 0, colMax: 7, time: 8},//3 - Caminhada para cima com espada na mão
-      {key: "personagem" + seletor, row: 11, col: 0, colMax: 0, time: 8},//4 - Parado para a direita com espada na mão
-      {key: "personagem" + seletor, row: 10, col: 0, colMax: 0, time: 8},//5 - Parado para baixo com espada na mão
-      {key: "personagem" + seletor, row: 9, col: 0, colMax: 0, time: 8},//6 - Parado para a esquerda com espada na mão
-      {key: "personagem" + seletor, row: 8, col: 0, colMax: 0, time: 8},//7 - Parado para cima com espada na mão
-      {key: "personagem" + seletor, row: 15, col: 0, colMax: 5, time: 16},//8 - Espadada para a direita
-      {key: "personagem" + seletor, row: 13, col: 0, colMax: 5, time: 16},//9 - Espadada para a esquerda
-      {key: "personagem" + seletor, row: 12, col: 0, colMax: 5, time: 16},//10 - Espadada para cima
-      {key: "personagem" + seletor, row: 14, col: 0, colMax: 5, time: 16},//11 - Espadada para baixo
+      {key: "personagem" + seletor, row: 11, col: 0, colMax:  7, time:  8},//0 - Caminhada para a direita com espada na mão
+      {key: "personagem" + seletor, row: 10, col: 0, colMax:  7, time:  8},//1 - Caminhada para baixo com espada na mão
+      {key: "personagem" + seletor, row:  9, col: 0, colMax:  7, time:  8},//2 - Caminhada para a esquerda com espada na mão
+      {key: "personagem" + seletor, row:  8, col: 0, colMax:  7, time:  8},//3 - Caminhada para cima com espada na mão
+      {key: "personagem" + seletor, row: 11, col: 0, colMax:  0, time:  8},//4 - Parado para a direita com espada na mão
+      {key: "personagem" + seletor, row: 10, col: 0, colMax:  0, time:  8},//5 - Parado para baixo com espada na mão
+      {key: "personagem" + seletor, row:  9, col: 0, colMax:  0, time:  8},//6 - Parado para a esquerda com espada na mão
+      {key: "personagem" + seletor, row:  8, col: 0, colMax:  0, time:  8},//7 - Parado para cima com espada na mão
+      {key: "personagem" + seletor, row: 15, col: 0, colMax:  5, time: 16},//8 - Espadada para a direita
+      {key: "personagem" + seletor, row: 13, col: 0, colMax:  5, time: 16},//9 - Espadada para a esquerda
+      {key: "personagem" + seletor, row: 12, col: 0, colMax:  5, time: 16},//10 - Espadada para cima
+      {key: "personagem" + seletor, row: 14, col: 0, colMax:  5, time: 16},//11 - Espadada para baixo
+      {key: "personagem" + seletor, row: 19, col: 0, colMax: 12, time: 16},//12 - Flecha para a direita
+      {key: "personagem" + seletor, row: 18, col: 0, colMax: 12, time: 16},//13 - Flecha para baixo
+      {key: "personagem" + seletor, row: 17, col: 0, colMax: 12, time: 16},//14 - Flecha para a esquerda
+      {key: "personagem" + seletor, row: 16, col: 0, colMax: 12, time: 16},//15 - Flecha para cima
+      {key: "personagem" + seletor, row:  7, col: 0, colMax:  7, time: 16},//16 - Bastão para a direita
+      {key: "personagem" + seletor, row:  6, col: 0, colMax:  7, time: 16},//17 - Bastão para baixo
+      {key: "personagem" + seletor, row:  5, col: 0, colMax:  7, time: 16},//18 - Bastão para a esquerda
+      {key: "personagem" + seletor, row:  4, col: 0, colMax:  7, time: 16},//19 - Bastão para cima
     ]
     a.x = coluna * SIZE+SIZE/2;
     a.y = linha * SIZE+SIZE/2;
@@ -333,18 +341,26 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     var b = new Sprite()
     b.imageLib = this.imageLib;
     b.poses = [//adiciona poses de b
-      {key: "personagem" + (seletor + 5), row: 11, col: 0, colMax: 7, time: 8 },//0 - Caminhada para a direita com espada na mão
-      {key: "personagem" + (seletor + 5), row: 10, col: 0, colMax: 7, time: 8},//1 - Caminhada para baixo com espada na mão
-      {key: "personagem" + (seletor + 5), row: 9, col: 0, colMax: 7, time: 8},//2 - Caminhada para a esquerda com espada na mão
-      {key: "personagem" + (seletor + 5), row: 8, col: 0, colMax: 7, time: 8},//3 - Caminhada para cima com espada na mão
-      {key: "personagem" + (seletor + 5), row: 11, col: 0, colMax: 0, time: 8},//4 - Parado para a direita com espada na mão
-      {key: "personagem" + (seletor + 5), row: 10, col: 0, colMax: 0, time: 8},//5 - Parado para baixo com espada na mão
-      {key: "personagem" + (seletor + 5), row: 9, col: 0, colMax: 0, time: 8},//6 - Parado para a esquerda com espada na mão
-      {key: "personagem" + (seletor + 5), row: 8, col: 0, colMax: 0, time: 8},//7 - Parado para cima com espada na mão
-      {key: "personagem" + (seletor + 5), row: 15, col: 0, colMax: 5, time: 16},//8 - Espadada para a direita
-      {key: "personagem" + (seletor + 5), row: 13, col: 0, colMax: 5, time: 16},//9 - Espadada para a esquerda
-      {key: "personagem" + (seletor + 5), row: 12, col: 0, colMax: 5, time: 16},//10 - Espadada para cima
-      {key: "personagem" + (seletor + 5), row: 14, col: 0, colMax: 5, time: 16},//11 - Espadada para baixo
+      {key: "personagem" + (seletor + 5), row: 11, col: 0, colMax:  7, time:  8},//0 - Caminhada para a direita com espada na mão
+      {key: "personagem" + (seletor + 5), row: 10, col: 0, colMax:  7, time:  8},//1 - Caminhada para baixo com espada na mão
+      {key: "personagem" + (seletor + 5), row:  9, col: 0, colMax:  7, time:  8},//2 - Caminhada para a esquerda com espada na mão
+      {key: "personagem" + (seletor + 5), row:  8, col: 0, colMax:  7, time:  8},//3 - Caminhada para cima com espada na mão
+      {key: "personagem" + (seletor + 5), row: 11, col: 0, colMax:  0, time:  8},//4 - Parado para a direita com espada na mão
+      {key: "personagem" + (seletor + 5), row: 10, col: 0, colMax:  0, time:  8},//5 - Parado para baixo com espada na mão
+      {key: "personagem" + (seletor + 5), row:  9, col: 0, colMax:  0, time:  8},//6 - Parado para a esquerda com espada na mão
+      {key: "personagem" + (seletor + 5), row:  8, col: 0, colMax:  0, time:  8},//7 - Parado para cima com espada na mão
+      {key: "personagem" + (seletor + 5), row: 15, col: 0, colMax:  5, time: 16},//8 - Espadada para a direita
+      {key: "personagem" + (seletor + 5), row: 13, col: 0, colMax:  5, time: 16},//9 - Espadada para a esquerda
+      {key: "personagem" + (seletor + 5), row: 12, col: 0, colMax:  5, time: 16},//10 - Espadada para cima
+      {key: "personagem" + (seletor + 5), row: 14, col: 0, colMax:  5, time: 16},//11 - Espadada para baixo
+      {key: "personagem" + (seletor + 5), row: 19, col: 0, colMax: 12, time: 16},//12 - Flecha para a direita
+      {key: "personagem" + (seletor + 5), row: 18, col: 0, colMax: 12, time: 16},//13 - Flecha para baixo
+      {key: "personagem" + (seletor + 5), row: 17, col: 0, colMax: 12, time: 16},//14 - Flecha para a esquerda
+      {key: "personagem" + (seletor + 5), row: 16, col: 0, colMax: 12, time: 16},//15 - Flecha para cima
+      {key: "personagem" + (seletor + 5), row:  7, col: 0, colMax:  7, time: 16},//16 - Bastão para a direita
+      {key: "personagem" + (seletor + 5), row:  6, col: 0, colMax:  7, time: 16},//17 - Bastão para baixo
+      {key: "personagem" + (seletor + 5), row:  5, col: 0, colMax:  7, time: 16},//18 - Bastão para a esquerda
+      {key: "personagem" + (seletor + 5), row:  4, col: 0, colMax:  7, time: 16},//19 - Bastão para cima
     ]
     b.x = coluna * SIZE+SIZE/2;
     b.y = linha * SIZE+SIZE/2;
@@ -468,20 +484,38 @@ Map.prototype.testarColisao = function(){//Função que chama o teste de colisã
 
         //Controla a pose de a em batalha de acordo com o dir
         if (this.a[i].dir == 1){
-          this.a[i].pose = 8;
+          if(this.a[i].seletor == 0 || this.a[i].seletor == 1 || this.a[i].seletor == 3){
+          	this.a[i].pose = 12;
+          }
+          else this.a[i].pose = 8;
         }else if (this.a[i].dir == 2){
-          this.a[i].pose = 11;
+          if(this.a[i].seletor == 0 || this.a[i].seletor == 1 || this.a[i].seletor == 3){
+          	this.a[i].pose = 13;
+          }
+          else this.a[i].pose = 11;
         }if (this.a[i].dir == 0){
-          this.a[i].pose = 10;
+          if(this.a[i].seletor == 0 || this.a[i].seletor == 1 || this.a[i].seletor == 3){
+          	this.a[i].pose = 15;
+          }
+          else this.a[i].pose = 10;
         }
 
         //Controla a pose de b em batalha de acordo com o dir
         if (this.b[j].dir == 3){
-          this.b[j].pose = 9;
+          if(this.b[i].seletor == 1 || this.b[i].seletor == 3){
+          	this.b[i].pose = 14;
+          }else if(this.b[i].seletor == 0) this.b[i].pose = 18;
+          else this.b[i].pose = 9;
         }else if (this.b[j].dir == 2){
-          this.b[j].pose = 11;
+          if(this.b[i].seletor == 1 || this.b[i].seletor == 3){
+          	this.b[i].pose = 13;
+          }else if(this.b[i].seletor == 0) this.b[i].pose = 17;
+          else this.b[i].pose = 11;
         }if (this.b[j].dir == 0){
-          this.b[j].pose = 10;
+          if(this.b[i].seletor == 1 || this.b[i].seletor == 3){
+          	this.b[i].pose = 15;
+          }else if(this.b[i].seletor == 0) this.b[i].pose = 19;
+          else this.b[i].pose = 10;
         }
 
         //Adiciona som de alerta quando energia da torre principal de a chega a 30%
