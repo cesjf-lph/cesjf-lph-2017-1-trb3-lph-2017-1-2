@@ -208,7 +208,102 @@ Map.prototype.criaPersonagem = function(linha, coluna, multiplicador){//Função
     var a = new Sprite()
     a.imageLib = this.imageLib;
     a.poses = [
-    {key: "personagem" + multiplicador, row: 11, col: 0, colMax:  7, time:  8},
+      //0 - Caminhada para a direita com espada na mão
+      {
+        key: "personagem" + (multiplicador),
+        row: 11,
+        col: 0,
+        colMax: 7,
+        time: 8
+      },
+      //1 - Caminhada para baixo com espada na mão
+      {
+        key: "personagem" + (multiplicador + 5),
+        row: 10,
+        col: 0,
+        colMax: 7,
+        time: 8
+      },
+      //2 - Caminhada para a esquerda com espada na mão
+      {
+        key: "personagem" + (multiplicador),
+        row: 9,
+        col: 0,
+        colMax: 7,
+        time: 8
+      },
+      //3 - Caminhada para cima com espada na mão
+      {
+        key: "personagem" + (multiplicador),
+        row: 8,
+        col: 0,
+        colMax: 7,
+        time: 8
+      },
+      //4 - Parado para a direita com espada na mão
+      {
+        key: "personagem" + (multiplicador),
+        row: 11,
+        col: 0,
+        colMax: 0,
+        time: 8
+      },
+      //5 - Parado para baixo com espada na mão
+      {
+        key: "personagem" + (multiplicador),
+        row: 10,
+        col: 0,
+        colMax: 0,
+        time: 8
+      },
+      //6 - Parado para a esquerda com espada na mão
+      {
+        key: "personagem" + (multiplicador),
+        row: 9,
+        col: 0,
+        colMax: 0,
+        time: 8
+      },
+      //7 - Parado para cima com espada na mão
+      {
+        key: "personagem" + (multiplicador),
+        row: 8,
+        col: 0,
+        colMax: 0,
+        time: 8
+      },
+      //8 - Espadada para a direita
+      {
+        key: "personagem" + (multiplicador),
+        row: 15,
+        col: 0,
+        colMax: 5,
+        time: 16
+      },
+      //9 - Espadada para a esquerda
+      {
+        key: "personagem" + (multiplicador),
+        row: 13,
+        col: 0,
+        colMax: 5,
+        time: 16
+      },
+      //10 - Espadada para cima
+      {
+        key: "personagem" + (multiplicador),
+        row: 12,
+        col: 0,
+        colMax: 5,
+        time: 16
+      },
+      //11 - Espadada para baixo
+      {
+        key: "personagem" + (multiplicador),
+        row: 14,
+        col: 0,
+        colMax: 5,
+        time: 16
+      },
     ]
     a.x = coluna * SIZE+SIZE/2;
     a.y = linha * SIZE+SIZE/2;
@@ -224,9 +319,103 @@ Map.prototype.criaPersonagem = function(linha, coluna, multiplicador){//Função
   if (coluna == 30){//Se a coluna for igual a 30 cria personagem de "b"
     var b = new Sprite()
     b.imageLib = this.imageLib;
-    b.imageLib = this.imageLib;
     b.poses = [
-    {key: "personagem" + (multiplicador + 5), row: 9, col: 0, colMax:  7, time:  8},
+      //0 - Caminhada para a direita com espada na mão
+      {
+        key: "personagem" + (multiplicador + 5),
+        row: 11,
+        col: 0,
+        colMax: 7,
+        time: 8
+      },
+      //1 - Caminhada para baixo com espada na mão
+      {
+        key: "personagem" + (multiplicador + 5),
+        row: 10,
+        col: 0,
+        colMax: 7,
+        time: 8
+      },
+      //2 - Caminhada para a esquerda com espada na mão
+      {
+        key: "personagem" + (multiplicador + 5),
+        row: 9,
+        col: 0,
+        colMax: 7,
+        time: 8
+      },
+      //3 - Caminhada para cima com espada na mão
+      {
+        key: "personagem" + (multiplicador + 5),
+        row: 8,
+        col: 0,
+        colMax: 7,
+        time: 8
+      },
+      //4 - Parado para a direita com espada na mão
+      {
+        key: "personagem" + (multiplicador + 5),
+        row: 11,
+        col: 0,
+        colMax: 0,
+        time: 8
+      },
+      //5 - Parado para baixo com espada na mão
+      {
+        key: "personagem" + (multiplicador + 5),
+        row: 10,
+        col: 0,
+        colMax: 0,
+        time: 8
+      },
+      //6 - Parado para a esquerda com espada na mão
+      {
+        key: "personagem" + (multiplicador + 5),
+        row: 9,
+        col: 0,
+        colMax: 0,
+        time: 8
+      },
+      //7 - Parado para cima com espada na mão
+      {
+        key: "personagem" + (multiplicador + 5),
+        row: 8,
+        col: 0,
+        colMax: 0,
+        time: 8
+      },
+      //8 - Espadada para a direita
+      {
+        key: "personagem" + (multiplicador + 5),
+        row: 15,
+        col: 0,
+        colMax: 5,
+        time: 16
+      },
+      //9 - Espadada para a esquerda
+      {
+        key: "personagem" + (multiplicador + 5),
+        row: 13,
+        col: 0,
+        colMax: 5,
+        time: 16
+      },
+      //10 - Espadada para cima
+      {
+        key: "personagem" + (multiplicador + 5),
+        row: 12,
+        col: 0,
+        colMax: 5,
+        time: 16
+      },
+      //11 - Espadada para baixo
+      {
+        key: "personagem" + (multiplicador + 5),
+        row: 14,
+        col: 0,
+        colMax: 5,
+        time: 16
+      },
     ]
     b.x = coluna * SIZE+SIZE/2;
     b.y = linha * SIZE+SIZE/2;
@@ -266,12 +455,15 @@ Map.prototype.move = function(map){//Função que acrescenta valor a vy e vx par
           if (this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE) + 1] == this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE)] - 1){
             this.a[i].vx = 100;
             this.a[i].vy = 0;
+            this.a[i].pose = 0;
           } else if (this.cells[Math.floor(this.a[i].y/SIZE) + 1][Math.floor(this.a[i].x/SIZE)] == this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE)] - 1){
             this.a[i].vy = 100;
             this.a[i].vx = 0;
+            this.a[i].pose = 1;
           }else if (this.cells[Math.floor(this.a[i].y/SIZE) - 1][Math.floor(this.a[i].x/SIZE)] == this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE)] - 1){
             this.a[i].vy = -100;
             this.a[i].vx = 0;
+            this.a[i].pose = 3;
           }else{
             this.a[i].vx = 0;
             this.a[i].vy = 0;
@@ -295,12 +487,15 @@ Map.prototype.move = function(map){//Função que acrescenta valor a vy e vx par
           if (this.cells[Math.floor(this.b[i].y/SIZE)][Math.floor(this.b[i].x/SIZE) - 1] == this.cells[Math.floor(this.b[i].y/SIZE)][Math.floor(this.b[i].x/SIZE)] + 1){
             this.b[i].vx = -100;
             this.b[i].vy = 0;
+            this.b[i].pose = 2;
           } else if (this.cells[Math.floor(this.b[i].y/SIZE) - 1][Math.floor(this.b[i].x/SIZE)] == this.cells[Math.floor(this.b[i].y/SIZE)][Math.floor(this.b[i].x/SIZE)] + 1){
             this.b[i].vy = -100;
             this.b[i].vx = 0;
+            this.b[i].pose = 3;
           }else if (this.cells[Math.floor(this.b[i].y/SIZE) + 1][Math.floor(this.b[i].x/SIZE)] == this.cells[Math.floor(this.b[i].y/SIZE)][Math.floor(this.b[i].x/SIZE)] + 1){
             this.b[i].vy = 100;
             this.b[i].vx = 0;
+            this.b[i].pose = 1;
           }else{
             this.b[i].vy = 0;
             this.b[i].vx = 0;
