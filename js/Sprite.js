@@ -53,8 +53,6 @@ Sprite.prototype.desenharLimites = function(ctx) {//Função que desenha os limi
 Sprite.prototype.movimenta = function(dt) {//Função que movimenta os personagens
   this.x = this.x + this.vx * dt;
   this.y = this.y + this.vy * dt;
-
-
   this.frame += this.poses[this.pose].time * dt;
   if (this.frame > this.poses[this.pose].colMax + 1) {
     this.frame = this.poses[this.pose].col;
@@ -68,10 +66,3 @@ Sprite.prototype.colidiuCom = function(alvo){//Função que testa colisão dos p
   if(this.x-(this.SIZE/2) > alvo.x+(alvo.SIZE/2)) return false;
   return true;
 }
-
-Sprite.prototype.animacao = function(dt){
-  this.frame += this.poses[this.pose].time * dt;
-  if (this.frame > this.poses[this.pose].colMax + 1) {
-    this.frame = this.poses[this.pose].col;
-  }
-};
