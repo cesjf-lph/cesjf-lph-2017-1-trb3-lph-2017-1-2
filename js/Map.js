@@ -498,7 +498,7 @@ Map.prototype.paraAtirador = function(){
     if (this.a[i].tempoFlecha > 0){
       this.a[i].vx = 0;
       this.a[i].vy = 0;
-      if (this.a[i].tempoFlecha > 0.4){
+      if (this.a[i].tempoFlecha > 0){
         if (this.a[i].dir == 0){
           this.a[i].pose = 15;
         }else if (this.a[i].dir == 1){
@@ -508,16 +508,6 @@ Map.prototype.paraAtirador = function(){
         }else if (this.a[i].dir == 3){
           this.a[i].pose = 14;
         }
-      }else{
-        if (this.a[i].dir == 0){
-          this.a[i].pose = 7;
-        }else if (this.a[i].dir == 1){
-          this.a[i].pose = 4;
-        }else if (this.a[i].dir == 2){
-          this.a[i].pose = 5;
-        }else if (this.a[i].dir == 3){
-          this.a[i].pose = 6;
-        }
       }
     }
   }
@@ -526,7 +516,7 @@ Map.prototype.paraAtirador = function(){
     if (this.b[i].tempoFlecha > 0){
       this.b[i].vx = 0;
       this.b[i].vy = 0;
-      if (this.b[i].tempoFlecha > 0.4){
+      if (this.b[i].tempoFlecha > 0){
         if (this.b[i].dir == 0){
           this.b[i].pose = 15;
         }else if (this.b[i].dir == 1){
@@ -535,16 +525,6 @@ Map.prototype.paraAtirador = function(){
           this.b[i].pose = 13;
         }else if (this.b[i].dir == 3){
           this.b[i].pose = 14;
-        }
-      }else{
-        if (this.b[i].dir == 0){
-          this.b[i].pose = 7;
-        }else if (this.b[i].dir == 1){
-          this.b[i].pose = 4;
-        }else if (this.b[i].dir == 2){
-          this.b[i].pose = 5;
-        }else if (this.b[i].dir == 3){
-          this.b[i].pose = 6;
         }
       }
     }
