@@ -342,7 +342,7 @@ Map.prototype.testarColisao = function(){//Função que chama o teste de colisã
         if (this.a[i].life <= 0){
           this.a[i].destroyed = true;//Ativa a destruição
           if (this.a[i].SIZE == 96){
-            this.venceu("B")
+            auxiliar = 4;
           }
         }
       }
@@ -357,7 +357,7 @@ Map.prototype.testarColisao = function(){//Função que chama o teste de colisã
         if (this.b[i].life <= 0){
           this.b[i].destroyed = true;//Ativa a destruição
           if (this.b[i].SIZE == 96){
-            this.venceu("A")
+            auxiliar = 3;
           }
         }
       }
@@ -437,8 +437,4 @@ Map.prototype.informacoes = function(){//Função que desenha outros elementos a
     ctx.fillStyle = "yellow";//Desenha um fundo preto por traz do card 1 de "b"
     ctx.fillRect (36 * SIZE, 14 * SIZE, SIZE * 2, SIZE * 3);
   }
-}
-
-Map.prototype.venceu = function(vencedor){//Função que escreve o vencedor
-      alert(vencedor + " Venceu!")
 }

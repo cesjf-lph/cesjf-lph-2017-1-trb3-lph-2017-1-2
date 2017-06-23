@@ -3,7 +3,7 @@ var ctx;
 var antes = new Date();
 var agora = new Date();
 var dt = 0;
-var auxiliar = 0; //Variável qua auxilia no status do jogo, se 0 tela inicial, se 1 está em jogo, se 2
+var auxiliar = 0; //Variável qua auxilia no status do jogo, se 0 tela inicial, se 1 está em jogo, se 2 está pausado, se 3 A ganhou, se 4 B ganhou
 var mapa;
 var imglib;
 var soundlib;
@@ -174,7 +174,7 @@ function configuraControles() {
             ctx.fillStyle = "blue";
             ctx.fillText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
             ctx.strokeText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
-            cancelAnimationFrame(id);                    
+            cancelAnimationFrame(id);
             auxiliar = 2;
         }
          else if(auxiliar == 2){
@@ -211,10 +211,46 @@ function configuraMouse(e) {
 };
 
 function tela(ctx){
+  /*if(auxiliar == 2){
+    var texto = "Jogo Pausado! ";
+    ctx.fillStyle = "green";
+    ctx.strokeStyle = "yellow";
+    ctx.globalAlpha = 0.50;
+    ctx.fillRect(0, 0, eCanvas.width, eCanvas.height);
+    ctx.font = "3em fantasy";
+    ctx.fillStyle = "blue";
+    ctx.fillText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
+    ctx.strokeText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
+    cancelAnimationFrame(id);
+  }*/
   if(auxiliar == 0){
     var telaInicial = new Image();
     telaInicial.src = "img/logo.png";
     ctx.drawImage(telaInicial, 0, 0, 1216, 544);
+  }
+  if(auxiliar == 3){
+    var texto = "Jogador A venceu!! ";
+    ctx.fillStyle = "green";
+    ctx.strokeStyle = "yellow";
+    ctx.globalAlpha = 0.50;
+    ctx.fillRect(0, 0, eCanvas.width, eCanvas.height);
+    ctx.font = "3em fantasy";
+    ctx.fillStyle = "blue";
+    ctx.fillText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
+    ctx.strokeText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
+    cancelAnimationFrame(id);
+  }
+  if(auxiliar == 4){
+    var texto = "Jogador B venceu!! ";
+    ctx.fillStyle = "green";
+    ctx.strokeStyle = "yellow";
+    ctx.globalAlpha = 0.50;
+    ctx.fillRect(0, 0, eCanvas.width, eCanvas.height);
+    ctx.font = "3em fantasy";
+    ctx.fillStyle = "blue";
+    ctx.fillText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
+    ctx.strokeText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
+    cancelAnimationFrame(id);
   }
 }
 
