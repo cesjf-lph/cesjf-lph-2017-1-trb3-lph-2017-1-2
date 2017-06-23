@@ -513,7 +513,7 @@ Map.prototype.testarColisao = function(){//Função que chama o teste de colisã
           this.a[i].destroyed = true;
           if (this.a[i].SIZE == 96){//Se a vida da torre principal de a estiver zerada a auxiliar passa a valer 4 que nas telas é vitoria de b
             auxiliar = 4;
-            soundLib.play("aplause");//Adiciona som de palmas pela destruião da torre principal
+            soundLib.play("Ta-Da");//Adiciona som de palmas pela destruião da torre principal
           }
           if (this.a[i].SIZE == 64){//Adiciona som de esplosão quando esplode as pequenas torres de a
             soundLib.play("explosion");
@@ -528,7 +528,7 @@ Map.prototype.testarColisao = function(){//Função que chama o teste de colisã
           this.b[j].destroyed = true;
           if (this.b[j].SIZE == 96){//Se a vida da torre principal de b estiver zerada a auxiliar passa a valer 3 que nas telas é vitoria de a
             auxiliar = 3;
-            soundLib.play("aplause");//Adiciona som de palmas pela destruião da torre principal
+            soundLib.play("Ta-Da");//Adiciona som de palmas pela destruião da torre principal
           }
           if (this.b[j].SIZE == 64){//Adiciona som de esplosão quando esplode as pequenas torres de a
             soundLib.play("explosion");

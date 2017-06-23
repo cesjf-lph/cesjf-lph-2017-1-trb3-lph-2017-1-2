@@ -44,7 +44,7 @@ function init(){
     soundLib = new SoundLoader();//Vincula os sons
     soundLib.load("select", "mp3/select.mp3");
     soundLib.load("explosion", "mp3/explosion.mp3");
-    soundLib.load("aplause", "mp3/aplause.mp3");
+    soundLib.load("Ta-Da", "mp3/Ta-da.mp3");
     soundLib.load("dying", "mp3/dying.mp3");
     soundLib.load("punch-on", "mp3/punch-on.mp3");
     soundLib.load("alert", "mp3/alert.mp3");
