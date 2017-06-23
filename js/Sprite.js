@@ -66,10 +66,3 @@ Sprite.prototype.colidiuCom = function(alvo){//Função que testa colisão dos p
   if(this.x-(this.SIZE/2) > alvo.x+(alvo.SIZE/2)) return false;
   return true;
 }
-
-/*Sprite.prototype.persegue = function(alvo) {
-	alert();
-  var dist = Math.sqrt(Math.pow(alvo.x - this.x, 2) + Math.pow(alvo.y - this.y, 2));
-  this.vx = 40 * (alvo.x - this.x) / dist;
-  this.vy = 40 * (alvo.y - this.y) / dist;
-}*/

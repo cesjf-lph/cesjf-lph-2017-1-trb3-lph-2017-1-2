@@ -4,6 +4,7 @@ function Map(l, c) {
   this.imageLib = null;
   this.a = [];
   this.b = [];
+  this.flechas = [];
 
   for (var i = 0; i < l; i++) {
     this.cells[i] = [];
@@ -81,6 +82,9 @@ Map.prototype.desenhar = function(ctx){//Função que desenha elementos na tela
   }
   for (var i = 0; i < this.b.length; i++) {//Chama o desenho do "b"
     this.b[i].desenharPose(ctx);//Função que desenha os personagens e as barras de life de b
+  }
+  for (var i = 0; i < this.flechas.length; i++) {//Chama o desenho do "b"
+    this.flechas[i].desenharLimites(ctx);//Função que desenha os personagens e as barras de life de b
   }
 }
 
@@ -335,6 +339,11 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     a.seletor = seletor;//Força do personagem em no teste de colisão
     a.dir = "";//Variável de direção para controlar melhor as poses
     a.tempoPunch = 0;//Variável que controla o tempo do som de cada som de punch
+    if (seletor == 0 || seletor == 1 || seletor == 3){
+      a.atira = true;
+    }else{
+      a.atira = false;
+    }
     this.a.push(a);
   }
   if (coluna == 30){//Se a coluna for igual a 30 cria personagem de "b"
@@ -373,6 +382,11 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     b.seletor = seletor;//Força do personagem em no teste de colisão
     b.dir = "";//Variável de direção para controlar melhor as poses
     b.tempoPunch = 0;//Variável que controla o tempo do som de cada som de punch
+    if (seletor == 1 || seletor == 3){
+      b.atira = true;
+    }else{
+      b.atira = false;
+    }
     this.b.push(b);
   }
 }
@@ -433,7 +447,7 @@ Map.prototype.moverPersonagens = function(map, dt){//Função que acrescenta val
   }
 }
 
-/*Map.prototype.testaRaio = function(map, dt){//
+Map.prototype.testaRaio = function(){//
   for (var i = 0; i < this.a.length; i++) {
     for (var j = 0; j < this.b.length; j++) {
       var dx = this.a[i].x - this.b[j].x;
@@ -442,50 +456,34 @@ Map.prototype.moverPersonagens = function(map, dt){//Função que acrescenta val
         Math.pow(dx,2)+
         Math.pow(dy,2)
       );
-      if (this.a[i].mover == true){
-        if (this.a[i].atira == false){
-          dist = 0;
-        }else if (this.a[i].atira == true){
-          dist = 200;
+      if(raio<500){//Teste da distância
+        if (this.a[i].mover == true && this.a[i].atira == true){
+          var dist = Math.sqrt(Math.pow(this.b[j].x - this.a[i].x, 2) + Math.pow(this.b[j].y - this.a[i].y, 2));
+          var vx = 200 * (this.b[j].x - this.a[i].x) / dist;
+          var vy = 200 * (this.b[j].y - this.a[i].y) / dist;
+          this.criaFlecha(this.a[i], vx, vy);//Função que cria as flechas de a
         }
-        if(raio<dist){//Incluir posteriormente o perseguir (Útil com o arqueiro) // Para isso tem que alterar o valor do raio
-          this.criaFlecha(this.a[i]);//Função que cria as flechas
+        if (this.b[j].mover == true && this.b[j].atira == true){
+          var dist = Math.sqrt(Math.pow(this.a[i].x - this.b[j].x, 2) + Math.pow(this.a[i].y - this.b[j].y, 2));
+          var vx = 200 * (this.a[i].x - this.b[j].x) / dist;
+          var vy = 200 * (this.a[i].y - this.b[j].y) / dist;
+          this.criaFlecha(this.b[j], vx, vy);//Função que cria as flechas de b
         }
       }
     }
   }
 }
 
-Map.prototype.criaFlecha = function(atirador){//Função que cria as flechas
-  if (atirador.atira == true && atirador.tempoPunch < 0){
+Map.prototype.criaFlecha = function(arqueiro, vx, vy){//Função que cria as flechas
+  if (arqueiro.atira == true && arqueiro.tempoPunch < 0){
     var flecha = new Sprite();
-    flecha.x = atirador.x;
-    flecha.y = atirador.y;
-    flecha.vx=0;
-    flecha.vy=0;
+    flecha.x = arqueiro.x;
+    flecha.y = arqueiro.y;
+    flecha.vx=vx;
+    flecha.vy=vy;
     flecha.SIZE = 16;
-    flecha.pers = pers;
-    atirador.tempoPunch = 2;//Tempo entre uma flecha e outra
+    arqueiro.tempoPunch = 2;//Tempo entre uma flecha e outra
     this.flechas.push(flecha);
-  }
-}
-
-Map.prototype.flechasPersegue = function(dt){//Função que movimenta as flechas
-  for (var i = 0; i < this.flechas.length; i++){
-    if (this.flechas[i].pers == "a"){
-      for (var j = 0; j < this.b.length; j++) {
-        var dx = this.flechas[i].x - this.b[j].x;
-        var dy = this.flechas[i].y - this.b[j].y;
-        var raio = Math.sqrt(
-          Math.pow(dx,2)+
-          Math.pow(dy,2)
-        );
-        if(raio<200){//Incluir posteriormente o perseguir (Útil com o arqueiro) // Para isso tem que alterar o valor do raio
-          alert()
-          this.flechas[i].persegue(this.b[j]);
-        }
-      }
-    }
   }
 }
 
@@ -493,7 +491,7 @@ Map.prototype.moverFlechas = function(dt){//Função que movimenta as flechas
   for (var i = 0; i < this.flechas.length; i++){//Chama o movimenta do Sprite para as flechas
     this.flechas[i].movimenta(dt);
   }
-}*/
+}
 
 Map.prototype.testarColisao = function(){//Função que chama o teste de colisão do Sprite e se tiver colidido impede o movimento para ocorrer a batalha
   for (var i = 0; i < this.a.length; i++) {

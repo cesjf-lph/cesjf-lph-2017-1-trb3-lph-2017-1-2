@@ -120,6 +120,8 @@ function passo(){
       mapa.desenhar(ctx);
       mapa.moverPersonagens(mapa, dt);
       mapa.testarColisao();
+      mapa.testaRaio();
+      mapa.moverFlechas(dt);
     }
   	antes = agora;
 }
