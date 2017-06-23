@@ -415,7 +415,7 @@ Map.prototype.informacoes = function(){//Função que desenha outros elementos a
 
   if (a.seletor == 0){
     ctx.fillStyle = "yellow";//Desenha um fundo branco por traz do card 1 de "a"
-    ctx.fillRect (0 * SIZE, 3 * SIZE, SIZE * 2, SIZE * 2.9);
+    ctx.fillRect (0 * SIZE, 3 * SIZE, SIZE * 2, SIZE * 3);
   }else if (a.seletor == 1){
     ctx.fillStyle = "yellow";//Desenha um fundo branco por traz do card 1 de "a"
     ctx.fillRect (0 * SIZE, 6 * SIZE, SIZE * 2, SIZE * 3);
