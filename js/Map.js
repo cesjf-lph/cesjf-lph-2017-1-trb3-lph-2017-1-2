@@ -484,14 +484,26 @@ Map.prototype.testarColisao = function(){//Função que chama o teste de colisã
           this.b[j].pose = 10;
         }
 
-        //Adiciona som de alerta quando energia das torres de a chega a 30%
-        if (this.a[i].SIZE == 96 || this.a[i].SIZE == 64 && this.a[i].life < 30 && this.a[i].tempoAlert < 0){
+        //Adiciona som de alerta quando energia da torre principal de a chega a 30%
+        if (this.a[i].SIZE == 96 && this.a[i].life < 30 && this.a[i].tempoAlert < 0){
           this.a[i].tempoAlert = 2;
           soundLib.play("alert");
         }
 
-        //Adiciona som de alerta quando energia das torres de a chega a 30%
-        if (this.b[j].SIZE == 96 || this.b[j].SIZE == 64 && this.b[j].life < 30 && this.b[j].tempoAlert < 0){
+        //Adiciona som de alerta quando energia das torres pequenas de a chega a 30%
+        if (this.a[i].SIZE == 64 && this.a[i].life < 30 && this.a[i].tempoAlert < 0){
+          this.a[i].tempoAlert = 2;
+          soundLib.play("alert");
+        }
+
+        //Adiciona som de alerta quando energia da torre principal de a chega a 30%
+        if (this.b[j].SIZE == 96 && this.b[j].life < 30 && this.b[j].tempoAlert < 0){
+          this.b[j].tempoAlert = 2;
+          soundLib.play("alert");
+        }
+
+        //Adiciona som de alerta quando energia das torres pequenas de b chega a 30%
+        if (this.b[j].SIZE == 64 && this.b[j].life < 30 && this.b[j].tempoAlert < 0){
           this.b[j].tempoAlert = 2;
           soundLib.play("alert");
         }
