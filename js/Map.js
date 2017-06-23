@@ -387,9 +387,9 @@ Map.prototype.informacoes = function(){//Função que desenha outros elementos a
   ctx.textAlign="left";//Adiciona texto "A" e "B"
   ctx.font = "4em Arial Black";
   ctx.fillStyle = "black";
-  ctx.fillText("B", 36 * SIZE + 6, 55);
+  ctx.fillText("B", 36 * SIZE + 6, 70);
   ctx.fillStyle = "white";
-  ctx.fillText("A", 0 * SIZE + 8, 55);
+  ctx.fillText("A", 0 * SIZE + 8, 70);
 
   ctx.textAlign="center";//Adiciona texto "ENERGIA" a barra do "a"
   ctx.fillStyle = "white";
@@ -415,35 +415,35 @@ Map.prototype.informacoes = function(){//Função que desenha outros elementos a
 
   if (a.seletor == 0){
     ctx.fillStyle = "yellow";//Desenha um fundo branco por traz do card 1 de "a"
-    ctx.fillRect (0 * SIZE, 2 * SIZE, SIZE * 2, SIZE * 2.9);
+    ctx.fillRect (0 * SIZE, 3 * SIZE, SIZE * 2, SIZE * 2.9);
   }else if (a.seletor == 1){
     ctx.fillStyle = "yellow";//Desenha um fundo branco por traz do card 1 de "a"
-    ctx.fillRect (0 * SIZE, 5 * SIZE, SIZE * 2, SIZE * 3);
+    ctx.fillRect (0 * SIZE, 6 * SIZE, SIZE * 2, SIZE * 3);
   }else if (a.seletor == 2){
     ctx.fillStyle = "yellow";//Desenha um fundo branco por traz do card 1 de "a"
-    ctx.fillRect (0 * SIZE, 8 * SIZE, SIZE * 2, SIZE * 3);
+    ctx.fillRect (0 * SIZE, 9 * SIZE, SIZE * 2, SIZE * 3);
   }else if (a.seletor == 3){
     ctx.fillStyle = "yellow";//Desenha um fundo branco por traz do card 1 de "a"
-    ctx.fillRect (0 * SIZE, 11 * SIZE, SIZE * 2, SIZE * 3);
+    ctx.fillRect (0 * SIZE, 12 * SIZE, SIZE * 2, SIZE * 3);
   }else if (a.seletor == 4){
     ctx.fillStyle = "yellow";//Desenha um fundo preto por traz do card 1 de "a"
-    ctx.fillRect (0 * SIZE, 14 * SIZE, SIZE * 2, SIZE * 3);
+    ctx.fillRect (0 * SIZE, 15 * SIZE, SIZE * 2, SIZE * 3);
   }
   if (b.seletor == 0){
     ctx.fillStyle = "yellow";//Desenha um fundo preto por traz do card 1 de "b"
-    ctx.fillRect (36 * SIZE, 2 * SIZE, SIZE * 2, SIZE * 3);
+    ctx.fillRect (36 * SIZE, 3 * SIZE, SIZE * 2, SIZE * 3);
   }else if (b.seletor == 1){
     ctx.fillStyle = "yellow";//Desenha um fundo preto por traz do card 1 de "b"
-    ctx.fillRect (36 * SIZE, 5 * SIZE, SIZE * 2, SIZE * 3);
+    ctx.fillRect (36 * SIZE, 6 * SIZE, SIZE * 2, SIZE * 3);
   }else if (b.seletor == 2){
     ctx.fillStyle = "yellow";//Desenha um fundo preto por traz do card 1 de "b"
-    ctx.fillRect (36 * SIZE, 8 * SIZE, SIZE * 2, SIZE * 3);
+    ctx.fillRect (36 * SIZE, 9 * SIZE, SIZE * 2, SIZE * 3);
   }else if (b.seletor == 3){
     ctx.fillStyle = "yellow";//Desenha um fundo preto por traz do card 1 de "b"
-    ctx.fillRect (36 * SIZE, 11 * SIZE, SIZE * 2, SIZE * 3);
+    ctx.fillRect (36 * SIZE, 12 * SIZE, SIZE * 2, SIZE * 3);
   }else if (b.seletor == 4){
     ctx.fillStyle = "yellow";//Desenha um fundo preto por traz do card 1 de "b"
-    ctx.fillRect (36 * SIZE, 14 * SIZE, SIZE * 2, SIZE * 3);
+    ctx.fillRect (36 * SIZE, 15 * SIZE, SIZE * 2, SIZE * 3);
   }
 }
 
@@ -452,6 +452,6 @@ Map.prototype.desenhaTopo = function(){
   ctx.fillStyle = "white";
   ctx.strokeStyle = "black";
   ctx.font = "1em Arial Black";
-  ctx.fillText("Tecle ' I ' para visualizar as instruções do jogo", eCanvas.width / 2, 12);
-  ctx.strokeText("Tecle ' I ' para visualizar as instruções do jogo", eCanvas.width / 2, 12);
+  ctx.fillText("Tecle ' I ' para visualizar as instruções do jogo", eCanvas.width / 2, 30);
+  ctx.strokeText("Tecle ' I ' para visualizar as instruções do jogo", eCanvas.width / 2, 30);
 }
