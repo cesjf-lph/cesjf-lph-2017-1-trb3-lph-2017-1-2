@@ -407,21 +407,22 @@ Map.prototype.moverPersonagens = function(map, dt){//Função que acrescenta val
           this.a[i].vx = 100;
           this.a[i].vy = 0;
           this.a[i].pose = 0;//Controla a pose de a em movimento
-          this.a[i].dir = 1;//Controla a direção de b
+          if (this.a[i].atira == false){
+            this.a[i].dir = 1;//Controla a direção de a
+          }
         } else if (this.cells[Math.floor(this.a[i].y/SIZE) + 1][Math.floor(this.a[i].x/SIZE)] == this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE)] - 1){
           this.a[i].vy = 100;
           this.a[i].vx = 0;
           this.a[i].pose = 1;//Controla a pose de a em movimento
-          this.a[i].dir = 2;//Controla a direção de b
+          this.a[i].dir = 2;//Controla a direção de a
         }else if (this.cells[Math.floor(this.a[i].y/SIZE) - 1][Math.floor(this.a[i].x/SIZE)] == this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE)] - 1){
           this.a[i].vy = -100;
           this.a[i].vx = 0;
           this.a[i].pose = 3;//Controla a pose de a em movimento
-          this.a[i].dir = 0;//Controla a direção de b
+          this.a[i].dir = 0;//Controla a direção de a
         }else{
           this.a[i].vx = 0;
           this.a[i].vy = 0;
-
         }
       }
       if (this.b[j].mover == true){
@@ -429,7 +430,9 @@ Map.prototype.moverPersonagens = function(map, dt){//Função que acrescenta val
           this.b[j].vx = -100;
           this.b[j].vy = 0;
           this.b[j].pose = 2;//Controla a pose de b em movimento
-          this.b[j].dir = 3;//Controla a direção de b
+          if (this.b[j].atira == false){
+            this.b[j].dir = 3;//Controla a direção de b
+          }
         } else if (this.cells[Math.floor(this.b[j].y/SIZE) - 1][Math.floor(this.b[j].x/SIZE)] == this.cells[Math.floor(this.b[j].y/SIZE)][Math.floor(this.b[j].x/SIZE)] + 1){
           this.b[j].vy = -100;
           this.b[j].vx = 0;
@@ -495,14 +498,34 @@ Map.prototype.paraAtirador = function(){
     if (this.a[i].tempoFlecha > 0){
       this.a[i].vx = 0;
       this.a[i].vy = 0;
-      this.a[i].pose = 12;
+      if (this.a[i].dir == 0){
+        this.a[i].pose = 15;
+      }else if (this.a[i].dir == 1){
+        this.a[i].pose = 12;
+      }else if (this.a[i].dir == 2){
+        this.a[i].pose = 13;
+      }else if (this.a[i].dir == 0){
+        this.a[i].pose = 14;
+      }
     }
   }
+
   for (var i = 0; i < this.b.length; i++) {
     if (this.b[i].tempoFlecha > 0){
       this.b[i].vx = 0;
       this.b[i].vy = 0;
-      this.b[i].pose = 14;
+      if (this.b[i].dir == 0){
+        this.b[i].pose = 15;
+      }else if (this.b[i].dir == 3){
+        this.b[i].pose = 14;
+      }else if (this.b[i].dir == 2){
+        this.b[i].pose = 13;
+      }else if (this.b[i].dir == 0){
+        this.b[i].pose = 14;
+      }
+      if (i == 3){
+        console.log(this.b[i].dir)
+      }
     }
   }
 }
@@ -516,6 +539,34 @@ Map.prototype.criaFlecha = function(arqueiro, vx, vy, quemAtira){//Função que 
     flecha.vy=vy;
     flecha.SIZE = 16;
     flecha.quemAtira = quemAtira;
+    if (flecha.vy > 100 && flecha.vy > 0){
+      arqueiro.dir = 2;
+    }
+    if (flecha.vy < 100 && flecha.vy > 0){
+      if (flecha.vx < 0){
+        arqueiro.dir = 3;
+      }else if(flecha.vx > 0){
+        arqueiro.dir = 1;
+      }
+    }
+
+    if (flecha.vy < -100 && flecha.vy < 0){
+      if (flecha.vx < 0){
+        arqueiro.dir = 0;
+      }
+    }
+    if (flecha.vy > -100 && flecha.vy < 0){
+      if (flecha.vx < 0){
+        arqueiro.dir = 3;
+      }else if(flecha.vx > 0){
+        arqueiro.dir = 1;
+      }
+    }
+    if(flecha.vx > 0 && flecha.vy == 0){
+      arqueiro.dir = 1;
+    }else if(flecha.vx < 0 && flecha.vy == 0){
+      arqueiro.dir = 3;
+    }
     arqueiro.tempoFlecha = 2;//Tempo entre uma flecha e outra
     this.flechas.push(flecha);
   }
@@ -644,18 +695,27 @@ Map.prototype.testarColisao = function(){//Função que chama o teste de colisã
         if (this.b[j].dir == 3){
           if(this.b[j].seletor == 1 || this.b[j].seletor == 3){
           	this.b[j].pose = 14;
-          }else if(this.b[j].seletor == 0) this.b[j].pose = 18;
-          else this.b[j].pose = 9;
+          }else if(this.b[j].seletor == 0){
+            this.b[j].pose = 18;
+          }else{
+            this.b[j].pose = 9;
+          }
         }else if (this.b[j].dir == 2){
           if(this.b[j].seletor == 1 || this.b[j].seletor == 3){
           	this.b[j].pose = 13;
-          }else if(this.b[i].seletor == 0) this.b[j].pose = 17;
-          else this.b[j].pose = 11;
-        }if (this.b[j].dir == 0){
+          }else if(this.b[i].seletor == 0){
+            this.b[j].pose = 17;
+          }else{
+            this.b[j].pose = 11;
+          }
+        }else if (this.b[j].dir == 0){
           if(this.b[j].seletor == 1 || this.b[j].seletor == 3){
           	this.b[j].pose = 15;
-          }else if(this.b[j].seletor == 0) this.b[j].pose = 19;
-          else this.b[j].pose = 10;
+          }else if(this.b[j].seletor == 0){
+            this.b[j].pose = 19;
+          }else{
+            this.b[j].pose = 10;
+          }
         }
 
         //Adiciona som de alerta quando energia da torre principal de a chega a 30%
