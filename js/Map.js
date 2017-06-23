@@ -446,3 +446,12 @@ Map.prototype.informacoes = function(){//Função que desenha outros elementos a
     ctx.fillRect (36 * SIZE, 14 * SIZE, SIZE * 2, SIZE * 3);
   }
 }
+
+Map.prototype.desenhaTopo = function(){
+  ctx.textAlign="center";//Adiciona texto "Tecle ' I ' para visualizar as instruções do jogo"
+  ctx.fillStyle = "white";
+  ctx.strokeStyle = "black";
+  ctx.font = "1em Arial Black";
+  ctx.fillText("Tecle ' I ' para visualizar as instruções do jogo", eCanvas.width / 2, 12);
+  ctx.strokeText("Tecle ' I ' para visualizar as instruções do jogo", eCanvas.width / 2, 12);
+}

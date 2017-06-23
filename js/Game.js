@@ -3,7 +3,7 @@ var ctx;
 var antes = new Date();
 var agora = new Date();
 var dt = 0;
-var auxiliar = 0; //Variável qua auxilia no status do jogo, se 0 tela inicial, se 1 está em jogo, se 2 está pausado, se 3 A ganhou, se 4 B ganhou
+var auxiliar = 0; //Variável qua auxilia no status do jogo, se 0 tela inicial, se 1 está em jogo, se 2 está pausado, se 3 A ganhou, se 4 B ganhou, se 5 tela de instruções
 var mapa;
 var imglib;
 var soundlib;
@@ -104,6 +104,7 @@ function passo(){
       mapa.move(mapa);
       mapa.carregaBarra();
       mapa.testarColisao();
+      mapa.desenhaTopo();
     }
   	antes = agora;
 }
@@ -163,6 +164,28 @@ function configuraControles() {
           }
           e.preventDefault();
           break;
+        case 73:
+        	if(auxiliar == 1){
+	            var texto = "Instruções do jogo ";
+	            ctx.fillStyle = "green";
+	            ctx.strokeStyle = "yellow";
+	            ctx.globalAlpha = 0.50;
+	            ctx.fillRect(0, 0, eCanvas.width, eCanvas.height);
+	            ctx.font = "3em fantasy";
+	            ctx.fillStyle = "blue";
+	            ctx.fillText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
+	            ctx.strokeText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
+	            cancelAnimationFrame(id);
+	            auxiliar = 5;
+          	}else if(auxiliar == 5){
+	          ctx.globalAlpha = 1;
+	          antes = new Date();
+	          requestAnimationFrame(passo);
+	          auxiliar = 1;
+        	}
+
+        	e.preventDefault();
+        	break;
         case 80:
           if(auxiliar == 1){
             var texto = "Jogo Pausado! ";
@@ -176,7 +199,7 @@ function configuraControles() {
             ctx.strokeText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
             cancelAnimationFrame(id);
             auxiliar = 2;
-        }
+          }
          else if(auxiliar == 2){
           ctx.globalAlpha = 1;
           antes = new Date();
