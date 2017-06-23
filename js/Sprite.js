@@ -66,3 +66,21 @@ Sprite.prototype.colidiuCom = function(alvo){//Função que testa colisão dos p
   if(this.x-(this.SIZE/2) > alvo.x+(alvo.SIZE/2)) return false;
   return true;
 }
+
+Sprite.prototype.perseguirAng = function(alvo){
+	alert();
+	var dX = alvo.x - this.x;
+	var dY = alvo.y - this.y;
+	var dist = Math.sqrt(dX*dX+dY*dY);
+	dX = dX/dist;
+	dY = dY/dist;
+	dA = Math.acos(dX);
+	var tX = Math.cos(this.angle*Math.PI/180);
+	var tY = Math.sin(this.angle*Math.PI/180);
+	var prod = dX*tX + dY*tY;
+	if(dA>this.angle){
+		this.vang = -180*(1 - prod);
+	} else {
+		this.vang = 180*(1 - prod);
+	}
+}

@@ -407,8 +407,13 @@ Map.prototype.moverPersonagens = function(map, dt){//Função que acrescenta val
         Math.pow(dy,2)
       );
       if (this.a[i].mover == true){
-        if(raio<0){//Incluir posteriormente o perseguir (Útil com o arqueiro) // Para isso tem que alterar o valor do raio
-
+        if (this.a[i].atira == false){
+          dist = 0;
+        }else if (this.a[i].atira == true){
+          dist = 200;
+        }
+        if(raio<dist){//Incluir posteriormente o perseguir (Útil com o arqueiro) // Para isso tem que alterar o valor do raio
+          this.a[i].perseguirAng(this.b[j]);
         } else{//Faz o personagem seguir o caminho até a torre inimiga
           if (this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE) + 1] == this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE)] - 1){
             this.a[i].vx = 100;
@@ -432,8 +437,13 @@ Map.prototype.moverPersonagens = function(map, dt){//Função que acrescenta val
         }
       }
       if (this.b[j].mover == true){
-        if(raio<0){//Incluir posteriormente o perseguir (Útil com o arqueiro) // Para isso tem que alterar o valor do raio
-
+        if (this.b[j].atira == false){
+          dist = 0;
+        }else if (this.b[j].atira == true){
+          dist = 200;
+        }
+        if(raio<dist){//Incluir posteriormente o perseguir (Útil com o arqueiro) // Para isso tem que alterar o valor do raio
+          this.b[j].perseguirAng(this.a[i]);
         } else{//Faz o personagem seguir o caminho até a torre inimiga
           if (this.cells[Math.floor(this.b[j].y/SIZE)][Math.floor(this.b[j].x/SIZE) - 1] == this.cells[Math.floor(this.b[j].y/SIZE)][Math.floor(this.b[j].x/SIZE)] + 1){
             this.b[j].vx = -100;
