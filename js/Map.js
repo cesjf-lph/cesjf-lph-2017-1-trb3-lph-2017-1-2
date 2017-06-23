@@ -74,12 +74,11 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
 }
 
 Map.prototype.desenhar = function(ctx){//Função que desenha elementos na tela
-  //this.desenharLimites(ctx);//Desenha estrutura do mapa
   this.informacoes();//Função que desenha elementos auxiliares nas laterais e topo da tela
   this.desenharTiles(ctx);//Função que desenha os componentes imóveis do mapa
   for (var i = 0; i < this.flechas.length; i++) {//Chama o desenho do "b"
-  this.flechas[i].desenharLimites(ctx);//Função que desenha os personagens e as barras de life de b
-}
+    this.flechas[i].desenharLimites(ctx);//Função que desenha os personagens e as barras de life de b
+  }
   for (var i = 0; i < this.a.length; i++) {
     this.a[i].desenharPose(ctx);//Função que desenha os personagens e as barras de life de a
   }
@@ -87,57 +86,6 @@ Map.prototype.desenhar = function(ctx){//Função que desenha elementos na tela
     this.b[i].desenharPose(ctx);//Função que desenha os personagens e as barras de life de b
   }
 }
-
-Map.prototype.desenharLimites = function(ctx) {//Desenha estrutura do mapa
-  for (var i = 0; i < this.cells.length; i++) {
-    var linha = this.cells[i];
-    for (var j = 0; j < linha.length; j++) {
-      switch (this.cells[i][j]) {
-        case 1:
-        case 2:
-        case 3:
-        case 4:
-        case 5:
-        case 6:
-        case 7:
-        case 8:
-          ctx.fillStyle = 'brown';
-          ctx.strokeStyle = 'brown';
-          ctx.fillRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
-          ctx.lineWidth = 3;
-          ctx.strokeRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
-          break;
-        case 0:
-          ctx.fillStyle = 'green';
-          ctx.strokeStyle = 'green';
-          ctx.fillRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
-          ctx.lineWidth = 3;
-          ctx.strokeRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
-          break;
-        case 9:
-          ctx.fillStyle = 'blue';
-          ctx.strokeStyle = 'blue';
-          ctx.fillRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
-          ctx.lineWidth = 3;
-          ctx.strokeRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
-          break;
-        case 100:
-          ctx.fillStyle = 'white';
-          ctx.strokeStyle = 'white';
-          ctx.fillRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
-          ctx.lineWidth = 3;
-          ctx.strokeRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
-          break;
-        default:
-          ctx.fillStyle = 'yellow';
-          ctx.strokeStyle = 'yellow';
-          ctx.fillRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
-          ctx.lineWidth = 3;
-          ctx.strokeRect(j * this.SIZE, i * this.SIZE, this.SIZE, this.SIZE);
-      }
-    }
-  }
-};
 
 Map.prototype.informacoes = function(){//Função que desenha elementos auxiliares nas laterais e topo da tela
   //Desenha um fundo azul por traz do eCanvas
@@ -226,16 +174,6 @@ Map.prototype.informacoes = function(){//Função que desenha elementos auxiliar
   }else if (b.seletor == 4){
     ctx.fillStyle = "yellow";
     ctx.fillRect (36 * SIZE, 15 * SIZE, SIZE * 2, SIZE * 3);
-  }
-
-  //Recarrega barra de energia de a
-  if(a.energia < eCanvas.height){
-    a.energia = a.energia + dt * 10;
-  }
-
-  //Recarrega barra de energia de b
-  if(b.energia < eCanvas.height){
-    b.energia = b.energia + dt * 10;
   }
 }
 
@@ -340,7 +278,7 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     a.dir = "";//Variável de direção para controlar melhor as poses
     a.tempoPunch = 0;//Variável que controla o tempo do som de cada som de punch
     a.tempoFlecha = 0;//Variável que controla o tempo da flecha
-    if (seletor == 0 || seletor == 1 || seletor == 3){
+    if (seletor == 0 || seletor == 1 || seletor == 3){//Controla se o personagem pode atirar
       a.atira = true;
     }else{
       a.atira = false;
@@ -384,7 +322,7 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     b.dir = "";//Variável de direção para controlar melhor as poses
     b.tempoPunch = 0;//Variável que controla o tempo do som de cada som de punch
     b.tempoFlecha = 0;//Variável que controla o tempo da flecha
-    if (seletor == 1 || seletor == 3){
+    if (seletor == 1 || seletor == 3){//Controla se o personagem pode atirar
       b.atira = true;
     }else{
       b.atira = false;
@@ -452,7 +390,7 @@ Map.prototype.moverPersonagens = function(map, dt){//Função que acrescenta val
   }
 }
 
-Map.prototype.testaRaio = function(){//
+Map.prototype.testaRaio = function(){//Função que testa o personagem mais próximo para atirar
   var menorDist = 500;//Variável para testar menor distância
   for (var i = 0; i < this.a.length; i++) {
     for (var j = 0; j < this.b.length; j++) {
@@ -483,7 +421,7 @@ Map.prototype.testaRaio = function(){//
   }
 }
 
-Map.prototype.paraAtirador = function(){
+Map.prototype.paraAtirador = function(){//Função que interrompe vx e vy do atirador enquanto está atirando, controla tbm a pose dele durante o tiro
   for (var i = 0; i < this.a.length; i++) {
     if (this.a[i].tempoFlecha > 0){
       this.a[i].vx = 0;
@@ -557,9 +495,9 @@ Map.prototype.criaFlecha = function(arqueiro, vx, vy, quemAtira){//Função que 
 
 Map.prototype.moverFlechas = function(dt){//Função que movimenta as flechas
   for (var i = 0; i < this.flechas.length; i++){//Chama o movimenta do Sprite para as flechas
-    if (this.flechas[i].tempoFlecha < 0.5){
+    if (this.flechas[i].tempoFlecha < 0.5){//Controla o tempo que começa mover as flechas
       this.flechas[i].movimenta(dt);
-      if (this.flechas[i].tempoSomFlecha < 0.5 && this.flechas[i].tempoSomFlecha > -1){
+      if (this.flechas[i].tempoSomFlecha < 0.5 && this.flechas[i].tempoSomFlecha > -1){//Controla o tempo que sai o som
         soundLib.play("punch-off");
         this.flechas[i].tempoSomFlecha = -2;
       }
@@ -621,18 +559,21 @@ Map.prototype.testarColisao = function(){//Função que chama o teste de colisã
         if (this.a[i].dir == 1){
           if(this.a[i].seletor == 0 || this.a[i].seletor == 1 || this.a[i].seletor == 3){
           	this.a[i].pose = 12;
+          }else{
+            this.a[i].pose = 8;
           }
-          else this.a[i].pose = 8;
         }else if (this.a[i].dir == 2){
           if(this.a[i].seletor == 0 || this.a[i].seletor == 1 || this.a[i].seletor == 3){
           	this.a[i].pose = 13;
+          }else{
+            this.a[i].pose = 11;
           }
-          else this.a[i].pose = 11;
         }if (this.a[i].dir == 0){
           if(this.a[i].seletor == 0 || this.a[i].seletor == 1 || this.a[i].seletor == 3){
           	this.a[i].pose = 15;
+          }else{
+            this.a[i].pose = 10;
           }
-          else this.a[i].pose = 10;
         }
 
         //Controla a pose de b em batalha de acordo com o dir
@@ -668,6 +609,16 @@ Map.prototype.testarColisao = function(){//Função que chama o teste de colisã
 }
 
 Map.prototype.atualizaDados = function(){
+  //Recarrega barra de energia de a
+  if(a.energia < eCanvas.height){
+    a.energia = a.energia + dt * 10;
+  }
+
+  //Recarrega barra de energia de b
+  if(b.energia < eCanvas.height){
+    b.energia = b.energia + dt * 10;
+  }
+
   //Subtrai tempo para a flecha sair do arco e som de acordo com dt
   for (var k = 0; k < this.flechas.length; k++) {
     this.flechas[k].tempoFlecha = this.flechas[k].tempoFlecha - dt;
