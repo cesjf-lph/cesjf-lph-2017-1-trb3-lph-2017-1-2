@@ -8,7 +8,17 @@ function Sprite(){
   this.frame = 0;
   this.pose = 0;
   this.imageLib;
-  this.poses = []
+  this.poses = [
+    {key: "pc", row: 11, col: 0, colMax: 7, time: 8},
+    {key: "pc", row: 10, col: 0, colMax: 7, time: 8},
+    {key: "pc", row:  9, col: 0, colMax: 7, time: 8},
+    {key: "pc", row:  8, col: 0, colMax: 7, time: 8},
+
+    {key: "pc", row: 11, col: 0, colMax: 0, time: 8},
+    {key: "pc", row: 10, col: 0, colMax: 0, time: 8},
+    {key: "pc", row:  9, col: 0, colMax: 0, time: 8},
+    {key: "pc", row:  8, col: 0, colMax: 0, time: 8}
+    ];
 }
 
 Sprite.prototype.desenharPose = function(ctx) {
@@ -48,6 +58,12 @@ Sprite.prototype.desenharLimites = function(ctx) {//Função que desenha os limi
 Sprite.prototype.movimenta = function(dt) {//Função que movimenta os personagens
   this.x = this.x + this.vx * dt;
   this.y = this.y + this.vy * dt;
+
+
+  this.frame += this.poses[this.pose].time * dt;
+  if (this.frame > this.poses[this.pose].colMax + 1) {
+    this.frame = this.poses[this.pose].col;
+  }
 };
 
 Sprite.prototype.colidiuCom = function(alvo){//Função que testa colisão dos personagens
@@ -57,3 +73,10 @@ Sprite.prototype.colidiuCom = function(alvo){//Função que testa colisão dos p
   if(this.x-(this.SIZE/2) > alvo.x+(alvo.SIZE/2)) return false;
   return true;
 }
+
+Sprite.prototype.animacao = function(dt){
+  this.frame += this.poses[this.pose].time * dt;
+  if (this.frame > this.poses[this.pose].colMax + 1) {
+    this.frame = this.poses[this.pose].col;
+  }
+};
