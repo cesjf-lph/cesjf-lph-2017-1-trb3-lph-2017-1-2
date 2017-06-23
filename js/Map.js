@@ -476,7 +476,7 @@ Map.prototype.testaRaio = function(){//
         Math.pow(dy,2)
       );
       if(raio<=menorDist){
-        if (this.a[i].mover == true && this.a[i].atira == true){
+        if (/*this.a[i].mover == */true && this.a[i].atira == true){
           var dist = Math.sqrt(Math.pow(this.b[j].x - this.a[i].x, 2) + Math.pow(this.b[j].y - this.a[i].y, 2));
           var vx = 200 * (this.b[j].x - this.a[i].x) / dist;
           var vy = 200 * (this.b[j].y - this.a[i].y) / dist;
@@ -498,14 +498,26 @@ Map.prototype.paraAtirador = function(){
     if (this.a[i].tempoFlecha > 0){
       this.a[i].vx = 0;
       this.a[i].vy = 0;
-      if (this.a[i].dir == 0){
-        this.a[i].pose = 15;
-      }else if (this.a[i].dir == 1){
-        this.a[i].pose = 12;
-      }else if (this.a[i].dir == 2){
-        this.a[i].pose = 13;
-      }else if (this.a[i].dir == 0){
-        this.a[i].pose = 14;
+      if (this.a[i].tempoFlecha > 0.4){
+        if (this.a[i].dir == 0){
+          this.a[i].pose = 15;
+        }else if (this.a[i].dir == 1){
+          this.a[i].pose = 12;
+        }else if (this.a[i].dir == 2){
+          this.a[i].pose = 13;
+        }else if (this.a[i].dir == 3){
+          this.a[i].pose = 14;
+        }
+      }else{
+        if (this.a[i].dir == 0){
+          this.a[i].pose = 7;
+        }else if (this.a[i].dir == 1){
+          this.a[i].pose = 4;
+        }else if (this.a[i].dir == 2){
+          this.a[i].pose = 5;
+        }else if (this.a[i].dir == 3){
+          this.a[i].pose = 6;
+        }
       }
     }
   }
@@ -514,14 +526,26 @@ Map.prototype.paraAtirador = function(){
     if (this.b[i].tempoFlecha > 0){
       this.b[i].vx = 0;
       this.b[i].vy = 0;
-      if (this.b[i].dir == 0){
-        this.b[i].pose = 15;
-      }else if (this.b[i].dir == 3){
-        this.b[i].pose = 14;
-      }else if (this.b[i].dir == 2){
-        this.b[i].pose = 13;
-      }else if (this.b[i].dir == 0){
-        this.b[i].pose = 14;
+      if (this.b[i].tempoFlecha > 0.4){
+        if (this.b[i].dir == 0){
+          this.b[i].pose = 15;
+        }else if (this.b[i].dir == 1){
+          this.b[i].pose = 12;
+        }else if (this.b[i].dir == 2){
+          this.b[i].pose = 13;
+        }else if (this.b[i].dir == 3){
+          this.b[i].pose = 14;
+        }
+      }else{
+        if (this.b[i].dir == 0){
+          this.b[i].pose = 7;
+        }else if (this.b[i].dir == 1){
+          this.b[i].pose = 4;
+        }else if (this.b[i].dir == 2){
+          this.b[i].pose = 5;
+        }else if (this.b[i].dir == 3){
+          this.b[i].pose = 6;
+        }
       }
     }
   }
@@ -566,6 +590,7 @@ Map.prototype.criaFlecha = function(arqueiro, vx, vy, quemAtira){//Função que 
     }
     arqueiro.tempoFlecha = 2.5;//Tempo entre uma flecha e outra
     flecha.tempoFlecha = 2;//Tempo para movimentar a flecha
+    flecha.tempoSomFlecha = 2;//Tempo para som da flecha
     this.flechas.push(flecha);
   }
 }
@@ -574,8 +599,9 @@ Map.prototype.moverFlechas = function(dt){//Função que movimenta as flechas
   for (var i = 0; i < this.flechas.length; i++){//Chama o movimenta do Sprite para as flechas
     if (this.flechas[i].tempoFlecha < 0){
       this.flechas[i].movimenta(dt);
-      if (this.flechas[i].tempoFlecha > -0.19){
+      if (this.flechas[i].tempoSomFlecha < 0 && this.flechas[i].tempoSomFlecha > -1){
         soundLib.play("punch-off");
+        this.flechas[i].tempoSomFlecha = -2;
       }
     }
   }
@@ -639,9 +665,10 @@ Map.prototype.testarColisao = function(){//Função que chama o teste de colisã
   for (var i = 0; i < this.a.length; i++) {
     for (var j = 0; j < this.b.length; j++) {
 
-      //Subtrai tempo para a flecha sair do arco de acordo com dt
+      //Subtrai tempo para a flecha sair do arco e som de acordo com dt
       for (var k = 0; k < this.flechas.length; k++) {
         this.flechas[k].tempoFlecha = this.flechas[k].tempoFlecha - dt;
+        this.flechas[k].tempoSomFlecha = this.flechas[k].tempoSomFlecha - dt;
       }
 
       //Subtrai tempoPunch de acordo com dt

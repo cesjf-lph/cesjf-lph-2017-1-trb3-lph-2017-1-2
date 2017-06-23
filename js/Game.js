@@ -101,10 +101,14 @@ function init(){
     a.imageLib = imglib;
     a.energia = eCanvas.height;//Fixa a energia com o mesmo valor da altura para simplificar no desenho
     a.seletor = 0;
+    a.atiraA1 = true;//Condiciona "a" a atirar da torre superior
+    a.atiraA2 = true;//Condiciona "a" a atirar da torre inferior
     b = new Sprite();
     b.imageLib = imglib;
     b.energia = eCanvas.height;//Fixa a energia com o mesmo valor da altura para simplificar no desenho
     b.seletor = 0;
+    b.atiraB1 = true;//Condiciona "b" a atirar da torre superior
+    b.atiraB2 = true;//Condiciona "b" a atirar da torre inferior
 
     configuraControles();
     window.onmousedown = configuraMouse;
