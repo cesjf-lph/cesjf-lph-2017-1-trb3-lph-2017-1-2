@@ -113,11 +113,8 @@ function passo(){
     tela(ctx);
     if(auxiliar == 1){
       mapa.desenhar(ctx);
-      mapa.moverPersonagens(dt);
-      mapa.move(mapa);
-      mapa.carregaBarra();
+      mapa.moverPersonagens(mapa, dt);
       mapa.testarColisao();
-      mapa.desenhaTopo();
     }
   	antes = agora;
 }

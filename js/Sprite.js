@@ -9,15 +9,7 @@ function Sprite(){
   this.pose = 0;
   this.imageLib;
   this.poses = [
-    {key: "pc", row: 11, col: 0, colMax: 7, time: 8},
-    {key: "pc", row: 10, col: 0, colMax: 7, time: 8},
-    {key: "pc", row:  9, col: 0, colMax: 7, time: 8},
-    {key: "pc", row:  8, col: 0, colMax: 7, time: 8},
-
-    {key: "pc", row: 11, col: 0, colMax: 0, time: 8},
-    {key: "pc", row: 10, col: 0, colMax: 0, time: 8},
-    {key: "pc", row:  9, col: 0, colMax: 0, time: 8},
-    {key: "pc", row:  8, col: 0, colMax: 0, time: 8}
+    {key: "", row: 0, col: 0, colMax: 0, time: 0},
     ];
 }
 
@@ -38,6 +30,9 @@ Sprite.prototype.desenharPose = function(ctx) {
       this.x - 32, this.y - 53
     );
   }
+	//Desenha a barra de life de cada personagem
+	ctx.fillStyle = "hsl("+this.life/100*120+",100%,50%)";
+	ctx.fillRect (this.x-this.SIZE/2, this.y+this.SIZE/2, this.life/100*this.SIZE, 2);
 };
 
 Sprite.prototype.desenharLimites = function(ctx) {//Função que desenha os limites dos personagens
