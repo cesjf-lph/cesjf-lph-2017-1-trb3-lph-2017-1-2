@@ -8,41 +8,26 @@ function Sprite(){
   this.frame = 0;
   this.pose = 0;
   this.imageLib;
-  this.poses = [
-    {key: "personagem", row: 11, col: 0, colMax:  7, time:  8},
-    {key: "personagem", row: 10, col: 0, colMax:  7, time:  8},
-    {key: "personagem", row:  9, col: 0, colMax:  7, time:  8},
-    {key: "personagem", row:  8, col: 0, colMax:  7, time:  8},
-    {key: "personagem", row: 11, col: 0, colMax:  0, time:  8},
-    {key: "personagem", row: 10, col: 0, colMax:  0, time:  8},
-    {key: "personagem", row:  9, col: 0, colMax:  0, time:  8},
-    {key: "personagem", row:  8, col: 0, colMax:  0, time: 16},
-    {key: "personagem", row: 19, col: 0, colMax: 12, time: 16},
-    {key: "personagem", row: 18, col: 0, colMax: 12, time: 16},
-    {key: "personagem", row: 17, col: 0, colMax: 12, time: 16},
-    {key: "personagem", row: 16, col: 0, colMax: 12, time:  8},
-    {key: "personagem", row: 19, col: 0, colMax:  0, time:  8},
-    {key: "personagem", row: 18, col: 0, colMax:  0, time:  8},
-    {key: "personagem", row: 17, col: 0, colMax:  0, time:  8},
-    {key: "personagem", row: 16, col: 0, colMax:  0, time:  8},
-  ]
+  this.poses = []
 }
 
 Sprite.prototype.desenharPose = function(ctx) {
-  ctx.fillStyle = "black";
-  ctx.globalAlpha = 0.4;
-  ctx.beginPath();
-  ctx.arc(this.x, this.y + 3, this.SIZE / 2, 0, 2 * Math.PI);
-  ctx.closePath();
-  ctx.fill();
-  ctx.globalAlpha = 1;
-  /*this.imageLib.drawImageTile(ctx,
-    this.poses[this.pose].key,
-    this.poses[this.pose].row,
-    this.poses[this.pose].col + Math.floor(this.frame),
-    64,
-    this.x - 32, this.y - 53
-  );*/
+  if(this.SIZE == 32){
+    ctx.fillStyle = "black";
+    ctx.globalAlpha = 0.4;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y + 3, this.SIZE / 3, 0, 2 * Math.PI);
+    ctx.closePath();
+    ctx.fill();
+    ctx.globalAlpha = 1;
+    this.imageLib.drawImageTile(ctx,
+      this.poses[this.pose].key,
+      this.poses[this.pose].row,
+      this.poses[this.pose].col + Math.floor(this.frame),
+      64,
+      this.x - 32, this.y - 53
+    );
+  }
 };
 
 Sprite.prototype.desenharLimites = function(ctx) {//Função que desenha os limites dos personagens

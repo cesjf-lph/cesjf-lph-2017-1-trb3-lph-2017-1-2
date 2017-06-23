@@ -206,6 +206,10 @@ Map.prototype.delete = function(){//Função que deleta os personagens da tela
 Map.prototype.criaPersonagem = function(linha, coluna, multiplicador){//Função que gera os personagens selecionados na tela
   if (coluna == 7){//Se a coluna for igual a 7 cria personagem de "a"
     var a = new Sprite()
+    a.imageLib = this.imageLib;
+    a.poses = [
+    {key: "personagem1", row: 11, col: 0, colMax:  7, time:  8},
+    ]
     a.x = coluna * SIZE+SIZE/2;
     a.y = linha * SIZE+SIZE/2;
     a.SIZE = 32;
@@ -219,6 +223,10 @@ Map.prototype.criaPersonagem = function(linha, coluna, multiplicador){//Função
   }
   if (coluna == 30){//Se a coluna for igual a 30 cria personagem de "b"
     var b = new Sprite()
+    b.imageLib = this.imageLib;
+    b.poses = [
+    {key: "personagem1", row: 9, col: 0, colMax:  7, time:  8},
+    ]
     b.x = coluna * SIZE+SIZE/2;
     b.y = linha * SIZE+SIZE/2;
     b.SIZE = 32;

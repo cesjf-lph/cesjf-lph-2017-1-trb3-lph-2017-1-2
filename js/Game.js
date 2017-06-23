@@ -72,7 +72,7 @@ function init(){
     imglib.load("tower", "img/tower.png");
     imglib.load("castle", "img/castle.png");
 
-    imglib.load("personagem", "personagens/pers_cavaleiro_com_arco.png");
+    imglib.load("personagem1", "personagens/pers_cavaleiro_com_arco.png");
 
     mapa = new Map(linhas, colunas);
     mapa.imageLib = imglib;
