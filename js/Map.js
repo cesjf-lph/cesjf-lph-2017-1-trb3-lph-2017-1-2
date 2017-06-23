@@ -4,6 +4,7 @@ function Map(l, c) {
   this.imageLib = null;
   this.a = [];
   this.b = [];
+  this.flechas = [];
 
   for (var i = 0; i < l; i++) {
     this.cells[i] = [];
@@ -81,6 +82,9 @@ Map.prototype.desenhar = function(ctx){//Função que desenha elementos na tela
   }
   for (var i = 0; i < this.b.length; i++) {//Chama o desenho do "b"
     this.b[i].desenharPose(ctx);//Função que desenha os personagens e as barras de life de b
+  }
+  for (var i = 0; i < this.flechas.length; i++){//Chama o desenho das flechas
+    this.flechas[i].desenharLimites(ctx);
   }
 }
 
@@ -333,6 +337,11 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     a.destroyed = false;
     a.mover = true;//Permite que o personagem se mova
     a.seletor = seletor;//Força do personagem em no teste de colisão
+    if (a.seletor == 0 || a.seletor == 1 || a.seletor == 3){//Condiciona o personagem a atirar ou não de acordo com o seletor
+      a.atira = true;
+    } else{
+      a.atira = false;
+    }
     a.dir = "";//Variável de direção para controlar melhor as poses
     a.tempoPunch = 0;//Variável que controla o tempo do som de cada som de punch
     this.a.push(a);
@@ -371,6 +380,11 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     b.destroyed = false;
     b.mover = true;//Permite que o personagem se mova
     b.seletor = seletor;//Força do personagem em no teste de colisão
+    if (b.seletor == 1 || b.seletor == 3){//Condiciona o personagem a atirar ou não de acordo com o seletor
+      b.atira = true;
+    } else{
+      b.atira = false;
+    }
     b.dir = "";//Variável de direção para controlar melhor as poses
     b.tempoPunch = 0;//Variável que controla o tempo do som de cada som de punch
     this.b.push(b);
@@ -414,7 +428,6 @@ Map.prototype.moverPersonagens = function(map, dt){//Função que acrescenta val
           }else{
             this.a[i].vx = 0;
             this.a[i].vy = 0;
-
           }
         }
       }
@@ -444,6 +457,59 @@ Map.prototype.moverPersonagens = function(map, dt){//Função que acrescenta val
         }
       }
     }
+  }
+}
+
+Map.prototype.flecha = function(){//Função que cria as flechas
+  for (var i = 0; i < this.a.length; i++){
+    if (this.a[i].atira == true && this.a[i].tempoPunch < 0){
+      var flecha = new Sprite();
+      flecha.x = this.a[i].x;
+      flecha.y = this.a[i].y;
+      if(this.a[i].dir == 1){
+        flecha.vx = 200;
+      }
+      if(this.a[i].dir == 3){
+        flecha.vx = -200;
+      }
+      if(this.a[i].dir == 0){
+        flecha.vy = -200;
+      }
+      if(this.a[i].dir == 2){
+        flecha.vy = 200;
+      }
+      flecha.SIZE = 16;
+      this.a[i].tempoPunch = 2;//Tempo entre uma flecha e outra
+      this.flechas.push(flecha);
+    }
+  }
+  for (var i = 0; i < this.b.length; i++){
+    if (this.b[i].atira == true && this.b[i].tempoPunch < 0){
+      var flecha = new Sprite();
+      flecha.x = this.b[i].x;
+      flecha.y = this.b[i].y;
+      if(this.b[i].dir == 1){
+        flecha.vx = 200;
+      }
+      if(this.b[i].dir == 3){
+        flecha.vx = -200;
+      }
+      if(this.b[i].dir == 0){
+        flecha.vy = -200;
+      }
+      if(this.b[i].dir == 2){
+        flecha.vy = 200;
+      }
+      flecha.SIZE = 16;
+      flecha.b[i].tempoPunch = 2;//Tempo entre uma flecha e outra
+      this.flechas.push(flecha);
+    }
+  }
+}
+
+Map.prototype.moverFlechas = function(dt){//Função que movimenta as flechas
+  for (var i = 0; i < this.flechas.length; i++){//Chama o movimenta do Sprite para as flechas
+    this.flechas[i].movimenta(dt);
   }
 }
 
