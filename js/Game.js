@@ -43,6 +43,7 @@ function init(){
 
     soundLib = new SoundLoader();//Vincula os sons
     soundLib.load("select", "mp3/select.mp3");
+    soundLib.load("buble", "mp3/buble.mp3");
     soundLib.load("explosion", "mp3/explosion.mp3");
     soundLib.load("Ta-Da", "mp3/Ta-da.mp3");
     soundLib.load("dying", "mp3/dying.mp3");
@@ -184,22 +185,26 @@ function configuraControles() {
         break;
       case 73:
       	if(auxiliar == 1){
-            auxiliar = 5;
-        	}else if(auxiliar == 5){
-            ctx.globalAlpha = 1;
-            antes = new Date();
-            requestAnimationFrame(passo);
-            auxiliar = 1;
+      	  soundLib.play("buble");
+          auxiliar = 5;
+        }else if(auxiliar == 5){
+          ctx.globalAlpha = 1;
+          antes = new Date();
+          requestAnimationFrame(passo);
+          soundLib.play("buble");
+          auxiliar = 1;
       	}
       	e.preventDefault();
       	break;
       case 80:
         if(auxiliar == 1){
+          soundLib.play("buble");
           auxiliar = 2;
         }else if(auxiliar == 2){
           ctx.globalAlpha = 1;
           antes = new Date();
           requestAnimationFrame(passo);
+          soundLib.play("buble");
           auxiliar = 1;
         }
         e.preventDefault();
