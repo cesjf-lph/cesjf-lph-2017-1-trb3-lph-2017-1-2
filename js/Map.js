@@ -339,6 +339,7 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     a.seletor = seletor;//Força do personagem em no teste de colisão
     a.dir = "";//Variável de direção para controlar melhor as poses
     a.tempoPunch = 0;//Variável que controla o tempo do som de cada som de punch
+    a.tempoFlecha = 0;//Variável que controla o tempo da flecha
     if (seletor == 0 || seletor == 1 || seletor == 3){
       a.atira = true;
     }else{
@@ -382,6 +383,7 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     b.seletor = seletor;//Força do personagem em no teste de colisão
     b.dir = "";//Variável de direção para controlar melhor as poses
     b.tempoPunch = 0;//Variável que controla o tempo do som de cada som de punch
+    b.tempoFlecha = 0;//Variável que controla o tempo da flecha
     if (seletor == 1 || seletor == 3){
       b.atira = true;
     }else{
@@ -488,15 +490,32 @@ Map.prototype.testaRaio = function(){//
   }
 }
 
+Map.prototype.paraAtirador = function(){
+  for (var i = 0; i < this.a.length; i++) {
+    if (this.a[i].tempoFlecha > 0){
+      this.a[i].vx = 0;
+      this.a[i].vy = 0;
+      this.a[i].pose = 12;
+    }
+  }
+  for (var i = 0; i < this.b.length; i++) {
+    if (this.b[i].tempoFlecha > 0){
+      this.b[i].vx = 0;
+      this.b[i].vy = 0;
+      this.b[i].pose = 14;
+    }
+  }
+}
+
 Map.prototype.criaFlecha = function(arqueiro, vx, vy){//Função que cria as flechas
-  if (arqueiro.atira == true && arqueiro.tempoPunch < 0){
+  if (arqueiro.atira == true && arqueiro.tempoFlecha < 0){
     var flecha = new Sprite();
     flecha.x = arqueiro.x;
     flecha.y = arqueiro.y;
     flecha.vx=vx;
     flecha.vy=vy;
     flecha.SIZE = 16;
-    arqueiro.tempoPunch = 2;//Tempo entre uma flecha e outra
+    arqueiro.tempoFlecha = 2;//Tempo entre uma flecha e outra
     this.flechas.push(flecha);
   }
 }
@@ -514,6 +533,10 @@ Map.prototype.testarColisao = function(){//Função que chama o teste de colisã
       //Subtrai tempoPunch de acordo com dt
       this.a[i].tempoPunch = this.a[i].tempoPunch - dt;
       this.b[j].tempoPunch = this.b[j].tempoPunch - dt;
+
+      //Subtrai tempoFlecha de acordo com dt
+      this.a[i].tempoFlecha = this.a[i].tempoFlecha - dt;
+      this.b[j].tempoFlecha = this.b[j].tempoFlecha - dt;
 
       //Subtrai tempoAlert de acordo com dt
       this.a[i].tempoAlert = this.a[i].tempoAlert - dt;

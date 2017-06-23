@@ -122,6 +122,7 @@ function passo(){
       mapa.testarColisao();
       mapa.testaRaio();
       mapa.moverFlechas(dt);
+      mapa.paraAtirador();
     }
   	antes = agora;
 }
