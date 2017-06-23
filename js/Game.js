@@ -84,6 +84,8 @@ function init(){
     imglib.load("personagem8", "Personagens x cartas/9.png");
     imglib.load("personagem9", "Personagens x cartas/10.png");
 
+    soundLib.load("select", "mp3/select.mp3");
+
     mapa = new Map(linhas, colunas);
     mapa.imageLib = imglib;
     mapa.loadMap(casasMapa);
@@ -126,24 +128,28 @@ function configuraControles() {
         case 38:
           if (b.seletor > 0){
             b.seletor = b.seletor - 1;
+            soundLib.play("select");
           }
           e.preventDefault();
           break;
         case 40:
           if (b.seletor < 4){
             b.seletor = b.seletor + 1;
+            soundLib.play("select");
           }
           e.preventDefault();
           break;
         case 87:
           if (a.seletor > 0){
             a.seletor = a.seletor - 1;
+            soundLib.play("select");
           }
           e.preventDefault();
           break;
         case 83:
           if (a.seletor < 4){
             a.seletor = a.seletor + 1;
+            soundLib.play("select");
           }
           e.preventDefault();
           break;
