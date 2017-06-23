@@ -321,6 +321,7 @@ Map.prototype.criaPersonagem = function(linha, coluna, multiplicador){//Função
     a.destroyed = false;
     a.mover = true;//Permite que o personagem se mova
     a.multiplicador = multiplicador;//Força do personagem em no teste de colisão
+    a.dir = "";//Variável de direção para controlar melhor as poses
     this.a.push(a);
   }
   if (coluna == 30){//Se a coluna for igual a 30 cria personagem de "b"
@@ -349,6 +350,7 @@ Map.prototype.criaPersonagem = function(linha, coluna, multiplicador){//Função
     b.destroyed = false;
     b.mover = true;//Permite que o personagem se mova
     b.multiplicador = multiplicador;//Força do personagem em no teste de colisão
+    b.dir = "";//Variável de direção para controlar melhor as poses
     this.b.push(b);
   }
 }
@@ -375,18 +377,22 @@ Map.prototype.moverPersonagens = function(map, dt){//Função que acrescenta val
           if (this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE) + 1] == this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE)] - 1){
             this.a[i].vx = 100;
             this.a[i].vy = 0;
-            this.a[i].pose = 0;
+            this.a[i].pose = 0;//Controla a pose de a em movimento
+            this.a[i].dir = 1;//Controla a direção de b
           } else if (this.cells[Math.floor(this.a[i].y/SIZE) + 1][Math.floor(this.a[i].x/SIZE)] == this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE)] - 1){
             this.a[i].vy = 100;
             this.a[i].vx = 0;
-            this.a[i].pose = 1;
+            this.a[i].pose = 1;//Controla a pose de a em movimento
+            this.a[i].dir = 2;//Controla a direção de b
           }else if (this.cells[Math.floor(this.a[i].y/SIZE) - 1][Math.floor(this.a[i].x/SIZE)] == this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE)] - 1){
             this.a[i].vy = -100;
             this.a[i].vx = 0;
-            this.a[i].pose = 3;
+            this.a[i].pose = 3;//Controla a pose de a em movimento
+            this.a[i].dir = 0;//Controla a direção de b
           }else{
             this.a[i].vx = 0;
             this.a[i].vy = 0;
+
           }
         }
       }
@@ -397,15 +403,18 @@ Map.prototype.moverPersonagens = function(map, dt){//Função que acrescenta val
           if (this.cells[Math.floor(this.b[j].y/SIZE)][Math.floor(this.b[j].x/SIZE) - 1] == this.cells[Math.floor(this.b[j].y/SIZE)][Math.floor(this.b[j].x/SIZE)] + 1){
             this.b[j].vx = -100;
             this.b[j].vy = 0;
-            this.b[j].pose = 2;
+            this.b[j].pose = 2;//Controla a pose de b em movimento
+            this.b[j].dir = 3;//Controla a direção de b
           } else if (this.cells[Math.floor(this.b[j].y/SIZE) - 1][Math.floor(this.b[j].x/SIZE)] == this.cells[Math.floor(this.b[j].y/SIZE)][Math.floor(this.b[j].x/SIZE)] + 1){
             this.b[j].vy = -100;
             this.b[j].vx = 0;
-            this.b[j].pose = 3;
+            this.b[j].pose = 3;//Controla a pose de b em movimento
+            this.b[j].dir = 0;//Controla a direção de b
           }else if (this.cells[Math.floor(this.b[j].y/SIZE) + 1][Math.floor(this.b[j].x/SIZE)] == this.cells[Math.floor(this.b[j].y/SIZE)][Math.floor(this.b[j].x/SIZE)] + 1){
             this.b[j].vy = 100;
             this.b[j].vx = 0;
-            this.b[j].pose = 1;
+            this.b[j].pose = 1;//Controla a pose de b em movimento
+            this.b[j].dir = 2;//Controla a direção de b
           }else{
             this.b[j].vy = 0;
             this.b[j].vx = 0;
@@ -420,19 +429,44 @@ Map.prototype.testarColisao = function(){//Função que chama o teste de colisã
   for (var i = 0; i < this.a.length; i++) {
     for (var j = 0; j < this.b.length; j++) {
       if(this.a[i].colidiuCom(this.b[j])){
+        //Quando colide zera vx e vy de a e b para a batalha ocorrer
         this.a[i].vx = 0;
         this.a[i].vy = 0;
         this.b[j].vx = 0;
         this.b[j].vy = 0;
+
+        //Quando colide consome a life de a e b
         this.a[i].life = this.a[i].life - dt*(20+20*this.a[i].multiplicador);//Consome a life do personagem a
         this.b[j].life = this.b[j].life - dt*(20+20*this.b[j].multiplicador);//Consome a life do personagem b
-        if (this.a[i].life <= 0){//Verifica se a vida da torre principal de a está zerada
+
+        //Controla a pose de a em batalha de acordo com o dir
+        if (this.a[i].dir == 1){
+          this.a[i].pose = 8;
+        }else if (this.a[i].dir == 2){
+          this.a[i].pose = 11;
+        }if (this.a[i].dir == 0){
+          this.a[i].pose = 10;
+        }
+
+        //Controla a pose de b em batalha de acordo com o dir
+        if (this.b[j].dir == 3){
+          this.b[j].pose = 9;
+        }else if (this.b[j].dir == 2){
+          this.b[j].pose = 11;
+        }if (this.b[j].dir == 0){
+          this.b[j].pose = 10;
+        }
+
+        //Verifica se a vida da torre principal de a está zerada
+        if (this.a[i].life <= 0){
           this.a[i].destroyed = true;
           if (this.a[i].SIZE == 96){
             auxiliar = 4;//Se a vida da torre principal de a estiver zerada a auxiliar passa a valer 4 que nas telas é vitoria de b
           }
         }
-        if (this.b[j].life <= 0){//Verifica se a vida da torre principal de a está zerada
+
+        //Verifica se a vida da torre principal de a está zerada
+        if (this.b[j].life <= 0){
           this.b[j].destroyed = true;
           if (this.b[j].SIZE == 96){
             auxiliar = 3;//Se a vida da torre principal de b estiver zerada a auxiliar passa a valer 3 que nas telas é vitoria de a
