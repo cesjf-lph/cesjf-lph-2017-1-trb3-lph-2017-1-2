@@ -477,13 +477,13 @@ Map.prototype.testaRaio = function(){//
           var dist = Math.sqrt(Math.pow(this.b[j].x - this.a[i].x, 2) + Math.pow(this.b[j].y - this.a[i].y, 2));
           var vx = 200 * (this.b[j].x - this.a[i].x) / dist;
           var vy = 200 * (this.b[j].y - this.a[i].y) / dist;
-          this.criaFlecha(this.a[i], vx, vy);//Função que cria as flechas de a
+          this.criaFlecha(this.a[i], vx, vy, "a");//Função que cria as flechas de a
         }
         if (this.b[j].mover == true && this.b[j].atira == true){
           var dist = Math.sqrt(Math.pow(this.a[i].x - this.b[j].x, 2) + Math.pow(this.a[i].y - this.b[j].y, 2));
           var vx = 200 * (this.a[i].x - this.b[j].x) / dist;
           var vy = 200 * (this.a[i].y - this.b[j].y) / dist;
-          this.criaFlecha(this.b[j], vx, vy);//Função que cria as flechas de b
+          this.criaFlecha(this.b[j], vx, vy, "b");//Função que cria as flechas de b
         }
       }
     }
@@ -507,7 +507,7 @@ Map.prototype.paraAtirador = function(){
   }
 }
 
-Map.prototype.criaFlecha = function(arqueiro, vx, vy){//Função que cria as flechas
+Map.prototype.criaFlecha = function(arqueiro, vx, vy, quemAtira){//Função que cria as flechas
   if (arqueiro.atira == true && arqueiro.tempoFlecha < 0){
     var flecha = new Sprite();
     flecha.x = arqueiro.x;
@@ -515,6 +515,7 @@ Map.prototype.criaFlecha = function(arqueiro, vx, vy){//Função que cria as fle
     flecha.vx=vx;
     flecha.vy=vy;
     flecha.SIZE = 16;
+    flecha.quemAtira = quemAtira;
     arqueiro.tempoFlecha = 2;//Tempo entre uma flecha e outra
     this.flechas.push(flecha);
   }
@@ -528,10 +529,22 @@ Map.prototype.moverFlechas = function(dt){//Função que movimenta as flechas
 
 Map.prototype.testarColisaoFlechas = function(){//Função que chama o teste de colisão do Sprite e se tiro tiver colidido impede o movimento para ocorrer a batalha
   for (var i = 0; i < this.flechas.length; i++){
-    for (var j = 0; j < this.b.length; j++) {
-      if(this.flechas[i].colidiuCom(this.b[j])){
-        this.b[j].life = this.b[j].life - 10;
-        this.flechas[i].destroyed = true;
+    if (this.flechas[i].quemAtira == "a"){
+      for (var j = 0; j < this.b.length; j++) {
+        if(this.flechas[i].colidiuCom(this.b[j])){
+          this.b[j].life = this.b[j].life - 10;
+          this.flechas[i].destroyed = true;
+        }
+      }
+    }
+  }
+  for (var i = 0; i < this.flechas.length; i++){
+    if (this.flechas[i].quemAtira == "b"){
+      for (var j = 0; j < this.a.length; j++) {
+        if(this.flechas[i].colidiuCom(this.a[j])){
+          this.a[j].life = this.a[j].life - 10;
+          this.flechas[i].destroyed = true;
+        }
       }
     }
   }
