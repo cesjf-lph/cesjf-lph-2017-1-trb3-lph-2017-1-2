@@ -523,9 +523,6 @@ Map.prototype.paraAtirador = function(){
       }else if (this.b[i].dir == 0){
         this.b[i].pose = 14;
       }
-      if (i == 3){
-        console.log(this.b[i].dir)
-      }
     }
   }
 }
@@ -537,7 +534,7 @@ Map.prototype.criaFlecha = function(arqueiro, vx, vy, quemAtira){//Função que 
     flecha.y = arqueiro.y;
     flecha.vx=vx;
     flecha.vy=vy;
-    flecha.SIZE = 16;
+    flecha.SIZE = 5;
     flecha.quemAtira = quemAtira;
     if (flecha.vy > 100 && flecha.vy > 0){
       arqueiro.dir = 2;
@@ -630,8 +627,6 @@ Map.prototype.testarColisaoFlechas = function(){//Função que chama o teste de 
       }
     }
   }
-
-
 }
 
 Map.prototype.testarColisao = function(){//Função que chama o teste de colisão do Sprite e se personagem tiver colidido impede o movimento para ocorrer a batalha

@@ -36,16 +36,16 @@ Sprite.prototype.desenharPose = function(ctx) {
 };
 
 Sprite.prototype.desenharLimites = function(ctx) {//Função que desenha os limites dos personagens
-  ctx.fillStyle = "blue";
+  ctx.fillStyle = "gold";
   ctx.fillRect(
     this.x-this.SIZE/2,
-    this.y-this.SIZE/2,
+    this.y-this.SIZE/2-17,
     this.SIZE, this.SIZE
   );
-  ctx.strokeStyle = "darkgrey";
+  ctx.strokeStyle = "gold";
   ctx.strokeRect(
     this.x-this.SIZE/2,
-    this.y-this.SIZE/2,
+    this.y-this.SIZE/2-17,
     this.SIZE, this.SIZE
   );
 };
