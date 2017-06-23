@@ -122,105 +122,84 @@ function passo(){
 function configuraControles() {
   addEventListener("keydown", function(e) {
     switch (e.keyCode) {
-        case 38:
-          if (b.seletor > 0){
-            b.seletor = b.seletor - 1;
-            soundLib.play("select");
-          }
-          e.preventDefault();
-          break;
-        case 40:
-          if (b.seletor < 4){
-            b.seletor = b.seletor + 1;
-            soundLib.play("select");
-          }
-          e.preventDefault();
-          break;
-        case 87:
-          if (a.seletor > 0){
-            a.seletor = a.seletor - 1;
-            soundLib.play("select");
-          }
-          e.preventDefault();
-          break;
-        case 83:
-          if (a.seletor < 4){
-            a.seletor = a.seletor + 1;
-            soundLib.play("select");
-          }
-          e.preventDefault();
-          break;
-        case 68:
-          if (a.energia > 50+100/(a.seletor+1) && auxiliar == 1){//Condiciona o lançamento a ter energia suficiente e o jogo estar em execução
-            mapa.criaPersonagem(14, 7, a.seletor);//(Linha, coluna) Se linha = 3 cria personagem na parte superior, se linha = 13 cria personagem na parte inferior, se coluna = 7 cria personagem de "a", se coluna = 30 cria personagem de "b"
-            a.energia = a.energia - (50+100/(a.seletor+1));
-          }
-          e.preventDefault();
-          break;
-        case 65:
-          if (a.energia >  50+100/(a.seletor+1) && auxiliar == 1){//Condiciona o lançamento a ter energia suficiente e o jogo estar em execução
-            mapa.criaPersonagem(4, 7, a.seletor);//(Linha, coluna) Se linha = 3 cria personagem na parte superior, se linha = 13 cria personagem na parte inferior, se coluna = 7 cria personagem de "a", se coluna = 30 cria personagem de "b"
-            a.energia = a.energia - (50+100/(a.seletor+1));
-          }
-          e.preventDefault();
-          break;
-        case 37:
-          if (b.energia >  50+100/(b.seletor+1) && auxiliar == 1){//Condiciona o lançamento a ter energia suficiente e o jogo estar em
-            mapa.criaPersonagem(14, 30, b.seletor);//(Linha, coluna) Se linha = 3 cria personagem na parte superior, se linha = 13 cria personagem na parte inferior, se coluna = 7 cria personagem de "a", se coluna = 30 cria personagem de "b"
-            b.energia = b.energia - (50+100/(b.seletor+1));
-          }
-          e.preventDefault();
-          break;
-        case 39:
-          if (b.energia >  50+100/(b.seletor+1) && auxiliar == 1){//Condiciona o lançamento a ter energia suficiente e o jogo estar em
-            mapa.criaPersonagem(4, 30, b.seletor);//(Linha, coluna) Se linha = 3 cria personagem na parte superior, se linha = 13 cria personagem na parte inferior, se coluna = 7 cria personagem de "a", se coluna = 30 cria personagem de "b"
-            b.energia = b.energia - (50+100/(b.seletor+1));
-          }
-          e.preventDefault();
-          break;
-        case 73:
-        	if(auxiliar == 1){
-	            var texto = "Instruções do jogo ";
-	            ctx.fillStyle = "green";
-	            ctx.strokeStyle = "yellow";
-	            ctx.globalAlpha = 0.50;
-	            ctx.fillRect(0, 0, eCanvas.width, eCanvas.height);
-	            ctx.font = "3em fantasy";
-	            ctx.fillStyle = "blue";
-	            ctx.fillText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
-	            ctx.strokeText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
-	            cancelAnimationFrame(id);
-	            auxiliar = 5;
-          	}else if(auxiliar == 5){
-	          ctx.globalAlpha = 1;
-	          antes = new Date();
-	          requestAnimationFrame(passo);
-	          auxiliar = 1;
-        	}
-
-        	e.preventDefault();
-        	break;
-        case 80:
-          if(auxiliar == 1){
-            var texto = "Jogo Pausado! ";
-            ctx.fillStyle = "green";
-            ctx.strokeStyle = "yellow";
-            ctx.globalAlpha = 0.50;
-            ctx.fillRect(0, 0, eCanvas.width, eCanvas.height);
-            ctx.font = "3em fantasy";
-            ctx.fillStyle = "blue";
-            ctx.fillText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
-            ctx.strokeText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
-            cancelAnimationFrame(id);
-            auxiliar = 2;
-          }
-         else if(auxiliar == 2){
+      case 38:
+        if (b.seletor > 0){
+          b.seletor = b.seletor - 1;
+          soundLib.play("select");
+        }
+        e.preventDefault();
+        break;
+      case 40:
+        if (b.seletor < 4){
+          b.seletor = b.seletor + 1;
+          soundLib.play("select");
+        }
+        e.preventDefault();
+        break;
+      case 87:
+        if (a.seletor > 0){
+          a.seletor = a.seletor - 1;
+          soundLib.play("select");
+        }
+        e.preventDefault();
+        break;
+      case 83:
+        if (a.seletor < 4){
+          a.seletor = a.seletor + 1;
+          soundLib.play("select");
+        }
+        e.preventDefault();
+        break;
+      case 68:
+        if (a.energia > 50+100/(a.seletor+1) && auxiliar == 1){//Condiciona o lançamento a ter energia suficiente e o jogo estar em execução
+          mapa.criaPersonagem(14, 7, a.seletor);//(Linha, coluna) Se linha = 3 cria personagem na parte superior, se linha = 13 cria personagem na parte inferior, se coluna = 7 cria personagem de "a", se coluna = 30 cria personagem de "b"
+          a.energia = a.energia - (50+100/(a.seletor+1));//Controla o consumo de energia
+        }
+        e.preventDefault();
+        break;
+      case 65:
+        if (a.energia >  50+100/(a.seletor+1) && auxiliar == 1){//Condiciona o lançamento a ter energia suficiente e o jogo estar em execução
+          mapa.criaPersonagem(4, 7, a.seletor);//(Linha, coluna) Se linha = 3 cria personagem na parte superior, se linha = 13 cria personagem na parte inferior, se coluna = 7 cria personagem de "a", se coluna = 30 cria personagem de "b"
+          a.energia = a.energia - (50+100/(a.seletor+1));//Controla o consumo de energia
+        }
+        e.preventDefault();
+        break;
+      case 37:
+        if (b.energia >  50+100/(b.seletor+1) && auxiliar == 1){//Condiciona o lançamento a ter energia suficiente e o jogo estar em
+          mapa.criaPersonagem(14, 30, b.seletor);//(Linha, coluna) Se linha = 3 cria personagem na parte superior, se linha = 13 cria personagem na parte inferior, se coluna = 7 cria personagem de "a", se coluna = 30 cria personagem de "b"
+          b.energia = b.energia - (50+100/(b.seletor+1));//Controla o consumo de energia
+        }
+        e.preventDefault();
+        break;
+      case 39:
+        if (b.energia >  50+100/(b.seletor+1) && auxiliar == 1){//Condiciona o lançamento a ter energia suficiente e o jogo estar em
+          mapa.criaPersonagem(4, 30, b.seletor);//(Linha, coluna) Se linha = 3 cria personagem na parte superior, se linha = 13 cria personagem na parte inferior, se coluna = 7 cria personagem de "a", se coluna = 30 cria personagem de "b"
+          b.energia = b.energia - (50+100/(b.seletor+1));//Controla o consumo de energia
+        }
+        e.preventDefault();
+        break;
+      case 73:
+      	if(auxiliar == 1){
+            auxiliar = 5;
+        	}else if(auxiliar == 5){
+            ctx.globalAlpha = 1;
+            antes = new Date();
+            requestAnimationFrame(passo);
+            auxiliar = 1;
+      	}
+      	e.preventDefault();
+      	break;
+      case 80:
+        if(auxiliar == 1){
+          auxiliar = 2;
+        }else if(auxiliar == 2){
           ctx.globalAlpha = 1;
           antes = new Date();
           requestAnimationFrame(passo);
           auxiliar = 1;
         }
-      break;
+        e.preventDefault();
+      	break;
       default:
     }
   });
@@ -248,7 +227,12 @@ function configuraMouse(e) {
 };
 
 function tela(ctx){
-  /*if(auxiliar == 2){
+  if(auxiliar == 0){
+    var telaInicial = new Image();
+    telaInicial.src = "img/logo.png";
+    ctx.drawImage(telaInicial, 0, 0, 1216, 576);
+  }
+  if(auxiliar == 2){
     var texto = "Jogo Pausado! ";
     ctx.fillStyle = "green";
     ctx.strokeStyle = "yellow";
@@ -259,11 +243,6 @@ function tela(ctx){
     ctx.fillText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
     ctx.strokeText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
     cancelAnimationFrame(id);
-  }*/
-  if(auxiliar == 0){
-    var telaInicial = new Image();
-    telaInicial.src = "img/logo.png";
-    ctx.drawImage(telaInicial, 0, 0, 1216, 576);
   }
   if(auxiliar == 3){
     var texto = "Jogador A venceu!! ";
@@ -289,24 +268,16 @@ function tela(ctx){
     ctx.strokeText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
     cancelAnimationFrame(id);
   }
+  if (auxiliar == 5){
+      var texto = "Instruções do jogo ";
+      ctx.fillStyle = "green";
+      ctx.strokeStyle = "yellow";
+      ctx.globalAlpha = 0.50;
+      ctx.fillRect(0, 0, eCanvas.width, eCanvas.height);
+      ctx.font = "3em fantasy";
+      ctx.fillStyle = "blue";
+      ctx.fillText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
+      ctx.strokeText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
+      cancelAnimationFrame(id);
+    }
 }
-
-/*function textoFormatado(texto1, texto2, texto3, texto4, texto5, texto6, texto7, texto8, texto9, texto10){//Não está sendo utilizado ainda, vai ser útil nas telas de boas vindas pausa e vitória
-  ctx.textAlign="center";
-  ctx.fillStyle = "red";
-  ctx.font = "3em Arial Black";
-  ctx.fillText(texto1, eCanvas.width / 2, eCanvas.height / 2-20);
-  ctx.fillStyle = "white";
-  ctx.font = "1em Arial Black";
-  ctx.fillText(texto2, eCanvas.width / 2, eCanvas.height / 2);
-  ctx.fillText(texto3, eCanvas.width / 2, eCanvas.height / 2 + 20);
-  ctx.fillText(texto4, eCanvas.width / 2, eCanvas.height / 2 + 40);
-  ctx.fillStyle = "white";
-  ctx.font = "0.75em Arial Black";
-  ctx.fillText(texto5, eCanvas.width / 2, eCanvas.height / 2 + 55);
-  ctx.fillText(texto6, eCanvas.width / 2, eCanvas.height / 2 + 70);
-  ctx.fillText(texto7, eCanvas.width / 2, eCanvas.height / 2 + 85);
-  ctx.fillText(texto8, eCanvas.width / 2, eCanvas.height / 2 + 100);
-  ctx.fillText(texto9, eCanvas.width / 2, eCanvas.height / 2 + 115);
-  ctx.fillText(texto10, eCanvas.width / 2, eCanvas.height / 2 + 130);
-}*/
