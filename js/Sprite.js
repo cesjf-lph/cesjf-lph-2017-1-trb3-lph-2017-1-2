@@ -57,3 +57,10 @@ Sprite.prototype.colidiuCom = function(alvo){//Função que testa colisão dos p
   if(this.x-(this.SIZE/2) > alvo.x+(alvo.SIZE/2)) return false;
   return true;
 }
+
+Sprite.prototype.animacao = function(dt){
+  this.frame += this.poses[this.pose].time * dt;
+  if (this.frame > this.poses[this.pose].colMax + 1) {
+    this.frame = this.poses[this.pose].col;
+  }
+};
