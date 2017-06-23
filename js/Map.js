@@ -4,7 +4,6 @@ function Map(l, c) {
   this.imageLib = null;
   this.a = [];
   this.b = [];
-  this.flechas = [];
 
   for (var i = 0; i < l; i++) {
     this.cells[i] = [];
@@ -82,9 +81,6 @@ Map.prototype.desenhar = function(ctx){//Função que desenha elementos na tela
   }
   for (var i = 0; i < this.b.length; i++) {//Chama o desenho do "b"
     this.b[i].desenharPose(ctx);//Função que desenha os personagens e as barras de life de b
-  }
-  for (var i = 0; i < this.flechas.length; i++){//Chama o desenho das flechas
-    this.flechas[i].desenharLimites(ctx);
   }
 }
 
@@ -337,11 +333,6 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     a.destroyed = false;
     a.mover = true;//Permite que o personagem se mova
     a.seletor = seletor;//Força do personagem em no teste de colisão
-    if (a.seletor == 0 || a.seletor == 1 || a.seletor == 3){//Condiciona o personagem a atirar ou não de acordo com o seletor
-      a.atira = true;
-    } else{
-      a.atira = false;
-    }
     a.dir = "";//Variável de direção para controlar melhor as poses
     a.tempoPunch = 0;//Variável que controla o tempo do som de cada som de punch
     this.a.push(a);
@@ -380,11 +371,6 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     b.destroyed = false;
     b.mover = true;//Permite que o personagem se mova
     b.seletor = seletor;//Força do personagem em no teste de colisão
-    if (b.seletor == 1 || b.seletor == 3){//Condiciona o personagem a atirar ou não de acordo com o seletor
-      b.atira = true;
-    } else{
-      b.atira = false;
-    }
     b.dir = "";//Variável de direção para controlar melhor as poses
     b.tempoPunch = 0;//Variável que controla o tempo do som de cada som de punch
     this.b.push(b);
@@ -400,6 +386,56 @@ Map.prototype.moverPersonagens = function(map, dt){//Função que acrescenta val
   }
   for (var i = 0; i < this.a.length; i++) {
     for (var j = 0; j < this.b.length; j++) {
+      if (this.a[i].mover == true){
+        if (this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE) + 1] == this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE)] - 1){
+          this.a[i].vx = 100;
+          this.a[i].vy = 0;
+          this.a[i].pose = 0;//Controla a pose de a em movimento
+          this.a[i].dir = 1;//Controla a direção de b
+        } else if (this.cells[Math.floor(this.a[i].y/SIZE) + 1][Math.floor(this.a[i].x/SIZE)] == this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE)] - 1){
+          this.a[i].vy = 100;
+          this.a[i].vx = 0;
+          this.a[i].pose = 1;//Controla a pose de a em movimento
+          this.a[i].dir = 2;//Controla a direção de b
+        }else if (this.cells[Math.floor(this.a[i].y/SIZE) - 1][Math.floor(this.a[i].x/SIZE)] == this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE)] - 1){
+          this.a[i].vy = -100;
+          this.a[i].vx = 0;
+          this.a[i].pose = 3;//Controla a pose de a em movimento
+          this.a[i].dir = 0;//Controla a direção de b
+        }else{
+          this.a[i].vx = 0;
+          this.a[i].vy = 0;
+
+        }
+      }
+      if (this.b[j].mover == true){
+        if (this.cells[Math.floor(this.b[j].y/SIZE)][Math.floor(this.b[j].x/SIZE) - 1] == this.cells[Math.floor(this.b[j].y/SIZE)][Math.floor(this.b[j].x/SIZE)] + 1){
+          this.b[j].vx = -100;
+          this.b[j].vy = 0;
+          this.b[j].pose = 2;//Controla a pose de b em movimento
+          this.b[j].dir = 3;//Controla a direção de b
+        } else if (this.cells[Math.floor(this.b[j].y/SIZE) - 1][Math.floor(this.b[j].x/SIZE)] == this.cells[Math.floor(this.b[j].y/SIZE)][Math.floor(this.b[j].x/SIZE)] + 1){
+          this.b[j].vy = -100;
+          this.b[j].vx = 0;
+          this.b[j].pose = 3;//Controla a pose de b em movimento
+          this.b[j].dir = 0;//Controla a direção de b
+        }else if (this.cells[Math.floor(this.b[j].y/SIZE) + 1][Math.floor(this.b[j].x/SIZE)] == this.cells[Math.floor(this.b[j].y/SIZE)][Math.floor(this.b[j].x/SIZE)] + 1){
+          this.b[j].vy = 100;
+          this.b[j].vx = 0;
+          this.b[j].pose = 1;//Controla a pose de b em movimento
+          this.b[j].dir = 2;//Controla a direção de b
+        }else{
+          this.b[j].vy = 0;
+          this.b[j].vx = 0;
+        }
+      }
+    }
+  }
+}
+
+/*Map.prototype.testaRaio = function(map, dt){//
+  for (var i = 0; i < this.a.length; i++) {
+    for (var j = 0; j < this.b.length; j++) {
       var dx = this.a[i].x - this.b[j].x;
       var dy = this.a[i].y - this.b[j].y;
       var raio = Math.sqrt(
@@ -413,106 +449,42 @@ Map.prototype.moverPersonagens = function(map, dt){//Função que acrescenta val
           dist = 200;
         }
         if(raio<dist){//Incluir posteriormente o perseguir (Útil com o arqueiro) // Para isso tem que alterar o valor do raio
-          this.a[i].perseguirAng(this.b[j]);
-        } else{//Faz o personagem seguir o caminho até a torre inimiga
-          if (this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE) + 1] == this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE)] - 1){
-            this.a[i].vx = 100;
-            this.a[i].vy = 0;
-            this.a[i].pose = 0;//Controla a pose de a em movimento
-            this.a[i].dir = 1;//Controla a direção de b
-          } else if (this.cells[Math.floor(this.a[i].y/SIZE) + 1][Math.floor(this.a[i].x/SIZE)] == this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE)] - 1){
-            this.a[i].vy = 100;
-            this.a[i].vx = 0;
-            this.a[i].pose = 1;//Controla a pose de a em movimento
-            this.a[i].dir = 2;//Controla a direção de b
-          }else if (this.cells[Math.floor(this.a[i].y/SIZE) - 1][Math.floor(this.a[i].x/SIZE)] == this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE)] - 1){
-            this.a[i].vy = -100;
-            this.a[i].vx = 0;
-            this.a[i].pose = 3;//Controla a pose de a em movimento
-            this.a[i].dir = 0;//Controla a direção de b
-          }else{
-            this.a[i].vx = 0;
-            this.a[i].vy = 0;
-          }
-        }
-      }
-      if (this.b[j].mover == true){
-        if (this.b[j].atira == false){
-          dist = 0;
-        }else if (this.b[j].atira == true){
-          dist = 200;
-        }
-        if(raio<dist){//Incluir posteriormente o perseguir (Útil com o arqueiro) // Para isso tem que alterar o valor do raio
-          this.b[j].perseguirAng(this.a[i]);
-        } else{//Faz o personagem seguir o caminho até a torre inimiga
-          if (this.cells[Math.floor(this.b[j].y/SIZE)][Math.floor(this.b[j].x/SIZE) - 1] == this.cells[Math.floor(this.b[j].y/SIZE)][Math.floor(this.b[j].x/SIZE)] + 1){
-            this.b[j].vx = -100;
-            this.b[j].vy = 0;
-            this.b[j].pose = 2;//Controla a pose de b em movimento
-            this.b[j].dir = 3;//Controla a direção de b
-          } else if (this.cells[Math.floor(this.b[j].y/SIZE) - 1][Math.floor(this.b[j].x/SIZE)] == this.cells[Math.floor(this.b[j].y/SIZE)][Math.floor(this.b[j].x/SIZE)] + 1){
-            this.b[j].vy = -100;
-            this.b[j].vx = 0;
-            this.b[j].pose = 3;//Controla a pose de b em movimento
-            this.b[j].dir = 0;//Controla a direção de b
-          }else if (this.cells[Math.floor(this.b[j].y/SIZE) + 1][Math.floor(this.b[j].x/SIZE)] == this.cells[Math.floor(this.b[j].y/SIZE)][Math.floor(this.b[j].x/SIZE)] + 1){
-            this.b[j].vy = 100;
-            this.b[j].vx = 0;
-            this.b[j].pose = 1;//Controla a pose de b em movimento
-            this.b[j].dir = 2;//Controla a direção de b
-          }else{
-            this.b[j].vy = 0;
-            this.b[j].vx = 0;
-          }
+          this.criaFlecha(this.a[i]);//Função que cria as flechas
         }
       }
     }
   }
 }
 
-Map.prototype.flecha = function(){//Função que cria as flechas
-  for (var i = 0; i < this.a.length; i++){
-    if (this.a[i].atira == true && this.a[i].tempoPunch < 0){
-      var flecha = new Sprite();
-      flecha.x = this.a[i].x;
-      flecha.y = this.a[i].y;
-      if(this.a[i].dir == 1){
-        flecha.vx = 200;
-      }
-      if(this.a[i].dir == 3){
-        flecha.vx = -200;
-      }
-      if(this.a[i].dir == 0){
-        flecha.vy = -200;
-      }
-      if(this.a[i].dir == 2){
-        flecha.vy = 200;
-      }
-      flecha.SIZE = 16;
-      this.a[i].tempoPunch = 2;//Tempo entre uma flecha e outra
-      this.flechas.push(flecha);
-    }
+Map.prototype.criaFlecha = function(atirador){//Função que cria as flechas
+  if (atirador.atira == true && atirador.tempoPunch < 0){
+    var flecha = new Sprite();
+    flecha.x = atirador.x;
+    flecha.y = atirador.y;
+    flecha.vx=0;
+    flecha.vy=0;
+    flecha.SIZE = 16;
+    flecha.pers = pers;
+    atirador.tempoPunch = 2;//Tempo entre uma flecha e outra
+    this.flechas.push(flecha);
   }
-  for (var i = 0; i < this.b.length; i++){
-    if (this.b[i].atira == true && this.b[i].tempoPunch < 0){
-      var flecha = new Sprite();
-      flecha.x = this.b[i].x;
-      flecha.y = this.b[i].y;
-      if(this.b[i].dir == 1){
-        flecha.vx = 200;
+}
+
+Map.prototype.flechasPersegue = function(dt){//Função que movimenta as flechas
+  for (var i = 0; i < this.flechas.length; i++){
+    if (this.flechas[i].pers == "a"){
+      for (var j = 0; j < this.b.length; j++) {
+        var dx = this.flechas[i].x - this.b[j].x;
+        var dy = this.flechas[i].y - this.b[j].y;
+        var raio = Math.sqrt(
+          Math.pow(dx,2)+
+          Math.pow(dy,2)
+        );
+        if(raio<200){//Incluir posteriormente o perseguir (Útil com o arqueiro) // Para isso tem que alterar o valor do raio
+          alert()
+          this.flechas[i].persegue(this.b[j]);
+        }
       }
-      if(this.b[i].dir == 3){
-        flecha.vx = -200;
-      }
-      if(this.b[i].dir == 0){
-        flecha.vy = -200;
-      }
-      if(this.b[i].dir == 2){
-        flecha.vy = 200;
-      }
-      flecha.SIZE = 16;
-      flecha.b[i].tempoPunch = 2;//Tempo entre uma flecha e outra
-      this.flechas.push(flecha);
     }
   }
 }
@@ -521,7 +493,7 @@ Map.prototype.moverFlechas = function(dt){//Função que movimenta as flechas
   for (var i = 0; i < this.flechas.length; i++){//Chama o movimenta do Sprite para as flechas
     this.flechas[i].movimenta(dt);
   }
-}
+}*/
 
 Map.prototype.testarColisao = function(){//Função que chama o teste de colisão do Sprite e se tiver colidido impede o movimento para ocorrer a batalha
   for (var i = 0; i < this.a.length; i++) {
@@ -578,20 +550,20 @@ Map.prototype.testarColisao = function(){//Função que chama o teste de colisã
 
         //Controla a pose de b em batalha de acordo com o dir
         if (this.b[j].dir == 3){
-          if(this.b[i].seletor == 1 || this.b[i].seletor == 3){
-          	this.b[i].pose = 14;
-          }else if(this.b[i].seletor == 0) this.b[i].pose = 18;
-          else this.b[i].pose = 9;
+          if(this.b[j].seletor == 1 || this.b[j].seletor == 3){
+          	this.b[j].pose = 14;
+          }else if(this.b[j].seletor == 0) this.b[j].pose = 18;
+          else this.b[j].pose = 9;
         }else if (this.b[j].dir == 2){
-          if(this.b[i].seletor == 1 || this.b[i].seletor == 3){
-          	this.b[i].pose = 13;
-          }else if(this.b[i].seletor == 0) this.b[i].pose = 17;
-          else this.b[i].pose = 11;
+          if(this.b[j].seletor == 1 || this.b[j].seletor == 3){
+          	this.b[j].pose = 13;
+          }else if(this.b[i].seletor == 0) this.b[j].pose = 17;
+          else this.b[j].pose = 11;
         }if (this.b[j].dir == 0){
-          if(this.b[i].seletor == 1 || this.b[i].seletor == 3){
-          	this.b[i].pose = 15;
-          }else if(this.b[i].seletor == 0) this.b[i].pose = 19;
-          else this.b[i].pose = 10;
+          if(this.b[j].seletor == 1 || this.b[j].seletor == 3){
+          	this.b[j].pose = 15;
+          }else if(this.b[j].seletor == 0) this.b[j].pose = 19;
+          else this.b[j].pose = 10;
         }
 
         //Adiciona som de alerta quando energia da torre principal de a chega a 30%
