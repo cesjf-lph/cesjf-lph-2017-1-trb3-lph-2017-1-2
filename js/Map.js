@@ -26,7 +26,7 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
           a.life = 100;
           a.destroyed = false;
           a.mover = false;//Impede que as torres se movam
-          a.multiplicador = 0;//Força do personagem no teste de colisão
+          a.seletor = 0;//Força do personagem no teste de colisão
           this.a.push(a);
         break;
         case 67://Gera os dados das 2 torres de "a"
@@ -37,7 +37,7 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
           b.life = 100;
           b.destroyed = false;
           b.mover = false;//Impede que as torres se movam
-          b.multiplicador = 0;//Força do personagem no teste de colisão
+          b.seletor = 0;//Força do personagem no teste de colisão
           this.b.push(b);
         break;
         case 99://Gera a torre principal de "a"
@@ -48,7 +48,7 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
           a.life = 100;
           a.destroyed = false;
           a.mover = false;//Impede que a torre se mova
-          a.multiplicador = 0;//Força do personagem no teste de colisão
+          a.seletor = 0;//Força do personagem no teste de colisão
           this.a.push(a);
         break;
         case 62://Gera a torre principal de "b"
@@ -59,7 +59,7 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
           b.life = 100;
           b.destroyed = false;
           b.mover = false;//Impede que a torre se mova
-          b.multiplicador = 0;//Força do personagem no teste de colisão
+          b.seletor = 0;//Força do personagem no teste de colisão
           this.b.push(b);
         break;
         default:
@@ -294,23 +294,23 @@ Map.prototype.desenharTiles = function(ctx){//Função que desenha os componente
   }
 }
 
-Map.prototype.criaPersonagem = function(linha, coluna, multiplicador){//Função que gera os personagens selecionados na tela
+Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que gera os personagens selecionados na tela
   if (coluna == 7){//Se a coluna for igual a 7 cria personagem de "a"
     var a = new Sprite()
     a.imageLib = this.imageLib;
     a.poses = [//adiciona poses de a
-      {key: "personagem" + (multiplicador), row: 11, col: 0, colMax: 7, time: 8 },//0 - Caminhada para a direita com espada na mão
-      {key: "personagem" + (multiplicador), row: 10, col: 0, colMax: 7, time: 8},//1 - Caminhada para baixo com espada na mão
-      {key: "personagem" + (multiplicador), row: 9, col: 0, colMax: 7, time: 8},//2 - Caminhada para a esquerda com espada na mão
-      {key: "personagem" + (multiplicador), row: 8, col: 0, colMax: 7, time: 8},//3 - Caminhada para cima com espada na mão
-      {key: "personagem" + (multiplicador), row: 11, col: 0, colMax: 0, time: 8},//4 - Parado para a direita com espada na mão
-      {key: "personagem" + (multiplicador), row: 10, col: 0, colMax: 0, time: 8},//5 - Parado para baixo com espada na mão
-      {key: "personagem" + (multiplicador), row: 9, col: 0, colMax: 0, time: 8},//6 - Parado para a esquerda com espada na mão
-      {key: "personagem" + (multiplicador), row: 8, col: 0, colMax: 0, time: 8},//7 - Parado para cima com espada na mão
-      {key: "personagem" + (multiplicador), row: 15, col: 0, colMax: 5, time: 16},//8 - Espadada para a direita
-      {key: "personagem" + (multiplicador), row: 13, col: 0, colMax: 5, time: 16},//9 - Espadada para a esquerda
-      {key: "personagem" + (multiplicador), row: 12, col: 0, colMax: 5, time: 16},//10 - Espadada para cima
-      {key: "personagem" + (multiplicador), row: 14, col: 0, colMax: 5, time: 16},//11 - Espadada para baixo
+      {key: "personagem" + seletor, row: 11, col: 0, colMax: 7, time: 8 },//0 - Caminhada para a direita com espada na mão
+      {key: "personagem" + seletor, row: 10, col: 0, colMax: 7, time: 8},//1 - Caminhada para baixo com espada na mão
+      {key: "personagem" + seletor, row: 9, col: 0, colMax: 7, time: 8},//2 - Caminhada para a esquerda com espada na mão
+      {key: "personagem" + seletor, row: 8, col: 0, colMax: 7, time: 8},//3 - Caminhada para cima com espada na mão
+      {key: "personagem" + seletor, row: 11, col: 0, colMax: 0, time: 8},//4 - Parado para a direita com espada na mão
+      {key: "personagem" + seletor, row: 10, col: 0, colMax: 0, time: 8},//5 - Parado para baixo com espada na mão
+      {key: "personagem" + seletor, row: 9, col: 0, colMax: 0, time: 8},//6 - Parado para a esquerda com espada na mão
+      {key: "personagem" + seletor, row: 8, col: 0, colMax: 0, time: 8},//7 - Parado para cima com espada na mão
+      {key: "personagem" + seletor, row: 15, col: 0, colMax: 5, time: 16},//8 - Espadada para a direita
+      {key: "personagem" + seletor, row: 13, col: 0, colMax: 5, time: 16},//9 - Espadada para a esquerda
+      {key: "personagem" + seletor, row: 12, col: 0, colMax: 5, time: 16},//10 - Espadada para cima
+      {key: "personagem" + seletor, row: 14, col: 0, colMax: 5, time: 16},//11 - Espadada para baixo
     ]
     a.x = coluna * SIZE+SIZE/2;
     a.y = linha * SIZE+SIZE/2;
@@ -320,7 +320,7 @@ Map.prototype.criaPersonagem = function(linha, coluna, multiplicador){//Função
     a.life = 100;
     a.destroyed = false;
     a.mover = true;//Permite que o personagem se mova
-    a.multiplicador = multiplicador;//Força do personagem em no teste de colisão
+    a.seletor = seletor;//Força do personagem em no teste de colisão
     a.dir = "";//Variável de direção para controlar melhor as poses
     this.a.push(a);
   }
@@ -328,18 +328,18 @@ Map.prototype.criaPersonagem = function(linha, coluna, multiplicador){//Função
     var b = new Sprite()
     b.imageLib = this.imageLib;
     b.poses = [//adiciona poses de b
-      {key: "personagem" + (multiplicador + 5), row: 11, col: 0, colMax: 7, time: 8 },//0 - Caminhada para a direita com espada na mão
-      {key: "personagem" + (multiplicador + 5), row: 10, col: 0, colMax: 7, time: 8},//1 - Caminhada para baixo com espada na mão
-      {key: "personagem" + (multiplicador + 5), row: 9, col: 0, colMax: 7, time: 8},//2 - Caminhada para a esquerda com espada na mão
-      {key: "personagem" + (multiplicador + 5), row: 8, col: 0, colMax: 7, time: 8},//3 - Caminhada para cima com espada na mão
-      {key: "personagem" + (multiplicador + 5), row: 11, col: 0, colMax: 0, time: 8},//4 - Parado para a direita com espada na mão
-      {key: "personagem" + (multiplicador + 5), row: 10, col: 0, colMax: 0, time: 8},//5 - Parado para baixo com espada na mão
-      {key: "personagem" + (multiplicador + 5), row: 9, col: 0, colMax: 0, time: 8},//6 - Parado para a esquerda com espada na mão
-      {key: "personagem" + (multiplicador + 5), row: 8, col: 0, colMax: 0, time: 8},//7 - Parado para cima com espada na mão
-      {key: "personagem" + (multiplicador + 5), row: 15, col: 0, colMax: 5, time: 16},//8 - Espadada para a direita
-      {key: "personagem" + (multiplicador + 5), row: 13, col: 0, colMax: 5, time: 16},//9 - Espadada para a esquerda
-      {key: "personagem" + (multiplicador + 5), row: 12, col: 0, colMax: 5, time: 16},//10 - Espadada para cima
-      {key: "personagem" + (multiplicador + 5), row: 14, col: 0, colMax: 5, time: 16},//11 - Espadada para baixo
+      {key: "personagem" + (seletor + 5), row: 11, col: 0, colMax: 7, time: 8 },//0 - Caminhada para a direita com espada na mão
+      {key: "personagem" + (seletor + 5), row: 10, col: 0, colMax: 7, time: 8},//1 - Caminhada para baixo com espada na mão
+      {key: "personagem" + (seletor + 5), row: 9, col: 0, colMax: 7, time: 8},//2 - Caminhada para a esquerda com espada na mão
+      {key: "personagem" + (seletor + 5), row: 8, col: 0, colMax: 7, time: 8},//3 - Caminhada para cima com espada na mão
+      {key: "personagem" + (seletor + 5), row: 11, col: 0, colMax: 0, time: 8},//4 - Parado para a direita com espada na mão
+      {key: "personagem" + (seletor + 5), row: 10, col: 0, colMax: 0, time: 8},//5 - Parado para baixo com espada na mão
+      {key: "personagem" + (seletor + 5), row: 9, col: 0, colMax: 0, time: 8},//6 - Parado para a esquerda com espada na mão
+      {key: "personagem" + (seletor + 5), row: 8, col: 0, colMax: 0, time: 8},//7 - Parado para cima com espada na mão
+      {key: "personagem" + (seletor + 5), row: 15, col: 0, colMax: 5, time: 16},//8 - Espadada para a direita
+      {key: "personagem" + (seletor + 5), row: 13, col: 0, colMax: 5, time: 16},//9 - Espadada para a esquerda
+      {key: "personagem" + (seletor + 5), row: 12, col: 0, colMax: 5, time: 16},//10 - Espadada para cima
+      {key: "personagem" + (seletor + 5), row: 14, col: 0, colMax: 5, time: 16},//11 - Espadada para baixo
     ]
     b.x = coluna * SIZE+SIZE/2;
     b.y = linha * SIZE+SIZE/2;
@@ -349,7 +349,7 @@ Map.prototype.criaPersonagem = function(linha, coluna, multiplicador){//Função
     b.life = 100;
     b.destroyed = false;
     b.mover = true;//Permite que o personagem se mova
-    b.multiplicador = multiplicador;//Força do personagem em no teste de colisão
+    b.seletor = seletor;//Força do personagem em no teste de colisão
     b.dir = "";//Variável de direção para controlar melhor as poses
     this.b.push(b);
   }
@@ -436,8 +436,8 @@ Map.prototype.testarColisao = function(){//Função que chama o teste de colisã
         this.b[j].vy = 0;
 
         //Quando colide consome a life de a e b
-        this.a[i].life = this.a[i].life - dt*(20+20*this.a[i].multiplicador);//Consome a life do personagem a
-        this.b[j].life = this.b[j].life - dt*(20+20*this.b[j].multiplicador);//Consome a life do personagem b
+        this.a[i].life = this.a[i].life - dt*(20+20*this.a[i].seletor);//Consome a life do personagem a
+        this.b[j].life = this.b[j].life - dt*(20+20*this.b[j].seletor);//Consome a life do personagem b
 
         //Controla a pose de a em batalha de acordo com o dir
         if (this.a[i].dir == 1){
