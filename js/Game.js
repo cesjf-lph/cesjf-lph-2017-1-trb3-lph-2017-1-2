@@ -97,6 +97,7 @@ function passo(){
   	id = requestAnimationFrame(passo);
   	agora = new Date();
   	dt = (agora - antes) / 1000;
+    eCanvas.style.border = "5px solid black";
   	ctx.clearRect(0, 0, eCanvas.width, eCanvas.height);
     tela(ctx);
     if(auxiliar == 1){
@@ -250,7 +251,7 @@ function tela(ctx){
   if(auxiliar == 0){
     var telaInicial = new Image();
     telaInicial.src = "img/logo.png";
-    ctx.drawImage(telaInicial, 0, 0, 1216, 544);
+    ctx.drawImage(telaInicial, 0, 0, 1216, 576);
   }
   if(auxiliar == 3){
     var texto = "Jogador A venceu!! ";
