@@ -165,11 +165,11 @@ function configuraControles() {
           break;
         case 80:
           if(auxiliar == 1){
-            var texto = "Jogo Pausado! ";          
+            var texto = "Jogo Pausado! ";
             ctx.fillStyle = "green";
             ctx.strokeStyle = "yellow";
             ctx.globalAlpha = 0.50;
-            ctx.fillRect(0, 0, eCanvas.width, eCanvas.height);                    
+            ctx.fillRect(0, 0, eCanvas.width, eCanvas.height);
             ctx.font = "3em fantasy";
             ctx.fillStyle = "blue";
             ctx.fillText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
@@ -177,11 +177,11 @@ function configuraControles() {
             cancelAnimationFrame(id);                    
             auxiliar = 2;
         }
-         else if(auxiliar == 2){ 
-          ctx.globalAlpha = 1;                   
-          antes = new Date();                      
-          requestAnimationFrame(passo);          
-          auxiliar = 1;            
+         else if(auxiliar == 2){
+          ctx.globalAlpha = 1;
+          antes = new Date();
+          requestAnimationFrame(passo);
+          auxiliar = 1;
         }
       break;
       default:
