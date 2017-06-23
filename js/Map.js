@@ -448,6 +448,7 @@ Map.prototype.moverPersonagens = function(map, dt){//Função que acrescenta val
 }
 
 Map.prototype.testaRaio = function(){//
+  var menorDist = 500;//Variável para testar menor distância
   for (var i = 0; i < this.a.length; i++) {
     for (var j = 0; j < this.b.length; j++) {
       var dx = this.a[i].x - this.b[j].x;
@@ -456,7 +457,20 @@ Map.prototype.testaRaio = function(){//
         Math.pow(dx,2)+
         Math.pow(dy,2)
       );
-      if(raio<500){//Teste da distância
+      if(raio<500 && raio < menorDist){//Teste da distância da menor distancia
+        menorDist = raio;
+      }
+    }
+  }
+  for (var i = 0; i < this.a.length; i++) {
+    for (var j = 0; j < this.b.length; j++) {
+      var dx = this.a[i].x - this.b[j].x;
+      var dy = this.a[i].y - this.b[j].y;
+      var raio = Math.sqrt(
+        Math.pow(dx,2)+
+        Math.pow(dy,2)
+      );
+      if(raio<=menorDist){
         if (this.a[i].mover == true && this.a[i].atira == true){
           var dist = Math.sqrt(Math.pow(this.b[j].x - this.a[i].x, 2) + Math.pow(this.b[j].y - this.a[i].y, 2));
           var vx = 200 * (this.b[j].x - this.a[i].x) / dist;
