@@ -130,6 +130,7 @@ function passo(){
       mapa.moverFlechas(dt);
       mapa.paraAtirador();
       mapa.testarColisaoFlechas();
+      mapa.atualizaDados();
     }
   	antes = agora;
 }

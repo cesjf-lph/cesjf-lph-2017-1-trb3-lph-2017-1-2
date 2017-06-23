@@ -77,14 +77,14 @@ Map.prototype.desenhar = function(ctx){//Função que desenha elementos na tela
   //this.desenharLimites(ctx);//Desenha estrutura do mapa
   this.informacoes();//Função que desenha elementos auxiliares nas laterais e topo da tela
   this.desenharTiles(ctx);//Função que desenha os componentes imóveis do mapa
+  for (var i = 0; i < this.flechas.length; i++) {//Chama o desenho do "b"
+  this.flechas[i].desenharLimites(ctx);//Função que desenha os personagens e as barras de life de b
+}
   for (var i = 0; i < this.a.length; i++) {
     this.a[i].desenharPose(ctx);//Função que desenha os personagens e as barras de life de a
   }
   for (var i = 0; i < this.b.length; i++) {//Chama o desenho do "b"
     this.b[i].desenharPose(ctx);//Função que desenha os personagens e as barras de life de b
-  }
-  for (var i = 0; i < this.flechas.length; i++) {//Chama o desenho do "b"
-    this.flechas[i].desenharLimites(ctx);//Função que desenha os personagens e as barras de life de b
   }
 }
 
@@ -465,16 +465,6 @@ Map.prototype.testaRaio = function(){//
       if(raio<500){//Teste da distância da menor distancia
         menorDist = raio;
       }
-    }
-  }
-  for (var i = 0; i < this.a.length; i++) {
-    for (var j = 0; j < this.b.length; j++) {
-      var dx = this.a[i].x - this.b[j].x;
-      var dy = this.a[i].y - this.b[j].y;
-      var raio = Math.sqrt(
-        Math.pow(dx,2)+
-        Math.pow(dy,2)
-      );
       if(raio<=menorDist){
         if (/*this.a[i].mover == */true && this.a[i].atira == true){
           var dist = Math.sqrt(Math.pow(this.b[j].x - this.a[i].x, 2) + Math.pow(this.b[j].y - this.a[i].y, 2));
@@ -498,34 +488,29 @@ Map.prototype.paraAtirador = function(){
     if (this.a[i].tempoFlecha > 0){
       this.a[i].vx = 0;
       this.a[i].vy = 0;
-      if (this.a[i].tempoFlecha > 0){
-        if (this.a[i].dir == 0){
-          this.a[i].pose = 15;
-        }else if (this.a[i].dir == 1){
-          this.a[i].pose = 12;
-        }else if (this.a[i].dir == 2){
-          this.a[i].pose = 13;
-        }else if (this.a[i].dir == 3){
-          this.a[i].pose = 14;
-        }
+      if (this.a[i].dir == 0){
+        this.a[i].pose = 15;
+      }else if (this.a[i].dir == 1){
+        this.a[i].pose = 12;
+      }else if (this.a[i].dir == 2){
+        this.a[i].pose = 13;
+      }else if (this.a[i].dir == 3){
+        this.a[i].pose = 14;
       }
     }
   }
-
   for (var i = 0; i < this.b.length; i++) {
     if (this.b[i].tempoFlecha > 0){
       this.b[i].vx = 0;
       this.b[i].vy = 0;
-      if (this.b[i].tempoFlecha > 0){
-        if (this.b[i].dir == 0){
-          this.b[i].pose = 15;
-        }else if (this.b[i].dir == 1){
-          this.b[i].pose = 12;
-        }else if (this.b[i].dir == 2){
-          this.b[i].pose = 13;
-        }else if (this.b[i].dir == 3){
-          this.b[i].pose = 14;
-        }
+      if (this.b[i].dir == 0){
+        this.b[i].pose = 15;
+      }else if (this.b[i].dir == 1){
+        this.b[i].pose = 12;
+      }else if (this.b[i].dir == 2){
+        this.b[i].pose = 13;
+      }else if (this.b[i].dir == 3){
+        this.b[i].pose = 14;
       }
     }
   }
@@ -542,44 +527,39 @@ Map.prototype.criaFlecha = function(arqueiro, vx, vy, quemAtira){//Função que 
     flecha.quemAtira = quemAtira;
     if (flecha.vy > 100 && flecha.vy > 0){
       arqueiro.dir = 2;
-    }
-    if (flecha.vy < 100 && flecha.vy > 0){
+    }else if (flecha.vy < 100 && flecha.vy > 0){
       if (flecha.vx < 0){
         arqueiro.dir = 3;
       }else if(flecha.vx > 0){
         arqueiro.dir = 1;
       }
-    }
-
-    if (flecha.vy < -100 && flecha.vy < 0){
+    }else if(flecha.vy < -100 && flecha.vy < 0){
       if (flecha.vx < 0){
         arqueiro.dir = 0;
       }
-    }
-    if (flecha.vy > -100 && flecha.vy < 0){
+    }else if(flecha.vy > -100 && flecha.vy < 0){
       if (flecha.vx < 0){
         arqueiro.dir = 3;
       }else if(flecha.vx > 0){
         arqueiro.dir = 1;
       }
-    }
-    if(flecha.vx > 0 && flecha.vy == 0){
+    }else if(flecha.vx > 0 && flecha.vy == 0){
       arqueiro.dir = 1;
     }else if(flecha.vx < 0 && flecha.vy == 0){
       arqueiro.dir = 3;
     }
-    arqueiro.tempoFlecha = 2.5;//Tempo entre uma flecha e outra
-    flecha.tempoFlecha = 2;//Tempo para movimentar a flecha
-    flecha.tempoSomFlecha = 2;//Tempo para som da flecha
+    arqueiro.tempoFlecha = 1;//Tempo entre uma flecha e outra
+    flecha.tempoFlecha = 1;//Tempo para movimentar a flecha
+    flecha.tempoSomFlecha = 1;//Tempo para som da flecha
     this.flechas.push(flecha);
   }
 }
 
 Map.prototype.moverFlechas = function(dt){//Função que movimenta as flechas
   for (var i = 0; i < this.flechas.length; i++){//Chama o movimenta do Sprite para as flechas
-    if (this.flechas[i].tempoFlecha < 0){
+    if (this.flechas[i].tempoFlecha < 0.5){
       this.flechas[i].movimenta(dt);
-      if (this.flechas[i].tempoSomFlecha < 0 && this.flechas[i].tempoSomFlecha > -1){
+      if (this.flechas[i].tempoSomFlecha < 0.5 && this.flechas[i].tempoSomFlecha > -1){
         soundLib.play("punch-off");
         this.flechas[i].tempoSomFlecha = -2;
       }
@@ -608,62 +588,13 @@ Map.prototype.testarColisaoFlechas = function(){//Função que chama o teste de 
       }
     }
   }
-
-  for (var i = 0; i < this.a.length; i++){
-    if (this.a[i].life <= 0){
-      this.a[i].destroyed = true;
-      if (this.a[i].SIZE == 96){//Se a vida da torre principal de a estiver zerada a auxiliar passa a valer 4 que nas telas é vitoria de b
-        auxiliar = 4;
-        soundLib.play("Ta-Da");//Adiciona som de palmas pela destruião da torre principal
-      }
-      if (this.a[i].SIZE == 64){//Adiciona som de esplosão quando esplode as pequenas torres de a
-        soundLib.play("explosion");
-      }
-      if (this.a[i].SIZE == 32){//Adiciona som quando personagem morre
-        soundLib.play("dying");
-      }
-    }
-  }
-  for (var i = 0; i < this.b.length; i++){
-    if (this.b[i].life <= 0){
-      this.b[i].destroyed = true;
-      if (this.b[i].SIZE == 96){//Se a vida da torre principal de a estiver zerada a auxiliar passa a valer 4 que nas telas é vitoria de b
-        auxiliar = 4;
-        soundLib.play("Ta-Da");//Adiciona som de palmas pela destruião da torre principal
-      }
-      if (this.b[i].SIZE == 64){//Adiciona som de esplosão quando esplode as pequenas torres de a
-        soundLib.play("explosion");
-      }
-      if (this.b[i].SIZE == 32){//Adiciona som quando personagem morre
-        soundLib.play("dying");
-      }
-    }
-  }
 }
 
 Map.prototype.testarColisao = function(){//Função que chama o teste de colisão do Sprite e se personagem tiver colidido impede o movimento para ocorrer a batalha
   for (var i = 0; i < this.a.length; i++) {
     for (var j = 0; j < this.b.length; j++) {
-
-      //Subtrai tempo para a flecha sair do arco e som de acordo com dt
-      for (var k = 0; k < this.flechas.length; k++) {
-        this.flechas[k].tempoFlecha = this.flechas[k].tempoFlecha - dt;
-        this.flechas[k].tempoSomFlecha = this.flechas[k].tempoSomFlecha - dt;
-      }
-
-      //Subtrai tempoPunch de acordo com dt
-      this.a[i].tempoPunch = this.a[i].tempoPunch - dt;
-      this.b[j].tempoPunch = this.b[j].tempoPunch - dt;
-
-      //Subtrai tempoFlecha de acordo com dt
-      this.a[i].tempoFlecha = this.a[i].tempoFlecha - dt;
-      this.b[j].tempoFlecha = this.b[j].tempoFlecha - dt;
-
-      //Subtrai tempoAlert de acordo com dt
-      this.a[i].tempoAlert = this.a[i].tempoAlert - dt;
-      this.b[j].tempoAlert = this.b[j].tempoAlert - dt;
-
       if(this.a[i].colidiuCom(this.b[j])){//Caso ocorra a colisão
+
         //Quando colide zera vx e vy de a e b para a batalha ocorrer
         this.a[i].vx = 0;
         this.a[i].vy = 0;
@@ -730,34 +661,91 @@ Map.prototype.testarColisao = function(){//Função que chama o teste de colisã
             this.b[j].pose = 10;
           }
         }
-
-        //Adiciona som de alerta quando energia da torre principal de a chega a 30%
-        if (this.a[i].SIZE == 96 && this.a[i].life < 30 && this.a[i].tempoAlert < 0){
-          this.a[i].tempoAlert = 2;
-          soundLib.play("alert");
-        }
-
-        //Adiciona som de alerta quando energia das torres pequenas de a chega a 30%
-        if (this.a[i].SIZE == 64 && this.a[i].life < 30 && this.a[i].tempoAlert < 0){
-          this.a[i].tempoAlert = 2;
-          soundLib.play("alert");
-        }
-
-        //Adiciona som de alerta quando energia da torre principal de a chega a 30%
-        if (this.b[j].SIZE == 96 && this.b[j].life < 30 && this.b[j].tempoAlert < 0){
-          this.b[j].tempoAlert = 2;
-          soundLib.play("alert");
-        }
-
-        //Adiciona som de alerta quando energia das torres pequenas de b chega a 30%
-        if (this.b[j].SIZE == 64 && this.b[j].life < 30 && this.b[j].tempoAlert < 0){
-          this.b[j].tempoAlert = 2;
-          soundLib.play("alert");
-        }
       }
     }
   }
   this.delete();
+}
+
+Map.prototype.atualizaDados = function(){
+  //Subtrai tempo para a flecha sair do arco e som de acordo com dt
+  for (var k = 0; k < this.flechas.length; k++) {
+    this.flechas[k].tempoFlecha = this.flechas[k].tempoFlecha - dt;
+    this.flechas[k].tempoSomFlecha = this.flechas[k].tempoSomFlecha - dt;
+  }
+
+  for (var i = 0; i < this.a.length; i++){
+    //Subtrai tempoPunch de acordo com dt
+    this.a[i].tempoPunch = this.a[i].tempoPunch - dt;
+
+    //Subtrai tempoFlecha de acordo com dt
+    this.a[i].tempoFlecha = this.a[i].tempoFlecha - dt;
+
+    //Subtrai tempoAlert de acordo com dt
+    this.a[i].tempoAlert = this.a[i].tempoAlert - dt;
+
+    if (this.a[i].life <= 0){
+      this.a[i].destroyed = true;
+      if (this.a[i].SIZE == 96){//Se a vida da torre principal de a estiver zerada a auxiliar passa a valer 4 que nas telas é vitoria de b
+        auxiliar = 4;
+        soundLib.play("Ta-Da");//Adiciona som de palmas pela destruião da torre principal
+      }
+      if (this.a[i].SIZE == 64){//Adiciona som de esplosão quando esplode as pequenas torres de a
+        soundLib.play("explosion");
+      }
+      if (this.a[i].SIZE == 32){//Adiciona som quando personagem morre
+        soundLib.play("dying");
+      }
+    }
+
+    //Adiciona som de alerta quando energia da torre principal de a chega a 30%
+    if (this.a[i].SIZE == 96 && this.a[i].life < 30 && this.a[i].tempoAlert < 0){
+      this.a[i].tempoAlert = 1;
+      soundLib.play("alert");
+    }
+
+    //Adiciona som de alerta quando energia das torres pequenas de a chega a 30%
+    if (this.a[i].SIZE == 64 && this.a[i].life < 30 && this.a[i].tempoAlert < 0){
+      this.a[i].tempoAlert = 1;
+      soundLib.play("alert");
+    }
+  }
+  for (var i = 0; i < this.b.length; i++){
+    //Subtrai tempoPunch de acordo com dt
+    this.b[i].tempoPunch = this.b[i].tempoPunch - dt;
+
+    //Subtrai tempoFlecha de acordo com dt
+    this.b[i].tempoFlecha = this.b[i].tempoFlecha - dt;
+
+    //Subtrai tempoAlert de acordo com dt
+    this.b[i].tempoAlert = this.b[i].tempoAlert - dt;
+
+    if (this.b[i].life <= 0){
+      this.b[i].destroyed = true;
+      if (this.b[i].SIZE == 96){//Se a vida da torre principal de a estiver zerada a auxiliar passa a valer 4 que nas telas é vitoria de b
+        auxiliar = 4;
+        soundLib.play("Ta-Da");//Adiciona som de palmas pela destruião da torre principal
+      }
+      if (this.b[i].SIZE == 64){//Adiciona som de esplosão quando esplode as pequenas torres de a
+        soundLib.play("explosion");
+      }
+      if (this.b[i].SIZE == 32){//Adiciona som quando personagem morre
+        soundLib.play("dying");
+      }
+    }
+
+    //Adiciona som de alerta quando energia da torre principal de a chega a 30%
+    if (this.b[i].SIZE == 96 && this.b[i].life < 30 && this.b[i].tempoAlert < 0){
+      this.b[i].tempoAlert = 1;
+      soundLib.play("alert");
+    }
+
+    //Adiciona som de alerta quando energia das torres pequenas de b chega a 30%
+    if (this.b[i].SIZE == 64 && this.b[i].life < 30 && this.b[i].tempoAlert < 0){
+      this.b[i].tempoAlert = 1;
+      soundLib.play("alert");
+    }
+  }
 }
 
 Map.prototype.delete = function(){//Função que deleta os personagens da tela
