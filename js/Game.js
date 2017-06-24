@@ -91,6 +91,7 @@ function init(){
     imglib.load("personagem7", "Personagens x cartas/8.png");
     imglib.load("personagem8", "Personagens x cartas/9.png");
     imglib.load("personagem9", "Personagens x cartas/10.png");
+    imglib.load("personagem10", "personagens/king.png");
 
 
     mapa = new Map(linhas, colunas);
@@ -242,7 +243,8 @@ function configuraMouse(e) {
   var button = e.which || e.button;
   if(button == 1) {
     auxiliar = 1;
-    console.log("Botão esquerdo");
+    mapa.criaPersonagem(9, 5, 10);
+    mapa.criaPersonagem(9, 32, 10);
   } else if(button == 2) {
     console.log("Botão de rolagem");
   } else if(button == 3) {

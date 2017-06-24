@@ -265,6 +265,10 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
       {key: "personagem" + seletor, row:  6, col: 0, colMax:  7, time: 16},//17 - Bastão para baixo
       {key: "personagem" + seletor, row:  5, col: 0, colMax:  7, time: 16},//18 - Bastão para a esquerda
       {key: "personagem" + seletor, row:  4, col: 0, colMax:  7, time: 16},//19 - Bastão para cima
+      {key: "personagem" + seletor, row:  0, col: 0, colMax:  7, time: 16},//20 - Rei virado para cima
+      {key: "personagem" + seletor, row:  1, col: 0, colMax:  7, time: 16},//21 - Rei virado para a esquerda
+      {key: "personagem" + seletor, row:  2, col: 0, colMax:  7, time: 16},//22 - Rei virado para baixo
+      {key: "personagem" + seletor, row:  3, col: 0, colMax:  7, time: 16},//23 - Rei virado para a direita
     ]
     a.x = coluna * SIZE+SIZE/2;
     a.y = linha * SIZE+SIZE/2;
@@ -273,7 +277,10 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     a.vy = 0;
     a.life = 100;
     a.destroyed = false;
-    a.mover = true;//Permite que o personagem se mova
+    if(a.seletor == 10){
+      a.mover = false;
+    }
+    else a.mover = true;//Permite que o personagem se mova
     a.seletor = seletor;//Força do personagem em no teste de colisão
     a.dir = "";//Variável de direção para controlar melhor as poses
     a.tempoPunch = 0;//Variável que controla o tempo do som de cada som de punch
@@ -309,6 +316,10 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
       {key: "personagem" + (seletor + 5), row:  6, col: 0, colMax:  7, time: 16},//17 - Bastão para baixo
       {key: "personagem" + (seletor + 5), row:  5, col: 0, colMax:  7, time: 16},//18 - Bastão para a esquerda
       {key: "personagem" + (seletor + 5), row:  4, col: 0, colMax:  7, time: 16},//19 - Bastão para cima
+      {key: "personagem" + (seletor + 5), row:  0, col: 0, colMax:  7, time: 16},//20 - Rei virado para cima
+      {key: "personagem" + (seletor + 5), row:  1, col: 0, colMax:  7, time: 16},//21 - Rei virado para a esquerda
+      {key: "personagem" + (seletor + 5), row:  2, col: 0, colMax:  7, time: 16},//22 - Rei virado para  baixo
+      {key: "personagem" + (seletor + 5), row:  3, col: 0, colMax:  7, time: 16},//23 - Rei virado para a direita
     ]
     b.x = coluna * SIZE+SIZE/2;
     b.y = linha * SIZE+SIZE/2;
@@ -317,7 +328,10 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     b.vy = 0;
     b.life = 100;
     b.destroyed = false;
-    b.mover = true;//Permite que o personagem se mova
+    if(b.seletor == 10){
+      b.mover = false;
+    }
+    else b.mover = true;//Permite que o personagem se mova
     b.seletor = seletor;//Força do personagem em no teste de colisão
     b.dir = "";//Variável de direção para controlar melhor as poses
     b.tempoPunch = 0;//Variável que controla o tempo do som de cada som de punch
