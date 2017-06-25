@@ -243,6 +243,14 @@ function configuraMouse(e) {
   var button = e.which || e.button;
   if(button == 1) {
     auxiliar = 1;
+
+    mapa.criaPersonagem(4, 5, 10);
+    mapa.criaPersonagem(14, 5, 10);
+
+    mapa.criaPersonagem(4, 32, 5);
+    mapa.criaPersonagem(14, 32, 5);
+
+
     mapa.criaPersonagem(9, 5, 10);
     mapa.criaPersonagem(9, 32, 5);
   } else if(button == 2) {
