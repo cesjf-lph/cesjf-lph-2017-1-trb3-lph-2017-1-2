@@ -285,7 +285,7 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     a.dir = "";//Variável de direção para controlar melhor as poses
     a.tempoPunch = 0;//Variável que controla o tempo do som de cada som de punch
     a.tempoFlecha = 0;//Variável que controla o tempo da flecha
-    if (seletor == 0 || seletor == 1 || seletor == 3){//Controla se o personagem pode atirar
+    if (seletor == 0 || seletor == 1 || seletor == 3 || seletor == 10 || seletor == 11){//Controla se o personagem pode atirar
       a.atira = true;
     }else{
       a.atira = false;
@@ -329,6 +329,7 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     b.life = 100;
     b.destroyed = false;
     if(seletor == 5 || seletor == 6){
+      b.pose = 2;
       b.mover = false;
     }
     else b.mover = true;//Permite que o personagem se mova
@@ -336,7 +337,7 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     b.dir = "";//Variável de direção para controlar melhor as poses
     b.tempoPunch = 0;//Variável que controla o tempo do som de cada som de punch
     b.tempoFlecha = 0;//Variável que controla o tempo da flecha
-    if (seletor == 1 || seletor == 3){//Controla se o personagem pode atirar
+    if (seletor == 1 || seletor == 3 || seletor == 5 || seletor == 6){//Controla se o personagem pode atirar
       b.atira = true;
     }else{
       b.atira = false;
