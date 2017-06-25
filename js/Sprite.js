@@ -32,7 +32,7 @@ Sprite.prototype.desenharPose = function(ctx) {
   }
 	//Desenha a barra de life de cada personagem
 	ctx.fillStyle = "hsl("+this.life/100*120+",100%,50%)";
-	ctx.fillRect (this.x-this.SIZE/2, this.y+this.SIZE/2, this.life/100*this.SIZE, 2);
+	ctx.fillRect (this.x-this.SIZE/2, this.y+this.SIZE/2+2, this.life/100*this.SIZE, 2);
 };
 
 Sprite.prototype.desenharLimites = function(ctx) {//Função que desenha os limites dos personagens
