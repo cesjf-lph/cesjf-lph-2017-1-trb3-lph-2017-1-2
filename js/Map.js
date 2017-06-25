@@ -665,6 +665,12 @@ Map.prototype.atualizaDados = function(){
       }
       if (this.a[i].SIZE == 64){//Adiciona som de esplosão quando esplode as pequenas torres de a
         soundLib.play("explosion");
+        if (this.a[i].y<200){
+          a.atiraA1 = false;
+        }
+        if (this.a[i].y>200){
+          a.atiraA2 = false;
+        }
       }
       if (this.a[i].SIZE == 32){//Adiciona som quando personagem morre
         soundLib.play("dying");
@@ -701,6 +707,12 @@ Map.prototype.atualizaDados = function(){
       }
       if (this.b[i].SIZE == 64){//Adiciona som de esplosão quando esplode as pequenas torres de a
         soundLib.play("explosion");
+        if (this.b[i].y<200){
+          b.atiraB1 = false;
+        }
+        if (this.b[i].y>200){
+          b.atiraB2 = false;
+        }
       }
       if (this.b[i].SIZE == 32){//Adiciona som quando personagem morre
         soundLib.play("dying");
