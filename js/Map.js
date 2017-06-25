@@ -452,6 +452,9 @@ Map.prototype.paraAtirador = function(){//Função que interrompe vx e vy do ati
         this.a[i].pose = 14;
       }
     }
+    if (this.a[i].tempoFlecha < 0 && this.a[i].seletor == 10 || this.a[i].tempoFlecha < 0 && this.a[i].seletor == 11){
+      this.a[i].pose = 4;
+    }
   }
   for (var i = 0; i < this.b.length; i++) {
     if (this.b[i].tempoFlecha > 0){
@@ -466,6 +469,9 @@ Map.prototype.paraAtirador = function(){//Função que interrompe vx e vy do ati
       }else if (this.b[i].dir == 3){
         this.b[i].pose = 14;
       }
+    }
+    if (this.b[i].tempoFlecha < 0 && this.b[i].seletor == 5 || this.b[i].tempoFlecha < 0 && this.b[i].seletor == 6){
+      this.b[i].pose = 6;
     }
   }
 }
