@@ -92,6 +92,7 @@ function init(){
     imglib.load("personagem8", "Personagens x cartas/9.png");
     imglib.load("personagem9", "Personagens x cartas/10.png");
     imglib.load("personagem10", "personagens/king.png");
+    imglib.load("personagem11", "personagens/princesa.png");
 
 
     mapa = new Map(linhas, colunas);
@@ -244,11 +245,11 @@ function configuraMouse(e) {
   if(button == 1) {
     auxiliar = 1;
 
-    mapa.criaPersonagem(4, 5, 10);
-    mapa.criaPersonagem(14, 5, 10);
+    mapa.criaPersonagem(4, 5, 11);
+    mapa.criaPersonagem(14, 5, 11);
 
-    mapa.criaPersonagem(4, 32, 5);
-    mapa.criaPersonagem(14, 32, 5);
+    mapa.criaPersonagem(4, 32, 6);
+    mapa.criaPersonagem(14, 32, 6);
 
 
     mapa.criaPersonagem(9, 5, 10);

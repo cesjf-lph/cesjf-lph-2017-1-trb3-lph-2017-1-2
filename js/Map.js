@@ -277,7 +277,7 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     a.vy = 0;
     a.life = 100;
     a.destroyed = false;
-    if(seletor == 10){
+    if(seletor == 10 || seletor == 11){
       a.mover = false;
     }
     else a.mover = true;//Permite que o personagem se mova
@@ -328,7 +328,7 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     b.vy = 0;
     b.life = 100;
     b.destroyed = false;
-    if(seletor == 5){
+    if(seletor == 5 || seletor == 6){
       b.mover = false;
     }
     else b.mover = true;//Permite que o personagem se mova
