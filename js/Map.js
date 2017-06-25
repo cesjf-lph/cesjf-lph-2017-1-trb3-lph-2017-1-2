@@ -278,6 +278,7 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     a.life = 100;
     a.destroyed = false;
     if(seletor == 10 || seletor == 11){
+      a.pose = 4;
       a.mover = false;
     }
     else a.mover = true;//Permite que o personagem se mova
@@ -329,7 +330,7 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     b.life = 100;
     b.destroyed = false;
     if(seletor == 5 || seletor == 6){
-      b.pose = 2;
+      b.pose = 6;
       b.mover = false;
     }
     else b.mover = true;//Permite que o personagem se mova
@@ -419,13 +420,13 @@ Map.prototype.testaRaio = function(){//Função que testa o personagem mais pró
         menorDist = raio;
       }
       if(raio<=menorDist){
-        if (/*this.a[i].mover == */true && this.a[i].atira == true){
+        if (/*this.a[i].mover == true && */this.a[i].atira == true){
           var dist = Math.sqrt(Math.pow(this.b[j].x - this.a[i].x, 2) + Math.pow(this.b[j].y - this.a[i].y, 2));
           var vx = 200 * (this.b[j].x - this.a[i].x) / dist;
           var vy = 200 * (this.b[j].y - this.a[i].y) / dist;
           this.criaFlecha(this.a[i], vx, vy, "a");//Função que cria as flechas de a
         }
-        if (this.b[j].mover == true && this.b[j].atira == true){
+        if (/*this.b[j].mover == true && */this.b[j].atira == true){
           var dist = Math.sqrt(Math.pow(this.a[i].x - this.b[j].x, 2) + Math.pow(this.a[i].y - this.b[j].y, 2));
           var vx = 200 * (this.a[i].x - this.b[j].x) / dist;
           var vy = 200 * (this.a[i].y - this.b[j].y) / dist;
