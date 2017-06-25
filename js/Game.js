@@ -244,7 +244,7 @@ function configuraMouse(e) {
   if(button == 1) {
     auxiliar = 1;
     mapa.criaPersonagem(9, 5, 10);
-    mapa.criaPersonagem(9, 32, 10);
+    mapa.criaPersonagem(9, 32, 5);
   } else if(button == 2) {
     console.log("Botão de rolagem");
   } else if(button == 3) {

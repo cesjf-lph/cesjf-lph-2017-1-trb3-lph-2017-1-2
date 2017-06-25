@@ -241,7 +241,7 @@ Map.prototype.desenharTiles = function(ctx){//Função que desenha os componente
 }
 
 Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que gera os personagens selecionados na tela
-  if (coluna == 7){//Se a coluna for igual a 7 cria personagem de "a"
+  if (coluna < 20){//Se a coluna for igual a 7 cria personagem de "a"
     var a = new Sprite()
     a.imageLib = this.imageLib;
     a.poses = [//adiciona poses de a
@@ -277,7 +277,7 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     a.vy = 0;
     a.life = 100;
     a.destroyed = false;
-    if(a.seletor == 10){
+    if(seletor == 10){
       a.mover = false;
     }
     else a.mover = true;//Permite que o personagem se mova
@@ -292,7 +292,7 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     }
     this.a.push(a);
   }
-  if (coluna == 30){//Se a coluna for igual a 30 cria personagem de "b"
+  if (coluna > 20){//Se a coluna for igual a 30 cria personagem de "b"
     var b = new Sprite()
     b.imageLib = this.imageLib;
     b.poses = [//adiciona poses de b
@@ -328,7 +328,7 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     b.vy = 0;
     b.life = 100;
     b.destroyed = false;
-    if(b.seletor == 10){
+    if(seletor == 5){
       b.mover = false;
     }
     else b.mover = true;//Permite que o personagem se mova
