@@ -24,7 +24,8 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
           a.SIZE = SIZE * 2;
           a.x = j * SIZE+SIZE/2;
           a.y = i * SIZE+SIZE/2;
-          a.life = 100;
+          a.lifeInicial = lifeTorresPequenas;
+          a.life = a.lifeInicial;
           a.destroyed = false;
           a.mover = false;//Impede que as torres se movam
           a.seletor = 0;//Força do personagem no teste de colisão
@@ -35,7 +36,8 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
           b.SIZE = SIZE * 2;
           b.x = j * SIZE+SIZE/2;
           b.y = i * SIZE+SIZE/2;
-          b.life = 100;
+          b.lifeInicial = lifeTorresPequenas;
+          b.life = b.lifeInicial;
           b.destroyed = false;
           b.mover = false;//Impede que as torres se movam
           b.seletor = 0;//Força do personagem no teste de colisão
@@ -46,7 +48,8 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
           a.SIZE = SIZE * 3;
           a.x = j * SIZE+SIZE/2;
           a.y = i * SIZE+SIZE/2;
-          a.life = 100;
+          a.lifeInicial = lifeTorresPrincipais;
+          a.life = a.lifeInicial;
           a.destroyed = false;
           a.mover = false;//Impede que a torre se mova
           a.seletor = 0;//Força do personagem no teste de colisão
@@ -57,7 +60,8 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
           b.SIZE = SIZE * 3;
           b.x = j * SIZE+SIZE/2;
           b.y = i * SIZE+SIZE/2;
-          b.life = 100;
+          b.lifeInicial = lifeTorresPrincipais;
+          b.life = b.lifeInicial;
           b.destroyed = false;
           b.mover = false;//Impede que a torre se mova
           b.seletor = 0;//Força do personagem no teste de colisão
@@ -268,19 +272,23 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     a.SIZE = 32;
     a.vx = 0;
     a.vy = 0;
+    a.lifeInicial = 100;
     a.life = 100;
     a.destroyed = false;
-    a.raio = 200;
     if(seletor == 10 || seletor == 11){
       a.pose = 4;
       a.mover = false;
       a.y = a.y - 15;
       if (seletor == 10){
         a.y = a.y - 6;
-        a.raio = 400;
+        a.raio = 250;
+      }else{
+        a.raio = 350;
       }
+    }else{
+      a.raio = 150;
+      a.mover = true;//Permite que o personagem se mova
     }
-    else a.mover = true;//Permite que o personagem se mova
     a.seletor = seletor;//Força do personagem em no teste de colisão
     a.dir = "";//Variável de direção para controlar melhor as poses
     a.tempoPunch = 0;//Variável que controla o tempo do som de cada som de punch
@@ -326,19 +334,24 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     b.SIZE = 32;
     b.vx = 0;
     b.vy = 0;
+    b.lifeInicial = 100;
     b.life = 100;
     b.destroyed = false;
-    b.raio = 200;
     if(seletor == 5 || seletor == 6){
       b.pose = 6;
       b.mover = false;
       b.y = b.y - 15;
       if (seletor == 5){
         b.y = b.y - 6;
-        b.raio = 400;
+        b.raio = 250;
+      }else{
+        b.raio = 350;
       }
     }
-    else b.mover = true;//Permite que o personagem se mova
+    else{
+      b.raio = 150;
+      b.mover = true;//Permite que o personagem se mova
+    }
     b.seletor = seletor;//Força do personagem em no teste de colisão
     b.dir = "";//Variável de direção para controlar melhor as poses
     b.tempoPunch = 0;//Variável que controla o tempo do som de cada som de punch
@@ -422,13 +435,7 @@ Map.prototype.testaRaio = function(){//Função que testa o personagem mais pró
         Math.pow(dx,2)+
         Math.pow(dy,2)
       );
-      if(raio<this.a[i].raio){//Teste da distância da menor distancia
-        menorDistA = this.a[i].raio;
-      }
-      if(raio<this.b[j].raio){//Teste da distância da menor distancia
-        menorDistB = this.b[j].raio;
-      }
-      if(raio<=menorDistA){
+      if(raio<=this.a[i].raio){
         if (this.a[i].atira == true){
           var dist = Math.sqrt(Math.pow(this.b[j].x - this.a[i].x, 2) + Math.pow(this.b[j].y - this.a[i].y, 2));
           var vx = 500 * (this.b[j].x - this.a[i].x) / dist;
@@ -436,7 +443,7 @@ Map.prototype.testaRaio = function(){//Função que testa o personagem mais pró
           this.criaFlecha(this.a[i], vx, vy, "a");//Função que cria as flechas de a
         }
       }
-      if(raio<=menorDistB){
+      if(raio<=this.b[j].raio){
         if (this.b[j].atira == true){
           var dist = Math.sqrt(Math.pow(this.a[i].x - this.b[j].x, 2) + Math.pow(this.a[i].y - this.b[j].y, 2));
           var vx = 500 * (this.a[i].x - this.b[j].x) / dist;
