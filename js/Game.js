@@ -56,6 +56,7 @@ function init(){
 
     imglib = new ImageLoader();//Vincula as imagens
     imglib.load("way", "img/way.png");
+    imglib.load("way2", "img/way2.png");
     imglib.load("0", "img/0.png");
     imglib.load("1", "img/1.png");
     imglib.load("2", "img/2.png");

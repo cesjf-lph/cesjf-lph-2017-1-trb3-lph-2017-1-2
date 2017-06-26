@@ -211,6 +211,10 @@ Map.prototype.desenharTiles = function(ctx){//Função que desenha os componente
           break;
         case 100:
           break;
+        case 94:
+        case 67:
+          this.imageLib.drawImageTile(ctx, "way2", 0, 0, 32, j*this.SIZE, i*this.SIZE); //desenha o chão
+          break;
         default:
           this.imageLib.drawImageTile(ctx, "way", 0, 0, 32, j*this.SIZE, i*this.SIZE); //intervalo entre os players
           break
@@ -696,7 +700,7 @@ Map.prototype.atualizaDados = function(){
     if (this.b[i].life <= 0){
       this.b[i].destroyed = true;
       if (this.b[i].SIZE == 96){//Se a vida da torre principal de a estiver zerada a auxiliar passa a valer 4 que nas telas é vitoria de b
-        auxiliar = 3;
+        auxiliar = 4;
         soundLib.play("Ta-Da");//Adiciona som de palmas pela destruião da torre principal
       }
       if (this.b[i].SIZE == 64){//Adiciona som de esplosão quando esplode as pequenas torres de a
