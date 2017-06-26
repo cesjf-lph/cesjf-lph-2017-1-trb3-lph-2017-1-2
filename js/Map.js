@@ -28,8 +28,6 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
           a.destroyed = false;
           a.mover = false;//Impede que as torres se movam
           a.seletor = 0;//Força do personagem no teste de colisão
-          a.tempoAlert = 0;//Variável que controla o tempo do som de alert
-          a.raio = 350;
           this.a.push(a);
         break;
         case 67://Gera os dados das 2 torres de "a"
@@ -41,8 +39,6 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
           b.destroyed = false;
           b.mover = false;//Impede que as torres se movam
           b.seletor = 0;//Força do personagem no teste de colisão
-          b.tempoAlert = 0;//Variável que controla o tempo do som de alert
-          b.raio = 350;
           this.b.push(b);
         break;
         case 99://Gera a torre principal de "a"
@@ -54,8 +50,6 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
           a.destroyed = false;
           a.mover = false;//Impede que a torre se mova
           a.seletor = 0;//Força do personagem no teste de colisão
-          a.tempoAlert = 0;//Variável que controla o tempo do som de alert
-          a.raio = 200;
           this.a.push(a);
         break;
         case 62://Gera a torre principal de "b"
@@ -67,8 +61,6 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
           b.destroyed = false;
           b.mover = false;//Impede que a torre se mova
           b.seletor = 0;//Força do personagem no teste de colisão
-          b.tempoAlert = 0;//Variável que controla o tempo do som de alert
-          b.raio = 200;
           this.b.push(b);
         break;
         default:
@@ -587,34 +579,10 @@ Map.prototype.testarColisao = function(){//Função que chama o teste de colisã
           soundLib.play("punch-on");
         }
 
-        //Adiciona som de alerta quando energia da torre principal de a chega a 30%
-        if (this.a[i].SIZE == 96 && this.a[i].life < 30 && this.a[i].tempoAlert < 0){
-          this.a[i].tempoAlert = 1;
-          soundLib.play("alert");
-        }
-
-        //Adiciona som de alerta quando energia das torres pequenas de a chega a 30%
-        if (this.a[i].SIZE == 64 && this.a[i].life < 30 && this.a[i].tempoAlert < 0){
-          this.a[i].tempoAlert = 1;
-          soundLib.play("alert");
-        }
-
         //Adiciona som quando b esta em batalha
         if (this.b[j].tempoPunch < 0){
           this.b[j].tempoPunch = 1.3;
           soundLib.play("punch-on");
-        }
-
-        //Adiciona som de alerta quando energia da torre principal de a chega a 30%
-        if (this.b[j].SIZE == 96 && this.b[j].life < 30 && this.b[j].tempoAlert < 0){
-          this.b[j].tempoAlert = 1;
-          soundLib.play("alert");
-        }
-
-        //Adiciona som de alerta quando energia das torres pequenas de b chega a 30%
-        if (this.b[j].SIZE == 64 && this.b[j].life < 30 && this.b[j].tempoAlert < 0){
-          this.b[j].tempoAlert = 1;
-          soundLib.play("alert");
         }
 
         //Quando colide consome a life de a e b
