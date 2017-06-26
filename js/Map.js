@@ -211,7 +211,7 @@ Map.prototype.desenharTiles = function(ctx){//Função que desenha os componente
         case 100:
           break;
         default:
-          this.imageLib.drawImageTile(ctx, "chao", 0, 0, 32, j*this.SIZE, i*this.SIZE); //intervalo entre os players
+          this.imageLib.drawImageTile(ctx, "way", 0, 0, 32, j*this.SIZE, i*this.SIZE); //intervalo entre os players
           break
       }
     }

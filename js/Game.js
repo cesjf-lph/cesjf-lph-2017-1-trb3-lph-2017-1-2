@@ -53,7 +53,7 @@ function init(){
     soundLib.load("criar", "mp3/rider_charge_03.mp3");
 
     imglib = new ImageLoader();//Vincula as imagens
-    imglib.load("chao", "img/chao.png");
+    imglib.load("way", "img/way.png");
     imglib.load("0", "img/0.png");
     imglib.load("1", "img/1.png");
     imglib.load("2", "img/2.png");
@@ -65,34 +65,34 @@ function init(){
     imglib.load("7", "img/7.png");
     imglib.load("8", "img/8.png");
     imglib.load("9", "img/9.png");
-    imglib.load("10", "img/10.png");
-    imglib.load("11", "img/11.png");
-    imglib.load("12", "img/12.png");
-    imglib.load("13", "img/13.png");
-    imglib.load("14", "img/14.png");
-    imglib.load("15", "img/15.png");
-    imglib.load("16", "img/16.png");
-    imglib.load("17", "img/17.png");
-    imglib.load("18", "img/18.png");
-    imglib.load("19", "img/19.png");
+    imglib.load("10", "img/Personagem 1 - Carta.png");
+    imglib.load("11", "img/Personagem 2 - Carta.png");
+    imglib.load("12", "img/Personagem 3 - Carta.png");
+    imglib.load("13", "img/Personagem 4 - Carta.png");
+    imglib.load("14", "img/Personagem 5 - Carta.png");
+    imglib.load("15", "img/Personagem 6 - Carta.png");
+    imglib.load("16", "img/Personagem 7 - Carta.png");
+    imglib.load("17", "img/Personagem 8 - Carta.png");
+    imglib.load("18", "img/Personagem 9 - Carta.png");
+    imglib.load("19", "img/Personagem 10 - Carta.png");
     imglib.load("79", "img/79.png");
     imglib.load("80", "img/80.png");
     imglib.load("81", "img/81.png");
     imglib.load("82", "img/82.png");
     imglib.load("tower", "img/tower.png");
     imglib.load("castle", "img/castle.png");
-    imglib.load("personagem0", "Personagens x cartas/1.png");
-    imglib.load("personagem1", "Personagens x cartas/2.png");
-    imglib.load("personagem2", "Personagens x cartas/3.png");
-    imglib.load("personagem3", "Personagens x cartas/4.png");
-    imglib.load("personagem4", "Personagens x cartas/5.png");
-    imglib.load("personagem5", "Personagens x cartas/6.png");
-    imglib.load("personagem6", "Personagens x cartas/7.png");
-    imglib.load("personagem7", "Personagens x cartas/8.png");
-    imglib.load("personagem8", "Personagens x cartas/9.png");
-    imglib.load("personagem9", "Personagens x cartas/10.png");
-    imglib.load("personagem10", "personagens/king.png");
-    imglib.load("personagem11", "personagens/princesa.png");
+    imglib.load("personagem0", "img/Personagem 1.png");
+    imglib.load("personagem1", "img/Personagem 2.png");
+    imglib.load("personagem2", "img/Personagem 3.png");
+    imglib.load("personagem3", "img/Personagem 4.png");
+    imglib.load("personagem4", "img/Personagem 5.png");
+    imglib.load("personagem5", "img/Personagem 6.png");
+    imglib.load("personagem6", "img/Personagem 7.png");
+    imglib.load("personagem7", "img/Personagem 8.png");
+    imglib.load("personagem8", "img/Personagem 9.png");
+    imglib.load("personagem9", "img/Personagem 10.png");
+    imglib.load("personagem10", "img/Personagem 12 - Rei.png");
+    imglib.load("personagem11", "img/Personagem 11 - Princesa.png");
 
 
     mapa = new Map(linhas, colunas);
