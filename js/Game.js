@@ -308,9 +308,8 @@ function tela(ctx){
   if(auxiliar == 2){
     var texto = "Jogo Pausado! ";
     ctx.font = "3em fantasy";
-    ctx.fillStyle = "blue";
+    ctx.fillStyle = "white";
     ctx.fillText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
-    ctx.strokeText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
     ctx.globalAlpha = 1.0;
     cancelAnimationFrame(id);
   }
@@ -336,35 +335,39 @@ function tela(ctx){
   }
   if (auxiliar == 5){
       var texto = "Instruções do jogo";
-      ctx.fillStyle = "green";
-      ctx.strokeStyle = "yellow";
-      ctx.globalAlpha = 0.50;
+      ctx.fillStyle = "#065671";
       ctx.fillRect(0, 0, eCanvas.width, eCanvas.height);
       ctx.font = "2em fantasy";
-      ctx.fillStyle = "blue";
+      ctx.fillStyle = "white";
       ctx.fillText(texto, eCanvas.width / 2, 50);
-      ctx.strokeText(texto, eCanvas.width / 2, 50);
+      //ctx.strokeText(texto, eCanvas.width / 2, 50);
       var texto2 = "Objetivo do Jogo";
       ctx.fillText(texto2, eCanvas.width / 2, 450);
-      ctx.strokeText(texto2, eCanvas.width / 2, 450);
-      ctx.font = "1.2em fantasy";
+      //ctx.strokeText(texto2, eCanvas.width / 2, 450);
+      ctx.font = "1.4em arial";
+      ctx.textAlign="left";
       ctx.fillStyle = "black";
-      var texto3 = "* Para seleção de personagens de A, utilize as teclas 'W' e 'S' e para B utilize as teclas 'Cima' e 'Baixo'";
-      ctx.fillText(texto3, eCanvas.width / 3.08, 100);
-      var texto4 = "* Para colocar personagens de A para a batalha, utilize as teclas 'A' para lançamento na torre de cima e 'D' para lançamento na torre de baixo";
-      ctx.fillText(texto4, eCanvas.width / 2.2, 150);
-      var texto5 = "* Para colocar personagens de B para a batalha, utilize as teclas 'Direita' para lançamento na torre de cima e 'Esquerda' para lançamento na torre de baixo";
-      ctx.fillText(texto5, eCanvas.width / 2, 200);
-      var texto6 = "* Para colocar personagens em campo é necessário que a barra de energia tenha carga considerável";
-      ctx.fillText(texto6, eCanvas.width / 3.02, 250);
-      var texto7 = "* Cada personagem causa uma quantidade diferente de dano ao oponente";
-      ctx.fillText(texto7, eCanvas.width / 4.1, 300);
-      var texto8 = "* Arqueiros atiram a uma certa distância, enquanto os demais personagens golpeiam os oponentes";
-      ctx.fillText(texto8, eCanvas.width / 3.07, 350);
-      var texto9 = "* Para pausar jogo utilize a tecla 'P'";
-      ctx.fillText(texto9, eCanvas.width / 8.5, 400);
-      var texto10 = "* O primeiro jogador que destruir a torre central do adversário vence!";
-      ctx.fillText(texto10, eCanvas.width / 4.4, 500);
-      //cancelAnimationFrame(id);
+      var texto = "* Para seleção de personagens de A, utilize as teclas 'W' e 'S' e para B utilize as teclas 'Cima' e 'Baixo'";
+      ctx.fillText(texto, 10, 100);
+      var texto = "* Para colocar personagens de A para a batalha, utilize as teclas 'A' para lançamento na torre de cima e 'D' para";
+      ctx.fillText(texto, 10, 130);
+      var texto = "lançamento na torre de baixo";
+      ctx.fillText(texto, 10, 155);
+      var texto = "* Para colocar personagens de B para a batalha, utilize as teclas 'Direita' para lançamento na torre de cima e 'Esquerda'";
+      ctx.fillText(texto, 10, 190);
+      var texto = "para lançamento na torre de baixo"
+      ctx.fillText(texto, 10, 215);
+      var texto = "* Para colocar personagens em campo é necessário que a barra de energia tenha carga considerável";
+      ctx.fillText(texto, 10, 250);
+      var texto = "* Cada personagem causa uma quantidade diferente de dano ao oponente";
+      ctx.fillText(texto, 10, 280);
+      var texto = "* Arqueiros atiram a uma certa distância, enquanto os demais personagens golpeiam os oponentes";
+      ctx.fillText(texto, 10, 310);
+      var texto = "* Para pausar jogo utilize a tecla 'P'";
+      ctx.fillText(texto, 10, 340);
+      var texto = "* O primeiro jogador que destruir a torre central do adversário vence!";
+      ctx.fillText(texto, 10, 500);
+      ctx.globalAlpha = 1.0;
+      cancelAnimationFrame(id);
     }
 }
