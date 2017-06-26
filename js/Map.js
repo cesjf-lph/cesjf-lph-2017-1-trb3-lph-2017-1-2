@@ -567,10 +567,34 @@ Map.prototype.testarColisao = function(){//Função que chama o teste de colisã
           soundLib.play("punch-on");
         }
 
+        //Adiciona som de alerta quando energia da torre principal de a chega a 30%
+        if (this.a[i].SIZE == 96 && this.a[i].life < 30 && this.a[i].tempoAlert < 0){
+          this.a[i].tempoAlert = 1;
+          soundLib.play("alert");
+        }
+
+        //Adiciona som de alerta quando energia das torres pequenas de a chega a 30%
+        if (this.a[i].SIZE == 64 && this.a[i].life < 30 && this.a[i].tempoAlert < 0){
+          this.a[i].tempoAlert = 1;
+          soundLib.play("alert");
+        }
+
         //Adiciona som quando b esta em batalha
         if (this.b[j].tempoPunch < 0){
           this.b[j].tempoPunch = 1.3;
           soundLib.play("punch-on");
+        }
+
+        //Adiciona som de alerta quando energia da torre principal de a chega a 30%
+        if (this.b[j].SIZE == 96 && this.b[j].life < 30 && this.b[j].tempoAlert < 0){
+          this.b[j].tempoAlert = 1;
+          soundLib.play("alert");
+        }
+
+        //Adiciona som de alerta quando energia das torres pequenas de b chega a 30%
+        if (this.b[j].SIZE == 64 && this.b[j].life < 30 && this.b[j].tempoAlert < 0){
+          this.b[j].tempoAlert = 1;
+          soundLib.play("alert");
         }
 
         //Quando colide consome a life de a e b
@@ -676,18 +700,6 @@ Map.prototype.atualizaDados = function(){
         soundLib.play("dying");
       }
     }
-
-    //Adiciona som de alerta quando energia da torre principal de a chega a 30%
-    if (this.a[i].SIZE == 96 && this.a[i].life < 30 && this.a[i].tempoAlert < 0){
-      this.a[i].tempoAlert = 1;
-      soundLib.play("alert");
-    }
-
-    //Adiciona som de alerta quando energia das torres pequenas de a chega a 30%
-    if (this.a[i].SIZE == 64 && this.a[i].life < 30 && this.a[i].tempoAlert < 0){
-      this.a[i].tempoAlert = 1;
-      soundLib.play("alert");
-    }
   }
   for (var i = 0; i < this.b.length; i++){
     //Subtrai tempoPunch de acordo com dt
@@ -717,18 +729,6 @@ Map.prototype.atualizaDados = function(){
       if (this.b[i].SIZE == 32){//Adiciona som quando personagem morre
         soundLib.play("dying");
       }
-    }
-
-    //Adiciona som de alerta quando energia da torre principal de a chega a 30%
-    if (this.b[i].SIZE == 96 && this.b[i].life < 30 && this.b[i].tempoAlert < 0){
-      this.b[i].tempoAlert = 1;
-      soundLib.play("alert");
-    }
-
-    //Adiciona som de alerta quando energia das torres pequenas de b chega a 30%
-    if (this.b[i].SIZE == 64 && this.b[i].life < 30 && this.b[i].tempoAlert < 0){
-      this.b[i].tempoAlert = 1;
-      soundLib.play("alert");
     }
   }
 }
