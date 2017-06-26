@@ -31,7 +31,7 @@ Sprite.prototype.desenharPose = function(ctx) {
     );
   }
 	//Desenha a barra de life de cada personagem
-	if (this.seletor != 5 && this.seletor != 6 && this.seletor != 10 && this.seletor != 11){
+	if (this.seletor != 6 && this.seletor != 7){
 			ctx.fillStyle = "hsl("+this.life/this.lifeInicial*120+",100%,50%)";
 			ctx.fillRect (this.x-this.SIZE/2, this.y+this.SIZE/2+2, this.life/this.lifeInicial*this.SIZE, 2);
 	}
