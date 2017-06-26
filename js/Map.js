@@ -29,6 +29,7 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
           a.mover = false;//Impede que as torres se movam
           a.seletor = 0;//Força do personagem no teste de colisão
           a.tempoAlert = 0;//Variável que controla o tempo do som de alert
+          a.raio = 350;
           this.a.push(a);
         break;
         case 67://Gera os dados das 2 torres de "a"
@@ -41,6 +42,7 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
           b.mover = false;//Impede que as torres se movam
           b.seletor = 0;//Força do personagem no teste de colisão
           b.tempoAlert = 0;//Variável que controla o tempo do som de alert
+          b.raio = 350;
           this.b.push(b);
         break;
         case 99://Gera a torre principal de "a"
@@ -53,6 +55,7 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
           a.mover = false;//Impede que a torre se mova
           a.seletor = 0;//Força do personagem no teste de colisão
           a.tempoAlert = 0;//Variável que controla o tempo do som de alert
+          a.raio = 200;
           this.a.push(a);
         break;
         case 62://Gera a torre principal de "b"
@@ -65,6 +68,7 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
           b.mover = false;//Impede que a torre se mova
           b.seletor = 0;//Força do personagem no teste de colisão
           b.tempoAlert = 0;//Variável que controla o tempo do som de alert
+          b.raio = 200;
           this.b.push(b);
         break;
         default:
@@ -274,12 +278,14 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     a.vy = 0;
     a.life = 100;
     a.destroyed = false;
+    a.raio = 200;
     if(seletor == 10 || seletor == 11){
       a.pose = 4;
       a.mover = false;
       a.y = a.y - 15;
       if (seletor == 10){
         a.y = a.y - 6;
+        a.raio = 400;
       }
     }
     else a.mover = true;//Permite que o personagem se mova
@@ -330,12 +336,14 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     b.vy = 0;
     b.life = 100;
     b.destroyed = false;
+    b.raio = 200;
     if(seletor == 5 || seletor == 6){
       b.pose = 6;
       b.mover = false;
       b.y = b.y - 15;
       if (seletor == 5){
         b.y = b.y - 6;
+        b.raio = 400;
       }
     }
     else b.mover = true;//Permite que o personagem se mova
@@ -412,7 +420,8 @@ Map.prototype.moverPersonagens = function(map, dt){//Função que acrescenta val
 }
 
 Map.prototype.testaRaio = function(){//Função que testa o personagem mais próximo para atirar
-  var menorDist = 500;//Variável para testar menor distância
+  var menorDistA = "";//Variável para testar menor distância
+  var menorDistB = "";//Variável para testar menor distância
   for (var i = 0; i < this.a.length; i++) {
     for (var j = 0; j < this.b.length; j++) {
       var dx = this.a[i].x - this.b[j].x;
@@ -421,17 +430,22 @@ Map.prototype.testaRaio = function(){//Função que testa o personagem mais pró
         Math.pow(dx,2)+
         Math.pow(dy,2)
       );
-      if(raio<500){//Teste da distância da menor distancia
-        menorDist = raio;
+      if(raio<this.a[i].raio){//Teste da distância da menor distancia
+        menorDistA = this.a[i].raio;
       }
-      if(raio<=menorDist){
-        if (/*this.a[i].mover == true && */this.a[i].atira == true){
+      if(raio<this.b[j].raio){//Teste da distância da menor distancia
+        menorDistB = this.b[j].raio;
+      }
+      if(raio<=menorDistA){
+        if (this.a[i].atira == true){
           var dist = Math.sqrt(Math.pow(this.b[j].x - this.a[i].x, 2) + Math.pow(this.b[j].y - this.a[i].y, 2));
           var vx = 500 * (this.b[j].x - this.a[i].x) / dist;
           var vy = 500 * (this.b[j].y - this.a[i].y) / dist;
           this.criaFlecha(this.a[i], vx, vy, "a");//Função que cria as flechas de a
         }
-        if (/*this.b[j].mover == true && */this.b[j].atira == true){
+      }
+      if(raio<=menorDistB){
+        if (this.b[j].atira == true){
           var dist = Math.sqrt(Math.pow(this.a[i].x - this.b[j].x, 2) + Math.pow(this.a[i].y - this.b[j].y, 2));
           var vx = 500 * (this.a[i].x - this.b[j].x) / dist;
           var vy = 500 * (this.a[i].y - this.b[j].y) / dist;
