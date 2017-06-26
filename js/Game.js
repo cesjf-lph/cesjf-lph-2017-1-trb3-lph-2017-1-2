@@ -127,9 +127,11 @@ function passo(){
   	dt = (agora - antes) / 1000;
     eCanvas.style.border = "5px solid black";
   	ctx.clearRect(0, 0, eCanvas.width, eCanvas.height);
+    if (auxiliar != 0){
+      mapa.desenhar(ctx);
+    }
     tela(ctx);
     if(auxiliar == 1){
-      mapa.desenhar(ctx);
       mapa.moverPersonagens(mapa, dt);
       mapa.testarColisao();
       mapa.testaRaio();
@@ -305,38 +307,31 @@ function tela(ctx){
   }
   if(auxiliar == 2){
     var texto = "Jogo Pausado! ";
-    ctx.fillStyle = "green";
-    ctx.strokeStyle = "yellow";
-    ctx.globalAlpha = 0.50;
-    ctx.fillRect(0, 0, eCanvas.width, eCanvas.height);
     ctx.font = "3em fantasy";
     ctx.fillStyle = "blue";
     ctx.fillText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
     ctx.strokeText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
+    ctx.globalAlpha = 1.0;
     cancelAnimationFrame(id);
   }
   if(auxiliar == 3){
     var texto = "Jogador A venceu!! ";
-    ctx.fillStyle = "green";
-    ctx.strokeStyle = "yellow";
-    ctx.globalAlpha = 0.50;
-    ctx.fillRect(0, 0, eCanvas.width, eCanvas.height);
     ctx.font = "3em fantasy";
-    ctx.fillStyle = "blue";
+    ctx.fillStyle = "#065671";
+    ctx.fillRect(0, 0, eCanvas.width, eCanvas.height);
+    ctx.fillStyle = "white";
     ctx.fillText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
-    ctx.strokeText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
+    ctx.globalAlpha = 1.0;
     cancelAnimationFrame(id);
   }
   if(auxiliar == 4){
     var texto = "Jogador B venceu!! ";
-    ctx.fillStyle = "green";
-    ctx.strokeStyle = "yellow";
-    ctx.globalAlpha = 0.50;
-    ctx.fillRect(0, 0, eCanvas.width, eCanvas.height);
     ctx.font = "3em fantasy";
-    ctx.fillStyle = "blue";
+    ctx.fillStyle = "#065671";
+    ctx.fillRect(0, 0, eCanvas.width, eCanvas.height);
+    ctx.fillStyle = "white";
     ctx.fillText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
-    ctx.strokeText(texto, (eCanvas.width / 2), (eCanvas.height / 2));
+    ctx.globalAlpha = 1.0;
     cancelAnimationFrame(id);
   }
   if (auxiliar == 5){
@@ -370,6 +365,6 @@ function tela(ctx){
       ctx.fillText(texto9, eCanvas.width / 8.5, 400);
       var texto10 = "* O primeiro jogador que destruir a torre central do adversário vence!";
       ctx.fillText(texto10, eCanvas.width / 4.4, 500);
-      cancelAnimationFrame(id);
+      //cancelAnimationFrame(id);
     }
 }
