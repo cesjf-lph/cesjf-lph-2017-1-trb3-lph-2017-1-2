@@ -534,6 +534,11 @@ Map.prototype.criaFlecha = function(arqueiro, vx, vy, quemAtira){//Função que 
     }else if(flecha.vx < 0 && flecha.vy == 0){
       arqueiro.dir = 3;
     }
+    if (arqueiro.seletor == 6 || arqueiro.seletor == 7){
+      flecha.forca = arqueiro.seletor;
+    }else{
+      flecha.forca = 5 * arqueiro.seletor;
+    }
     arqueiro.tempoFlecha = 1;//Tempo entre uma flecha e outra
     flecha.tempoFlecha = 1;//Tempo para movimentar a flecha
     flecha.tempoSomFlecha = 1;//Tempo para som da flecha
@@ -559,7 +564,7 @@ Map.prototype.testarColisaoFlechas = function(){//Função que chama o teste de 
     if (this.flechas[i].quemAtira == "a"){
       for (var j = 0; j < this.b.length; j++) {
         if(this.flechas[i].colidiuCom(this.b[j])){
-          this.b[j].life = this.b[j].life - 10;
+          this.b[j].life = this.b[j].life - this.flechas[i].forca;
           this.flechas[i].destroyed = true;
         }
       }
@@ -569,7 +574,7 @@ Map.prototype.testarColisaoFlechas = function(){//Função que chama o teste de 
     if (this.flechas[i].quemAtira == "b"){
       for (var j = 0; j < this.a.length; j++) {
         if(this.flechas[i].colidiuCom(this.a[j])){
-          this.a[j].life = this.a[j].life - 10;
+          this.a[j].life = this.a[j].life - this.flechas[i].forca;
           this.flechas[i].destroyed = true;
         }
       }
