@@ -76,9 +76,6 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
 Map.prototype.desenhar = function(ctx){//Função que desenha elementos na tela
   this.informacoes();//Função que desenha elementos auxiliares nas laterais e topo da tela
   this.desenharTiles(ctx);//Função que desenha os componentes imóveis do mapa
-  for (var i = 0; i < this.flechas.length; i++) {//Chama o desenho do "b"
-    this.flechas[i].desenharFlecha(ctx);//Função que desenha os personagens e as barras de life de b
-  }
   for (var i = 0; i < this.a.length; i++) {
     this.a[i].desenharPose(ctx);//Função que desenha os personagens e as barras de life de a
   }
@@ -526,6 +523,7 @@ Map.prototype.criaFlecha = function(arqueiro, vx, vy, quemAtira){//Função que 
 Map.prototype.moverFlechas = function(dt){//Função que movimenta as flechas
   for (var i = 0; i < this.flechas.length; i++){//Chama o movimenta do Sprite para as flechas
     if (this.flechas[i].tempoFlecha < 0.5){//Controla o tempo que começa mover as flechas
+      this.flechas[i].desenharFlecha(ctx);
       this.flechas[i].movimenta(dt);
       if (this.flechas[i].tempoSomFlecha < 0.5 && this.flechas[i].tempoSomFlecha > -1){//Controla o tempo que sai o som
         soundLib.play("punch-off");
