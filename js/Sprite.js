@@ -41,24 +41,8 @@ Sprite.prototype.desenharPose = function(ctx) {
 	}
 };
 
-Sprite.prototype.desenharLimites = function(ctx) {//Função que desenha os limites dos personagens
-  ctx.fillStyle = "gold";
-  ctx.fillRect(
-    this.x-this.SIZE/2,
-    this.y-this.SIZE/2-17,
-    this.SIZE, this.SIZE
-  );
-  ctx.strokeStyle = "gold";
-  ctx.strokeRect(
-    this.x-this.SIZE/2,
-    this.y-this.SIZE/2-17,
-    this.SIZE, this.SIZE
-  );
-};
-
 Sprite.prototype.desenharFlecha = function(ctx) {//Função que desenha os limites dos personagens
 	var angle = Math.atan(this.vy/this.vx);
-
 	ctx.save();
 	ctx.translate(this.x, this.y);
 	ctx.rotate(angle);
@@ -81,7 +65,6 @@ Sprite.prototype.desenharFlecha = function(ctx) {//Função que desenha os limit
 Sprite.prototype.movimenta = function(dt) {//Função que movimenta os personagens
   this.x = this.x + this.vx * dt;
   this.y = this.y + this.vy * dt;
-
 };
 
 Sprite.prototype.colidiuCom = function(alvo){//Função que testa colisão dos personagens

@@ -99,7 +99,6 @@ function init(){
     imglib.load("personagemB2", "img/Personagem 9.png");
     imglib.load("personagemB1", "img/Personagem 10.png");
 
-
     mapa = new Map(linhas, colunas);
     mapa.imageLib = imglib;
     mapa.loadMap(casasMapa);
@@ -283,20 +282,13 @@ function configuraMouse(e) {
   var button = e.which || e.button;
   if(button == 1 && auxiliar == 0) {
     auxiliar = 1;
-
+    //Cria os reis e as princesas em cima das torres
     mapa.criaPersonagem(4, 5, 6);
     mapa.criaPersonagem(14, 5, 6);
-
     mapa.criaPersonagem(4, 32, 6);
     mapa.criaPersonagem(14, 32, 6);
-
-
     mapa.criaPersonagem(9, 5, 7);
     mapa.criaPersonagem(9, 32, 7);
-  } else if(button == 2) {
-    console.log("Botão de rolagem");
-  } else if(button == 3) {
-    console.log("Botão direito");
   }
 };
 
@@ -341,10 +333,8 @@ function tela(ctx){
       ctx.font = "2em fantasy";
       ctx.fillStyle = "white";
       ctx.fillText(texto, eCanvas.width / 2, 50);
-      //ctx.strokeText(texto, eCanvas.width / 2, 50);
       var texto2 = "Objetivo do Jogo";
       ctx.fillText(texto2, eCanvas.width / 2, 450);
-      //ctx.strokeText(texto2, eCanvas.width / 2, 450);
       ctx.font = "1.4em arial";
       ctx.textAlign="left";
       ctx.fillStyle = "black";
