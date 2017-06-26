@@ -66,14 +66,14 @@ Sprite.prototype.desenharFlecha = function(ctx) {//Função que desenha os limit
   ctx.fillRect(
     0-16,
     0-1-17,
-    32, 2
+    32, 1.5
   );
 	ctx.lineWidth = 1;
   ctx.strokeStyle = "black";
   ctx.strokeRect(
     0-16,
     0-1-17,
-    32, 2
+    32, 1.5
   );
 	ctx.restore();
 };

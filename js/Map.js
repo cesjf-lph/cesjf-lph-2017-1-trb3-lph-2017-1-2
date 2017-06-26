@@ -535,7 +535,7 @@ Map.prototype.criaFlecha = function(arqueiro, vx, vy, quemAtira){//Função que 
       arqueiro.dir = 3;
     }
     if (arqueiro.seletor == 6 || arqueiro.seletor == 7){
-      flecha.forca = arqueiro.seletor;
+      flecha.forca = 10;
     }else{
       flecha.forca = 5 * arqueiro.seletor;
     }
