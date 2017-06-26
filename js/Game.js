@@ -250,7 +250,7 @@ function configuraControles() {
 function configuraMouse(e) {
   e = e || window.event;
   var button = e.which || e.button;
-  if(button == 1) {
+  if(button == 1 && auxiliar == 0) {
     auxiliar = 1;
 
     mapa.criaPersonagem(4, 5, 11);
