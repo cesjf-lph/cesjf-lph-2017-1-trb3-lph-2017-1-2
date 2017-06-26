@@ -433,6 +433,9 @@ Map.prototype.testaRaio = function(){//Função que testa o personagem mais pró
           var vx = 200 * (this.b[j].x - this.a[i].x) / dist;
           var vy = 200 * (this.b[j].y - this.a[i].y) / dist;
           this.criaFlecha(this.a[i], vx, vy, "a");//Função que cria as flechas de a
+          var teste = Math.sin(dy / menorDist)
+          var teste = Math.asin(teste)*Math.PI*180
+          console.log(teste)
         }
         if (/*this.b[j].mover == true && */this.b[j].atira == true){
           var dist = Math.sqrt(Math.pow(this.a[i].x - this.b[j].x, 2) + Math.pow(this.a[i].y - this.b[j].y, 2));
