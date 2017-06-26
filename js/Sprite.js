@@ -15,6 +15,10 @@ function Sprite(){
 
 Sprite.prototype.desenharPose = function(ctx) {
   if(this.SIZE == 32){
+		this.frame += this.poses[this.pose].time * dt;
+		if (this.frame > this.poses[this.pose].colMax + 1) {
+			this.frame = this.poses[this.pose].col;
+		}
     ctx.fillStyle = "black";
     ctx.globalAlpha = 0.4;
     ctx.beginPath();
@@ -77,10 +81,7 @@ Sprite.prototype.desenharFlecha = function(ctx) {//Função que desenha os limit
 Sprite.prototype.movimenta = function(dt) {//Função que movimenta os personagens
   this.x = this.x + this.vx * dt;
   this.y = this.y + this.vy * dt;
-  this.frame += this.poses[this.pose].time * dt;
-  if (this.frame > this.poses[this.pose].colMax + 1) {
-    this.frame = this.poses[this.pose].col;
-  }
+
 };
 
 Sprite.prototype.colidiuCom = function(alvo){//Função que testa colisão dos personagens

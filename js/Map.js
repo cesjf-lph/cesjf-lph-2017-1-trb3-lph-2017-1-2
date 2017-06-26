@@ -27,6 +27,7 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
           a.lifeInicial = lifeTorresPequenas;
           a.life = a.lifeInicial;
           a.destroyed = false;
+          a.atira = false;
           a.mover = false;//Impede que as torres se movam
           a.seletor = 0;//Força do personagem no teste de colisão
           this.a.push(a);
@@ -39,6 +40,7 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
           b.lifeInicial = lifeTorresPequenas;
           b.life = b.lifeInicial;
           b.destroyed = false;
+          a.atira = false;
           b.mover = false;//Impede que as torres se movam
           b.seletor = 0;//Força do personagem no teste de colisão
           this.b.push(b);
@@ -51,6 +53,7 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
           a.lifeInicial = lifeTorresPrincipais;
           a.life = a.lifeInicial;
           a.destroyed = false;
+          a.atira = false;
           a.mover = false;//Impede que a torre se mova
           a.seletor = 0;//Força do personagem no teste de colisão
           this.a.push(a);
@@ -63,6 +66,7 @@ Map.prototype.loadMap = function(map) {//Função que carrega o mapa de acordo c
           b.lifeInicial = lifeTorresPrincipais;
           b.life = b.lifeInicial;
           b.destroyed = false;
+          b.atira = false;
           b.mover = false;//Impede que a torre se mova
           b.seletor = 0;//Força do personagem no teste de colisão
           this.b.push(b);
@@ -367,10 +371,14 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
 
 Map.prototype.moverPersonagens = function(map, dt){//Função que acrescenta valor a vy e vx para o personagem se mover
   for (var i = 0; i < this.a.length; i++){//Chama o movimenta do Sprite para a
+    if (this.a[i].mover == true){
     this.a[i].movimenta(dt);
   }
+  }
   for (var i = 0; i < this.b.length; i++){//Chama o movimenta do Sprite para b
+    if (this.b[i].mover == true){
     this.b[i].movimenta(dt);
+  }
   }
   for (var i = 0; i < this.a.length; i++) {
     for (var j = 0; j < this.b.length; j++) {
@@ -581,20 +589,18 @@ Map.prototype.testarColisao = function(){//Função que chama o teste de colisã
         this.b[j].vy = 0;
 
         //Adiciona som quando a esta em batalha
-        if (this.a[i].tempoPunch < 0){
+        if (this.a[i].tempoPunch < 0 && this.a[i].atira == false && this.a[i].seletor > 0){
           this.a[i].tempoPunch = 1.3;
+          this.b[j].life = this.b[j].life - 10 * this.a[i].seletor;
           soundLib.play("punch-on");
         }
 
         //Adiciona som quando b esta em batalha
-        if (this.b[j].tempoPunch < 0){
+        if (this.b[j].tempoPunch < 0 && this.b[j].atira == false && this.b[j].seletor > 0){
           this.b[j].tempoPunch = 1.3;
+          this.a[i].life = this.a[i].life - 10 * this.b[j].seletor;
           soundLib.play("punch-on");
         }
-
-        //Quando colide consome a life de a e b
-        this.a[i].life = this.a[i].life - dt*(20+20*this.a[i].seletor);//Consome a life do personagem a
-        this.b[j].life = this.b[j].life - dt*(20+20*this.b[j].seletor);//Consome a life do personagem b
 
         //Controla a pose de a em batalha de acordo com o dir
         if (this.a[i].dir == 0){
