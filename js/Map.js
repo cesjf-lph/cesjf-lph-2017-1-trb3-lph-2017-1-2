@@ -700,7 +700,7 @@ Map.prototype.atualizaDados = function(){
     if (this.b[i].life <= 0){
       this.b[i].destroyed = true;
       if (this.b[i].SIZE == 96){//Se a vida da torre principal de a estiver zerada a auxiliar passa a valer 4 que nas telas é vitoria de b
-        auxiliar = 4;
+        auxiliar = 3;
         soundLib.play("Ta-Da");//Adiciona som de palmas pela destruião da torre principal
       }
       if (this.b[i].SIZE == 64){//Adiciona som de esplosão quando esplode as pequenas torres de a
