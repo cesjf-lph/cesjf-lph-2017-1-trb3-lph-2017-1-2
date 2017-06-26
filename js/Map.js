@@ -691,9 +691,11 @@ Map.prototype.atualizaDados = function(){
         soundLib.play("explosion");
         if (this.a[i].y<200){
           a.atiraA1 = false;
+          this.a[3].destroyed = true;
         }
         if (this.a[i].y>200){
           a.atiraA2 = false;
+          this.a[4].destroyed = true;
         }
       }
       if (this.a[i].SIZE == 32){//Adiciona som quando personagem morre
@@ -721,9 +723,11 @@ Map.prototype.atualizaDados = function(){
         soundLib.play("explosion");
         if (this.b[i].y<200){
           b.atiraB1 = false;
+          this.b[3].destroyed = true;
         }
         if (this.b[i].y>200){
           b.atiraB2 = false;
+          this.b[4].destroyed = true;
         }
       }
       if (this.b[i].SIZE == 32){//Adiciona som quando personagem morre
