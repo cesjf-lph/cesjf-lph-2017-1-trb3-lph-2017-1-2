@@ -280,6 +280,10 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     if(seletor == 10 || seletor == 11){
       a.pose = 4;
       a.mover = false;
+      a.y = a.y - 15;
+      if (seletor == 10){
+        a.y = a.y - 6;
+      }
     }
     else a.mover = true;//Permite que o personagem se mova
     a.seletor = seletor;//Força do personagem em no teste de colisão
@@ -332,6 +336,10 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
     if(seletor == 5 || seletor == 6){
       b.pose = 6;
       b.mover = false;
+      b.y = b.y - 15;
+      if (seletor == 5){
+        b.y = b.y - 6;
+      }
     }
     else b.mover = true;//Permite que o personagem se mova
     b.seletor = seletor;//Força do personagem em no teste de colisão
