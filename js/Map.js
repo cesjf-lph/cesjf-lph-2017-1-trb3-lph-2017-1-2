@@ -77,7 +77,7 @@ Map.prototype.desenhar = function(ctx){//Função que desenha elementos na tela
   this.informacoes();//Função que desenha elementos auxiliares nas laterais e topo da tela
   this.desenharTiles(ctx);//Função que desenha os componentes imóveis do mapa
   for (var i = 0; i < this.flechas.length; i++) {//Chama o desenho do "b"
-    this.flechas[i].desenharLimites(ctx);//Função que desenha os personagens e as barras de life de b
+    this.flechas[i].desenharFlecha(ctx);//Função que desenha os personagens e as barras de life de b
   }
   for (var i = 0; i < this.a.length; i++) {
     this.a[i].desenharPose(ctx);//Função que desenha os personagens e as barras de life de a
@@ -430,14 +430,14 @@ Map.prototype.testaRaio = function(){//Função que testa o personagem mais pró
       if(raio<=menorDist){
         if (/*this.a[i].mover == true && */this.a[i].atira == true){
           var dist = Math.sqrt(Math.pow(this.b[j].x - this.a[i].x, 2) + Math.pow(this.b[j].y - this.a[i].y, 2));
-          var vx = 200 * (this.b[j].x - this.a[i].x) / dist;
-          var vy = 200 * (this.b[j].y - this.a[i].y) / dist;
+          var vx = 500 * (this.b[j].x - this.a[i].x) / dist;
+          var vy = 500 * (this.b[j].y - this.a[i].y) / dist;
           this.criaFlecha(this.a[i], vx, vy, "a");//Função que cria as flechas de a
         }
         if (/*this.b[j].mover == true && */this.b[j].atira == true){
           var dist = Math.sqrt(Math.pow(this.a[i].x - this.b[j].x, 2) + Math.pow(this.a[i].y - this.b[j].y, 2));
-          var vx = 200 * (this.a[i].x - this.b[j].x) / dist;
-          var vy = 200 * (this.a[i].y - this.b[j].y) / dist;
+          var vx = 500 * (this.a[i].x - this.b[j].x) / dist;
+          var vy = 500 * (this.a[i].y - this.b[j].y) / dist;
           this.criaFlecha(this.b[j], vx, vy, "b");//Função que cria as flechas de b
         }
       }

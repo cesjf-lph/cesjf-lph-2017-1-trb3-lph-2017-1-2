@@ -52,6 +52,27 @@ Sprite.prototype.desenharLimites = function(ctx) {//Função que desenha os limi
   );
 };
 
+Sprite.prototype.desenharFlecha = function(ctx) {//Função que desenha os limites dos personagens
+	var angle = Math.atan(this.vy/this.vx);
+	ctx.save();
+	ctx.translate(this.x, this.y);
+	ctx.rotate(angle);
+  ctx.fillStyle = "brown";
+  ctx.fillRect(
+    0-16,
+    0-1-17,
+    32, 2
+  );
+	ctx.lineWidth = 1;
+  ctx.strokeStyle = "black";
+  ctx.strokeRect(
+    0-16,
+    0-1-17,
+    32, 2
+  );
+	ctx.restore();
+};
+
 Sprite.prototype.movimenta = function(dt) {//Função que movimenta os personagens
   this.x = this.x + this.vx * dt;
   this.y = this.y + this.vy * dt;
