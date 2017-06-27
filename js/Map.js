@@ -274,6 +274,7 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
       {key: "personagemA" + seletor, row:  1, col: 0, colMax:  7, time: 16},//21 - Rei virado para a esquerda
       {key: "personagemA" + seletor, row:  2, col: 0, colMax:  7, time: 16},//22 - Rei virado para baixo
       {key: "personagemA" + seletor, row:  3, col: 0, colMax:  7, time: 16},//23 - Rei virado para a direita
+      {key: "personagemA" + seletor, row: 11, col: 0, colMax:  7, time:  6},//24 - Caminhada lenta para a direita com espada na mão
     ]
     a.x = coluna * SIZE+SIZE/2;
     a.y = linha * SIZE+SIZE/2;
@@ -336,6 +337,7 @@ Map.prototype.criaPersonagem = function(linha, coluna, seletor){//Função que g
       {key: "personagemB" + seletor, row:  1, col: 0, colMax:  7, time: 16},//21 - Rei virado para a esquerda
       {key: "personagemB" + seletor, row:  2, col: 0, colMax:  7, time: 16},//22 - Rei virado para  baixo
       {key: "personagemB" + seletor, row:  3, col: 0, colMax:  7, time: 16},//23 - Rei virado para a direita
+      {key: "personagemB" + seletor, row:  9, col: 0, colMax:  7, time:  6},//24 - Caminhada lenta para a esquerda com espada na mão
     ]
     b.x = coluna * SIZE+SIZE/2;
     b.y = linha * SIZE+SIZE/2;
@@ -386,13 +388,25 @@ Map.prototype.moverPersonagens = function(map, dt){//Função que acrescenta val
   }
   for (var i = 0; i < this.a.length; i++) {
     for (var j = 0; j < this.b.length; j++) {
+      var dx = this.a[i].x - this.b[j].x;
+      var dy = this.a[i].y - this.b[j].y;
+      var raio = Math.sqrt(Math.pow(dx,2)+Math.pow(dy,2));
       if (this.a[i].mover == true){
         if (this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE) + 1] == this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE)] - 1){
-          this.a[i].vx = 100;
-          this.a[i].vy = 0;
-          this.a[i].pose = 0;//Controla a pose de a em movimento
-          if (this.a[i].atira == false){
-            this.a[i].dir = 1;//Controla a direção de a
+          if(raio<=this.a[i].raio && this.a[i].raio > 10){
+            this.a[i].vx = raio/this.a[i].raio*100;
+            this.a[i].vy = 0;
+            this.a[i].pose = 24;//Controla a pose de a em movimento
+            if (this.a[i].atira == false){
+              this.a[i].dir = 1;//Controla a direção de a
+            }
+          }else{
+            this.a[i].vx = 100;
+            this.a[i].vy = 0;
+            this.a[i].pose = 0;//Controla a pose de a em movimento
+            if (this.a[i].atira == false){
+              this.a[i].dir = 1;//Controla a direção de a
+            }
           }
         } else if (this.cells[Math.floor(this.a[i].y/SIZE) + 1][Math.floor(this.a[i].x/SIZE)] == this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE)] - 1){
           this.a[i].vy = 100;
@@ -411,11 +425,20 @@ Map.prototype.moverPersonagens = function(map, dt){//Função que acrescenta val
       }
       if (this.b[j].mover == true){
         if (this.cells[Math.floor(this.b[j].y/SIZE)][Math.floor(this.b[j].x/SIZE) - 1] == this.cells[Math.floor(this.b[j].y/SIZE)][Math.floor(this.b[j].x/SIZE)] + 1){
-          this.b[j].vx = -100;
-          this.b[j].vy = 0;
-          this.b[j].pose = 2;//Controla a pose de b em movimento
-          if (this.b[j].atira == false){
-            this.b[j].dir = 3;//Controla a direção de b
+          if(raio<=this.b[j].raio && this.b[j].raio > 10){
+            this.b[j].vx = - (raio/this.b[j].raio*100);
+            this.b[j].vy = 0;
+            this.b[j].pose = 24;//Controla a pose de b em movimento
+            if (this.b[j].atira == false){
+              this.b[j].dir = 3;//Controla a direção de b
+            }
+          }else{
+            this.b[j].vx = -100;
+            this.b[j].vy = 0;
+            this.b[j].pose = 2;//Controla a pose de b em movimento
+            if (this.b[j].atira == false){
+              this.b[j].dir = 3;//Controla a direção de b
+            }
           }
         } else if (this.cells[Math.floor(this.b[j].y/SIZE) - 1][Math.floor(this.b[j].x/SIZE)] == this.cells[Math.floor(this.b[j].y/SIZE)][Math.floor(this.b[j].x/SIZE)] + 1){
           this.b[j].vy = -100;
@@ -615,24 +638,24 @@ Map.prototype.testarColisao = function(){//Função que chama o teste de colisã
 
         //Controla a pose de a em batalha de acordo com o dir
         if (this.a[i].dir == 0){
-          this.a[i].pose = 10;
+          this.a[i].pose = 19;
         }else if (this.a[i].dir == 1){
-          this.a[i].pose = 8;
+          this.a[i].pose = 16;
         }else if (this.a[i].dir == 2){
-          this.a[i].pose = 11;
+          this.a[i].pose = 17;
         }else{
-          this.a[i].pose = 9;
+          this.a[i].pose = 18;
         }
 
         //Controla a pose de b em batalha de acordo com o dir
         if (this.b[j].dir == 0){
-          this.b[j].pose = 10;
+          this.b[j].pose = 19;
         }else if (this.b[j].dir == 1){
-          this.b[j].pose = 8;
+          this.b[j].pose = 16;
         }else if (this.b[j].dir == 2){
-          this.b[j].pose = 11;
+          this.b[j].pose = 17;
         }else{
-          this.b[j].pose = 9;
+          this.b[j].pose = 18;
         }
       }
     }
