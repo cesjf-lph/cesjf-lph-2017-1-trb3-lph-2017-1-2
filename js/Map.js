@@ -569,6 +569,7 @@ Map.prototype.testarColisaoFlechas = function(){//Função que chama o teste de 
       for (var j = 0; j < this.b.length; j++) {
         if(this.flechas[i].colidiuCom(this.b[j])){
           this.b[j].life = this.b[j].life - this.flechas[i].forca;
+          soundLib.play("punch-on");
           this.flechas[i].destroyed = true;
         }
       }
@@ -579,6 +580,7 @@ Map.prototype.testarColisaoFlechas = function(){//Função que chama o teste de 
       for (var j = 0; j < this.a.length; j++) {
         if(this.flechas[i].colidiuCom(this.a[j])){
           this.a[j].life = this.a[j].life - this.flechas[i].forca;
+          soundLib.play("punch-on");
           this.flechas[i].destroyed = true;
         }
       }
