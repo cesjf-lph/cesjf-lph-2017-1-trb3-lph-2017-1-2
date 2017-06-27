@@ -393,8 +393,8 @@ Map.prototype.moverPersonagens = function(map, dt){//Função que acrescenta val
       var raio = Math.sqrt(Math.pow(dx,2)+Math.pow(dy,2));
       if (this.a[i].mover == true){
         if (this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE) + 1] == this.cells[Math.floor(this.a[i].y/SIZE)][Math.floor(this.a[i].x/SIZE)] - 1){
-          if(raio<=this.a[i].raio && this.a[i].raio > 10){
-            this.a[i].vx = raio/this.a[i].raio*100;
+          if(raio<=100 && raio > 10){
+            this.a[i].vx = raio;
             this.a[i].vy = 0;
             this.a[i].pose = 24;//Controla a pose de a em movimento
             if (this.a[i].atira == false){
@@ -425,8 +425,8 @@ Map.prototype.moverPersonagens = function(map, dt){//Função que acrescenta val
       }
       if (this.b[j].mover == true){
         if (this.cells[Math.floor(this.b[j].y/SIZE)][Math.floor(this.b[j].x/SIZE) - 1] == this.cells[Math.floor(this.b[j].y/SIZE)][Math.floor(this.b[j].x/SIZE)] + 1){
-          if(raio<=this.b[j].raio && this.b[j].raio > 10){
-            this.b[j].vx = - (raio/this.b[j].raio*100);
+          if(raio<=100 && raio > 10){
+            this.b[j].vx = - (raio);
             this.b[j].vy = 0;
             this.b[j].pose = 24;//Controla a pose de b em movimento
             if (this.b[j].atira == false){
@@ -624,14 +624,14 @@ Map.prototype.testarColisao = function(){//Função que chama o teste de colisã
 
         //Adiciona som quando a esta em batalha
         if (this.a[i].tempoPunch < 0 && this.a[i].atira == false && this.a[i].seletor > 0){
-          this.a[i].tempoPunch = 1.3;
+          this.a[i].tempoPunch = 0.5;
           this.b[j].life = this.b[j].life - 10 * this.a[i].seletor;
           soundLib.play("punch-on");
         }
 
         //Adiciona som quando b esta em batalha
         if (this.b[j].tempoPunch < 0 && this.b[j].atira == false && this.b[j].seletor > 0){
-          this.b[j].tempoPunch = 1.3;
+          this.b[j].tempoPunch = 0.5;
           this.a[i].life = this.a[i].life - 10 * this.b[j].seletor;
           soundLib.play("punch-on");
         }
