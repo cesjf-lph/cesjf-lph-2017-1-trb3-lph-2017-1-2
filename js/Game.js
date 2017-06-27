@@ -337,7 +337,7 @@ function tela(ctx){
       ctx.fillText(texto2, eCanvas.width / 2, 450);
       ctx.font = "1.4em arial";
       ctx.textAlign="left";
-      ctx.fillStyle = "black";
+      ctx.fillStyle = "orange";
       var texto = "* Para seleção de personagens de A, utilize as teclas 'W' e 'S' e para B utilize as teclas 'Cima' e 'Baixo'";
       ctx.fillText(texto, 10, 100);
       var texto = "* Para colocar personagens de A para a batalha, utilize as teclas 'A' para lançamento na torre de cima e 'D' para";
